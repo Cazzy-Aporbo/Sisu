@@ -1,0 +1,49 @@
+body {
+    font-family: 'Comic Sans MS', sans-serif;
+    background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.game-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 0 20px #ff66cc;
+}
+
+#question {
+    font-size: 2em;
+    margin: 20px 0;
+}
+
+#answer {
+    padding: 10px;
+    font-size: 1.2em;
+    width: 100px;
+    text-align: center;
+}
+
+#submit {
+    padding: 10px 20px;
+    font-size: 1em;
+    margin-left: 10px;
+    cursor: pointer;
+    background: #ff66cc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+#feedback {
+    margin-top: 20px;
+    font-size: 1.5em;
+}
+
+#score {
+    margin-top: 15px;
+    font-size: 1.2em;
+}
