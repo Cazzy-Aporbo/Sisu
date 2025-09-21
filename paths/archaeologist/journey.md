@@ -59,7 +59,7 @@ Every high-level language eventually becomes this. Python's print()? It becomes 
 Memory management is archaeology. Every malloc() is digging a hole. Every free() is covering your tracks. The heap is littered with the bones of leaked pointers.
 
 ### What You'll Find:
-- Why we still manually manage memory in 2024
+- Why we still manually manage memory in 2025
 - The philosophy of ownership before Rust made it cool
 - How garbage collection is just automated archaeology
 
