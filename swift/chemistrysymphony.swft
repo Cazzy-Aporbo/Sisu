@@ -1,0 +1,138 @@
+//
+// ChemistrySymphony.swift
+// Interactive PhD-Level Chemistry Teaching Prototype — by Cazzy
+//
+
+import SwiftUI
+
+// MARK: - Molecule Types
+enum FunctionalGroup: String, CaseIterable {
+    case alcohol = "Alcohol"
+    case ketone = "Ketone"
+    case aldehyde = "Aldehyde"
+    case carboxylicAcid = "Acid"
+    case amine = "Amine"
+    case ester = "Ester"
+}
+
+// MARK: - Molecule Model
+struct Molecule: Identifiable, Hashable {
+    let id = UUID()
+    let name: String
+    let group: FunctionalGroup
+    var color: Color
+}
+
+// MARK: - Reaction Engine
+struct ReactionEngine {
+    static func react(_ a: Molecule, _ b: Molecule) -> String {
+        switch (a.group, b.group) {
+        case (.alcohol, .acid):
+            return "✅ Esterification! \(a.name) + \(b.name) → Ester"
+        case (.ketone, .amine):
+            return "✅ Imine formation detected!"
+        case (.aldehyde, .alcohol):
+            return "✅ Hemiacetal forms!"
+        default:
+            return "⚠️ No reaction occurs."
+        }
+    }
+}
+
+// MARK: - ViewModel
+class ChemistryLab: ObservableObject {
+    @Published var molecules: [Molecule] = [
+        Molecule(name: "Ethanol", group: .alcohol, color: .blue),
+        Molecule(name: "Acetic Acid", group: .carboxylicAcid, color: .red),
+        Molecule(name: "Acetone", group: .ketone, color: .purple),
+        Molecule(name: "Formaldehyde", group: .aldehyde, color: .green),
+        Molecule(name: "Methylamine", group: .amine, color: .orange)
+    ]
+    
+    @Published var reactionMessage: String = "Drag molecules together to react!"
+}
+
+// MARK: - Main Lab View
+struct ChemistryLabView: View {
+    @StateObject private var lab = ChemistryLab()
+    
+    var body: some View {
+        ZStack {
+            LinearGradient(gradient: Gradient(colors: [Color.black, Color.indigo]), startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
+            
+            VStack {
+                Text("🎓 Interactive Molecular Lab")
+                    .font(.title2).bold()
+                    .foregroundColor(.white)
+                    .padding(.top, 30)
+                
+                Text(lab.reactionMessage)
+                    .foregroundColor(.yellow)
+                    .padding()
+                    .multilineTextAlignment(.center)
+                
+                Spacer()
+                
+                // Molecule palette
+                HStack(spacing: 30) {
+                    ForEach(lab.molecules) { molecule in
+                        MoleculeView(molecule: molecule, lab: lab)
+                    }
+                }
+                .padding(.bottom, 50)
+            }
+        }
+    }
+}
+
+// MARK: - Draggable Molecule View
+struct MoleculeView: View {
+    let molecule: Molecule
+    @ObservedObject var lab: ChemistryLab
+    @State private var position = CGSize.zero
+    @State private var lastPosition = CGSize.zero
+    
+    var body: some View {
+        Circle()
+            .fill(molecule.color)
+            .frame(width: 70, height: 70)
+            .overlay(Text(molecule.group.rawValue.prefix(1))
+                        .foregroundColor(.white)
+                        .bold())
+            .offset(x: position.width, y: position.height)
+            .gesture(
+                DragGesture()
+                    .onChanged { value in
+                        position = CGSize(width: value.translation.width + lastPosition.width,
+                                          height: value.translation.height + lastPosition.height)
+                    }
+                    .onEnded { _ in
+                        lastPosition = position
+                        checkReactions()
+                    }
+            )
+            .animation(.spring(), value: position)
+    }
+    
+    private func checkReactions() {
+        for other in lab.molecules {
+            guard other.id != molecule.id else { continue }
+            let dx = position.width
+            let dy = position.height
+            if hypot(dx, dy) < 50 { // Collision detection
+                lab.reactionMessage = ReactionEngine.react(molecule, other)
+            }
+        }
+    }
+}
+
+// MARK: - Run
+@main
+struct RunChemistryLab: App {
+    var body: some Scene {
+        WindowGroup {
+            ChemistryLabView()
+        }
+    }
+}
