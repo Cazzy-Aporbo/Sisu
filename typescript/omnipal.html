@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniWellness Pals | Vibrational Health & Education Collectibles</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pastel-rainbow: linear-gradient(135deg, 
+                #ffd6e7 0%, #ffd6f3 10%, #e6d6ff 20%, 
+                #d6eaff 30%, #d6fff8 40%, #d6ffdf 50%, 
+                #fffed6 60%, #ffdfd6 70%, #ffd6d6 80%, 
+                #f2d6ff 90%, #e4d6ff 100%);
+            --vibe-pink: #ffa6e8;
+            --vibe-blue: #a6e8ff;
+            --vibe-purple: #d6a6ff;
+            --vibe-green: #a6ffd6;
+            --vibe-yellow: #fffca6;
+            --vibe-orange: #ffd6a6;
+            --vibe-teal: #a6fff0;
+            --vibe-lavender: #e4d6ff;
+            --vibe-mint: #d6ffec;
+            --vibe-peach: #ffdfd6;
+            --deep-purple: #7b5bd6;
+            --text-color: #4a4a4a;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #fffaf9;
+            color: var(--text-color);
+            overflow-x: hidden;
+            font-family: 'Quicksand', sans-serif;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(255, 214, 231, 0.3) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(214, 234, 255, 0.3) 0%, transparent 25%),
+                radial-gradient(circle at 50% 80%, rgba(214, 255, 223, 0.3) 0%, transparent 25%);
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+        }
+        
+        header {
+            background: var(--pastel-rainbow);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--deep-purple);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .logo i {
+            font-size: 3.5rem;
+            animation: pulse 2s infinite;
+        }
+        
+        nav {
+            margin-top: 15px;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--deep-purple);
+            font-weight: bold;
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav a:hover {
+            background-color: white;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+        }
+        
+        .hero {
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--pastel-rainbow);
+            opacity: 0.3;
+            z-index: -1;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            color: var(--deep-purple);
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .hero p {
+            font-size: 1.8rem;
+            max-width: 900px;
+            margin: 0 auto 40px;
+            color: var(--text-color);
+            font-weight: 600;
+        }
+        
+        .cta-button {
+            background: var(--pastel-rainbow);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-8px) scale(1.08);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+        }
+        
+        .collection {
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 3.2rem;
+            color: var(--deep-purple);
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 6px;
+            background: var(--pastel-rainbow);
+            border-radius: 3px;
+        }
+        
+        .vibrational-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .vibe-card {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        
+        .vibe-card:hover {
+            transform: translateY(-15px) rotate(1deg);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .vibe-image {
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .vibe-image i {
+            font-size: 7rem;
+            color: white;
+            text-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+            z-index: 2;
+        }
+        
+        .vibe-info {
+            padding: 25px;
+        }
+        
+        .vibe-name {
+            font-size: 1.8rem;
+            color: var(--deep-purple);
+            margin-bottom: 12px;
+        }
+        
+        .vibe-desc {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            line-height: 1.5;
+        }
+        
+        .vibe-power {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .power-badge {
+            background: rgba(214, 234, 255, 0.3);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        
+        .vibe-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--deep-purple);
+            margin-bottom: 20px;
+        }
+        
+        .add-to-cart {
+            background: var(--pastel-rainbow);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 1.2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        .add-to-cart:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+        
+        .limited-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #ff8a8a 0%, #ff5252 100%);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+            z-index: 3;
+        }
+        
+        .vibe-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .vibe-symbol {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.4;
+            color: var(--deep-purple);
+            animation: float 5s ease-in-out infinite;
+        }
+        
+        .health-hint {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: help;
+            transition: all 0.3s ease;
+            z-index: 3;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .health-hint:hover {
+            background: white;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            transform: scale(1.1);
+        }
+        
+        .health-popup {
+            display: none;
+            position: absolute;
+            bottom: 50px;
+            left: 15px;
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            width: 250px;
+            z-index: 10;
+            text-align: left;
+        }
+        
+        .health-hint:hover + .health-popup {
+            display: block;
+        }
+        
+        .features {
+            padding: 80px 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .feature-card i {
+            font-size: 4rem;
+            margin-bottom: 25px;
+            background: var(--pastel-rainbow);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--deep-purple);
+        }
+        
+        .newsletter {
+            padding: 80px 20px;
+            text-align: center;
+            background: var(--pastel-rainbow);
+        }
+        
+        .newsletter-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            gap: 15px;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 18px 25px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            font-family: 'Quicksand', sans-serif;
+        }
+        
+        footer {
+            background: var(--deep-purple);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            transform: translateY(-8px) scale(1.2);
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 12px;
+            height: 12px;
+            background: var(--vibe-pink);
+            opacity: 0.8;
+            border-radius: 50%;
+            z-index: 1000;
+            animation: fall linear forwards;
+        }
+        
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            nav ul {
+                gap: 15px;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .vibrational-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .logo {
+                font-size: 2.2rem;
+            }
+            
+            .logo i {
+                font-size: 2.8rem;
+            }
+            
+            nav a {
+                font-size: 1rem;
+                padding: 8px 15px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.4rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .vibrational-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-stars"></i>
+            <span>OmniWellness Pals</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Vibe Pals</a></li>
+                <li><a href="#">Health Goals</a></li>
+                <li><a href="#">Education</a></li>
+                <li><a href="#">Collection</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="hero">
+        <h1>Meet Your OmniWellness Pals</h1>
+        <p>Vibrational pastel companions that transform health and education into an addictive adventure!</p>
+        <button class="cta-button">Explore the Vibe</button>
+    </section>
+    
+    <section class="collection">
+        <h2 class="section-title">Vibrational Wellness Collection</h2>
+        
+        <div class="vibrational-grid">
+            <!-- Vibe Pal 1 -->
+            <div class="vibe-card">
+                <div class="limited-badge">Cosmic Edition!</div>
+                <div class="vibe-image" style="background: linear-gradient(135deg, var(--vibe-pink) 0%, var(--vibe-blue) 100%);">
+                    <i class="fas fa-heartbeat"></i>
+                    <div class="vibe-elements">
+                        <div class="vibe-symbol" style="top: 20%; left: 20%;">♡</div>
+                        <div class="vibe-symbol" style="top: 60%; left: 80%;">★</div>
+                        <div class="vibe-symbol" style="top: 40%; left: 40%;">☯</div>
+                    </div>
+                    <div class="health-hint">Health Tip</div>
+                    <div class="health-popup">
+                        <strong>Heart Health:</strong> This pal encourages 60 minutes of daily activity with its built-in step tracker!
+                    </div>
+                </div>
+                <div class="vibe-info">
+                    <h3 class="vibe-name">Cardio-Cuddler</h3>
+                    <p class="vibe-desc">This heart-healthy buddy vibrates with positive energy and encourages daily exercise with fun challenges.</p>
+                    <div class="vibe-power">
+                        <span class="power-badge">❤️ Heart Health</span>
+                        <span class="power-badge">⚡ Energy Boost</span>
+                    </div>
+                    <p class="vibe-price">$29.99</p>
+                    <button class="add-to-cart">Add to Vibe Cart</button>
+                </div>
+            </div>
+            
+            <!-- Vibe Pal 2 -->
+            <div class="vibe-card">
+                <div class="limited-badge">Cosmic Edition!</div>
+                <div class="vibe-image" style="background: linear-gradient(135deg, var(--vibe-teal) 0%, var(--vibe-lavender) 100%);">
+                    <i class="fas fa-brain"></i>
+                    <div class="vibe-elements">
+                        <div class="vibe-symbol" style="top: 30%; left: 30%;">∞</div>
+                        <div class="vibe-symbol" style="top: 70%; left: 60%;">π</div>
+                    </div>
+                    <div class="health-hint">Health Tip</div>
+                    <div class="health-popup">
+                        <strong>Brain Power:</strong> This pal reminds you to drink water for optimal brain function with its hydration sensor!
+                    </div>
+                </div>
+                <div class="vibe-info">
+                    <h3 class="vibe-name">Neuro-Nurturer</h3>
+                    <p class="vibe-desc">A cognitive companion that makes learning addictive with neural vibration patterns and memory games.</p>
+                    <div class="vibe-power">
+                        <span class="power-badge">🧠 Brain Boost</span>
+                        <span class="power-badge">💧 Hydration</span>
+                    </div>
+                    <p class="vibe-price">$32.99</p>
+                    <button class="add-to-cart">Add to Vibe Cart</button>
+                </div>
+            </div>
+            
+            <!-- Vibe Pal 3 -->
+            <div class="vibe-card">
+                <div class="limited-badge">Cosmic Edition!</div>
+                <div class="vibe-image" style="background: linear-gradient(135deg, var(--vibe-yellow) 0%, var(--vibe-peach) 100%);">
+                    <i class="fas fa-apple-alt"></i>
+                    <div class="vibe-elements">
+                        <div class="vibe-symbol" style="top: 20%; left: 70%;">♻</div>
+                        <div class="vibe-symbol" style="top: 60%; left: 30%;">☀</div>
+                    </div>
+                    <div class="health-hint">Health Tip</div>
+                    <div class="health-popup">
+                        <strong>Nutrition:</strong> This pal helps track fruit and vegetable intake with its colorful food journal feature!
+                    </div>
+                </div>
+                <div class="vibe-info">
+                    <h3 class="vibe-name">Vita-Vibester</h3>
+                    <p class="vibe-desc">Your nutritional guide that makes healthy eating fun with its interactive meal planning vibrations.</p>
+                    <div class="vibe-power">
+                        <span class="power-badge">🍎 Nutrition</span>
+                        <span class="power-badge">🌱 Growth</span>
+                    </div>
+                    <p class="vibe-price">$27.99</p>
+                    <button class="add-to-cart">Add to Vibe Cart</button>
+                </div>
+            </div>
+            
+            <!-- Vibe Pal 4 -->
+            <div class="vibe-card">
+                <div class="limited-badge">Cosmic Edition!</div>
+                <div class="vibe-image" style="background: linear-gradient(135deg, var(--vibe-purple) 0%, var(--vibe-mint) 100%);">
+                    <i class="fas fa-moon"></i>
+                    <div class="vibe-elements">
+                        <div class="vibe-symbol" style="top: 30%; left: 60%;">☾</div>
+                        <div class="vibe-symbol" style="top: 70%; left: 20%;">zzz</div>
+                    </div>
+                    <div class="health-hint">Health Tip</div>
+                    <div class="health-popup">
+                        <strong>Sleep Health:</strong> This pal helps establish bedtime routines with its soothing vibration patterns!
+                    </div>
+                </div>
+                <div class="vibe-info">
+                    <h3 class="vibe-name">Snooze-Sync</h3>
+                    <p class="vibe-desc">A restful companion that encourages healthy sleep patterns with calming vibrations and sleep stories.</p>
+                    <div class="vibe-power">
+                        <span class="power-badge">😴 Sleep</span>
+                        <span class="power-badge">🌙 Relaxation</span>
+                    </div>
+                    <p class="vibe-price">$31.99</p>
+                    <button class="add-to-cart">Add to Vibe Cart</button>
+                </div>
+            </div>
+            
+            <!-- Vibe Pal 5 -->
+            <div class="vibe-card">
+                <div class="limited-badge">Cosmic Edition!</div>
+                <div class="vibe-image" style="background: linear-gradient(135deg, var(--vibe-green) 0%, var(--vibe-orange) 100%);">
+                    <i class="fas fa-hands-helping"></i>
+                    <div class="vibe-elements">
+                        <div class="vibe-symbol" style="top: 20%; left: 20%;">☮</div>
+                        <div class="vibe-symbol" style="top: 60%; left: 80%;">🕊</div>
+                    </div>
+                    <div class="health-hint">Health Tip</div>
+                    <div class="health-popup">
+                        <strong>Mental Health:</strong> This pal teaches mindfulness and meditation through guided breathing vibrations!
+                    </div>
+                </div>
+                <div class="vibe-info">
+                    <h3 class="vibe-name">Mindful-Mender</h3>
+                    <p class="vibe-desc">An emotional wellness pal that teaches mindfulness, empathy and kindness through interactive vibrations.</p>
+                    <div class="vibe-power">
+                        <span class="power-badge">🧘 Mindfulness</span>
+                        <span class="power-badge">💖 Kindness</span>
+                    </div>
+                    <p class="vibe-price">$28.99</p>
+                    <button class="add-to-cart">Add to Vibe Cart</button>
+                </div>
+            </div>
+            
+            <!-- Vibe Pal 6 -->
+            <div class="vibe-card">
+                <div class="limited-badge">Cosmic Edition!</div>
+                <div class="vibe-image" style="background: linear-gradient(135deg, var(--vibe-blue) 0%, var(--vibe-yellow) 100%);">
+                    <i class="fas fa-water"></i>
+                    <div class="vibe-elements">
+                        <div class="vibe-symbol" style="top: 30%; left: 30%;">💧</div>
+                        <div class="vibe-symbol" style="top: 70%; left: 60%;">☔</div>
+                    </div>
+                    <div class="health-hint">Health Tip</div>
+                    <div class="health-popup">
+                        <strong>Hydration:</strong> This pal reminds you to drink water throughout the day with gentle vibration reminders!
+                    </div>
+                </div>
+                <div class="vibe-info">
+                    <h3 class="vibe-name">Hydro-Happifier</h3>
+                    <p class="vibe-desc">A hydration hero that makes water intake fun with reminder vibrations and hydration achievement badges.</p>
+                    <div class="vibe-power">
+                        <span class="power-badge">💧 Hydration</span>
+                        <span class="power-badge">🎯 Goals</span>
+                    </div>
+                    <p class="vibe-price">$26.99</p>
+                    <button class="add-to-cart">Add to Vibe Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="features">
+        <h2 class="section-title">Why OmniWellness Pals?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-heart"></i>
+                <h3>Health Habit Forming</h3>
+                <p>Each pal uses vibrational technology to make healthy habits addictive and fun through positive reinforcement.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-graduation-cap"></i>
+                <h3>Stealth Education</h3>
+                <p>Learning happens through play with hidden educational content that aligns with school curriculum standards.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-rainbow"></i>
+                <h3>Vibrational Colors</h3>
+                <p>Our unique pastel spectrum is scientifically designed to promote calm, focus, and happiness in children.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="newsletter">
+        <h2 class="section-title">Join the Vibe Tribe</h2>
+        <p>Subscribe for updates on new characters, health tips, and exclusive content!</p>
+        <form class="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="Your email address">
+            <button type="submit" class="cta-button">Vibe With Us</button>
+        </form>
+    </section>
+    
+    <footer>
+        <div class="logo">
+            <i class="fas fa-stars"></i>
+            <span>OmniWellness Pals</span>
+        </div>
+        <p>Transforming health and education through vibrational play</p>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+        <p>&copy; 2023 OmniWellness Pals. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Enhanced confetti animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const colors = ['#ffa6e8', '#a6e8ff', '#d6a6ff', '#a6ffd6', '#fffca6', '#ffd6a6', '#a6fff0', '#e4d6ff', '#d6ffec', '#ffdfd6'];
+            
+            function createConfetti() {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = (8 + Math.random() * 10) + 'px';
+                confetti.style.height = (8 + Math.random() * 10) + 'px';
+                confetti.style.animationDuration = (1 + Math.random() * 3) + 's';
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+            
+            // Create initial confetti
+            for (let i = 0; i < 40; i++) {
+                setTimeout(() => {
+                    createConfetti();
+                }, i * 100);
+            }
+            
+            // Add confetti on button hover
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', () => {
+                    for (let i = 0; i < 8; i++) {
+                        createConfetti();
+                    }
+                });
+            });
+            
+            // Add to cart animation
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const originalText = this.innerHTML;
+                    this.innerHTML = 'Added to Vibe Cart! <i class="fas fa-check"></i>';
+                    this.style.background = 'linear-gradient(135deg, #a6ffd6 0%, #6bce87 100%)';
+                    
+                    // Create more confetti
+                    for (let i = 0; i < 25; i++) {
+                        createConfetti();
+                    }
+                    
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        this.style.background = 'var(--pastel-rainbow)';
+                    }, 2000);
+                });
+            });
+            
+            // Floating animation for vibe symbols
+            const vibeSymbols = document.querySelectorAll('.vibe-symbol');
+            vibeSymbols.forEach(symbol => {
+                symbol.style.animationDelay = `${Math.random() * 2}s`;
+                symbol.style.animationDuration = `${3 + Math.random() * 4}s`;
+            });
+        });
+    </script>
+</body>
+</html>
