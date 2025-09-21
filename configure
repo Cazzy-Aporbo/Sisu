@@ -1,0 +1,219 @@
+#!/bin/bash
+# =========================================================
+# SISU — Auto-Configuration Script
+# =========================================================
+# 
+# Detects system capabilities and optimizes for learning
+# Ensures code can survive on any system
+#
+# COLOR PHASE: #A7F3D0 (Primary Sisu Green)
+#
+# =========================================================
+
+# Color codes
+GREEN_WHISPER='\033[38;2;240;253;244m'
+GREEN_PRIMARY='\033[38;2;167;243;208m'
+GREEN_PEAK='\033[38;2;110;231;183m'
+GREEN_DEEP='\033[38;2;74;222;128m'
+GREEN_VOID='\033[38;2;5;46;22m'
+RESET='\033[0m'
+
+echo -e "${GREEN_PRIMARY}╔═══════════════════════════════════════════════════════════╗${RESET}"
+echo -e "${GREEN_PRIMARY}║               SISU CONFIGURATION SYSTEM                    ║${RESET}"
+echo -e "${GREEN_PRIMARY}╚═══════════════════════════════════════════════════════════╝${RESET}"
+echo
+
+# Function to check command existence
+check_command() {
+    if command -v $1 >/dev/null 2>&1; then
+        echo -e "${GREEN_PEAK}✓${RESET} $1 found: $(command -v $1)"
+        return 0
+    else
+        echo -e "${GREEN_VOID}✗${RESET} $1 not found"
+        return 1
+    fi
+}
+
+# Function to detect architecture
+detect_architecture() {
+    echo -e "\n${GREEN_PRIMARY}Detecting Architecture...${RESET}"
+    ARCH=$(uname -m)
+    OS=$(uname -s)
+    echo -e "Architecture: ${GREEN_PEAK}$ARCH${RESET}"
+    echo -e "Operating System: ${GREEN_PEAK}$OS${RESET}"
+}
+
+# Function to check language support
+check_languages() {
+    echo -e "\n${GREEN_PRIMARY}Checking Language Support...${RESET}"
+    
+    # Essential (must have)
+    echo -e "\n${GREEN_DEEP}Essential Languages:${RESET}"
+    ESSENTIAL_MISSING=0
+    
+    if ! check_command "gcc"; then
+        ((ESSENTIAL_MISSING++))
+    fi
+    
+    if ! check_command "as"; then
+        ((ESSENTIAL_MISSING++))
+    fi
+    
+    if [ $ESSENTIAL_MISSING -gt 0 ]; then
+        echo -e "${GREEN_VOID}⚠ Warning: Essential tools missing. Core functionality limited.${RESET}"
+    fi
+    
+    # Modern languages (optional)
+    echo -e "\n${GREEN_DEEP}Modern Languages:${RESET}"
+    check_command "g++"
+    check_command "python3"
+    check_command "node"
+    check_command "go"
+    check_command "rustc"
+    check_command "java"
+    
+    # Functional languages (paradigm support)
+    echo -e "\n${GREEN_DEEP}Functional Paradigm:${RESET}"
+    check_command "ghc"      # Haskell
+    check_command "ocaml"    # OCaml
+    check_command "sbcl"     # Lisp
+    check_command "elixir"   # Elixir
+}
+
+# Function to measure system compression capability
+measure_compression() {
+    echo -e "\n${GREEN_PRIMARY}Measuring Compression Capability...${RESET}"
+    
+    # Create test file
+    echo "SISU" > /tmp/sisu_test.txt
+    for i in {1..1000}; do
+        echo "Pattern $i repeats for compression testing" >> /tmp/sisu_test.txt
+    done
+    
+    ORIGINAL_SIZE=$(wc -c < /tmp/sisu_test.txt)
+    
+    if command -v gzip >/dev/null 2>&1; then
+        gzip -c /tmp/sisu_test.txt > /tmp/sisu_test.gz
+        COMPRESSED_SIZE=$(wc -c < /tmp/sisu_test.gz)
+        RATIO=$(echo "scale=2; $ORIGINAL_SIZE / $COMPRESSED_SIZE" | bc 2>/dev/null || echo "N/A")
+        echo -e "Compression ratio: ${GREEN_PEAK}${RATIO}:1${RESET}"
+        rm /tmp/sisu_test.gz
+    fi
+    
+    rm /tmp/sisu_test.txt
+}
+
+# Function to test color support
+test_colors() {
+    echo -e "\n${GREEN_PRIMARY}Testing Color Support...${RESET}"
+    
+    if [ -t 1 ] && [ -n "${TERM}" ] && [ "${TERM}" != "dumb" ]; then
+        COLORS=$(tput colors 2>/dev/null || echo 0)
+        if [ $COLORS -ge 256 ]; then
+            echo -e "${GREEN_PEAK}✓${RESET} 256-color support detected"
+            echo -e "Gradient visualization: ${GREEN_WHISPER}░${GREEN_PRIMARY}▒${GREEN_PEAK}▓${GREEN_DEEP}█${RESET}"
+        elif [ $COLORS -ge 8 ]; then
+            echo -e "Basic color support detected (gradients limited)"
+        else
+            echo -e "No color support detected (monochrome mode)"
+        fi
+    else
+        echo -e "Non-interactive terminal (colors disabled)"
+    fi
+}
+
+# Function to check Git configuration
+check_git() {
+    echo -e "\n${GREEN_PRIMARY}Checking Git Configuration...${RESET}"
+    
+    if check_command "git"; then
+        GIT_VERSION=$(git --version | cut -d' ' -f3)
+        echo -e "Git version: ${GREEN_PEAK}$GIT_VERSION${RESET}"
+        
+        # Check if we're in a git repository
+        if git rev-parse --git-dir > /dev/null 2>&1; then
+            COMMITS=$(git rev-list --count HEAD 2>/dev/null || echo "0")
+            echo -e "Repository commits: ${GREEN_PEAK}$COMMITS${RESET}"
+            
+            if [ $COMMITS -gt 100 ]; then
+                echo -e "${GREEN_PEAK}✓${RESET} This code has endurance"
+            fi
+        else
+            echo -e "${GREEN_WHISPER}Not a git repository yet${RESET}"
+        fi
+    fi
+}
+
+# Function to create configuration file
+create_config() {
+    echo -e "\n${GREEN_PRIMARY}Creating Configuration...${RESET}"
+    
+    cat > .sisu.config << EOF
+# SISU Configuration File
+# Generated: $(date)
+# Color: #A7F3D0
+
+ARCH=$ARCH
+OS=$OS
+COMPRESSION_CAPABLE=$([[ $RATIO != "N/A" ]] && echo "true" || echo "false")
+COLOR_SUPPORT=$([[ $COLORS -ge 256 ]] && echo "256" || echo "$COLORS")
+GIT_ENABLED=$(command -v git >/dev/null 2>&1 && echo "true" || echo "false")
+
+# Optimization flags based on system
+CFLAGS="-O3 -march=native"
+DENSITY_TARGET=47  # KB
+
+# Learning mode
+LEARNING_MODE=true
+VERBOSE_COMMENTS=true
+EOF
+    
+    echo -e "${GREEN_PEAK}✓${RESET} Configuration saved to .sisu.config"
+}
+
+# Function to set up learning paths
+setup_paths() {
+    echo -e "\n${GREEN_PRIMARY}Setting Up Learning Paths...${RESET}"
+    
+    # Ensure directories exist
+    mkdir -p paths/{archaeologist,compressor,visualist,philosopher}
+    mkdir -p compression/{algorithms,patterns,abstractions}
+    mkdir -p paradigms/{functional,object,concurrent,quantum}
+    mkdir -p core
+    mkdir -p visualization
+    mkdir -p manifesto
+    
+    echo -e "${GREEN_PEAK}✓${RESET} Directory structure created"
+}
+
+# Main configuration flow
+main() {
+    detect_architecture
+    check_languages
+    measure_compression
+    test_colors
+    check_git
+    setup_paths
+    create_config
+    
+    echo -e "\n${GREEN_PRIMARY}╔═══════════════════════════════════════════════════════════╗${RESET}"
+    echo -e "${GREEN_PRIMARY}║                  CONFIGURATION COMPLETE                    ║${RESET}"
+    echo -e "${GREEN_PRIMARY}╠═══════════════════════════════════════════════════════════╣${RESET}"
+    
+    if [ $ESSENTIAL_MISSING -eq 0 ]; then
+        echo -e "${GREEN_PRIMARY}║ ${GREEN_PEAK}✓${GREEN_PRIMARY} System ready for Sisu development               ║${RESET}"
+    else
+        echo -e "${GREEN_PRIMARY}║ ${GREEN_VOID}⚠${GREEN_PRIMARY} Some tools missing - limited functionality     ║${RESET}"
+    fi
+    
+    echo -e "${GREEN_PRIMARY}╚═══════════════════════════════════════════════════════════╝${RESET}"
+    
+    echo -e "\n${GREEN_WHISPER}Next steps:${RESET}"
+    echo -e "  ${GREEN_PRIMARY}make all${RESET}      - Build everything"
+    echo -e "  ${GREEN_PRIMARY}make breathe${RESET}  - Start terminal breathing"
+    echo -e "  ${GREEN_PRIMARY}make test${RESET}     - Test endurance"
+    echo -e "\n${GREEN_DEEP}Begin your journey in: ${GREEN_PEAK}paths/archaeologist/journey.md${RESET}"
+}
+
+# Run configuration
+main
