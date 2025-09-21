@@ -1,0 +1,109 @@
+# =========================================================
+# SISU — Git Ignore Configuration
+# =========================================================
+# 
+# Only ignore what cannot endure
+# Build artifacts are temporary, source is eternal
+#
+# COLOR PHASE: #F0FDF4 (Whisper - barely visible)
+#
+# =========================================================
+
+# Build artifacts (these don't endure)
+*.o
+*.out
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+
+# Language-specific temporary files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.class
+*.jar
+target/
+Cargo.lock
+node_modules/
+package-lock.json
+yarn.lock
+*.wasm
+
+# IDE/Editor files (personal, not universal)
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Test coverage (measures endurance, doesn't have it)
+coverage/
+*.coverage
+.coverage
+htmlcov/
+*.gcov
+*.gcda
+*.gcno
+
+# Temporary compression attempts
+*.tmp
+*.temp
+*.bak
+*.backup
+*.old
+compression/temp/
+
+# Logs (the exhaust of computation)
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment (local, not portable)
+.env
+.env.local
+.env.*.local
+venv/
+env/
+ENV/
+
+# Documentation builds (generated, not source)
+docs/_build/
+docs/.doctrees/
+*.pdf
+*.aux
+*.toc
+
+# BUT NEVER IGNORE:
+# !core/assembly.s       - The void persists
+# !*.c                   - C is eternal
+# !*.h                   - Headers endure
+# !manifesto/*.md        - Philosophy is permanent
+# !visualization/*.css   - Gradients are forever
+
+# The deepest green - files that have returned to void
+/void/
+/deprecated/
+/archive/
+
+# Compression experiments that failed
+compression/failed/
+compression/experiments/*.tmp
+
+# Personal meditations (until ready)
+compression/meditation/personal/
+paths/*/personal/
+
+# The breathing cache (regenerated each time)
+.breathe-cache/
+
+# =========================================================
+# Remember: We ignore the temporary, commit the eternal
+# =========================================================
