@@ -1,5 +1,5 @@
 ! File: lessons_fortran.f90
-! Purpose: Demonstrate Fortran basics with clear, tutorial-style code
+! Purpose: Demonstrate Fortran basics with clear code
 
 program fortran_lessons
     implicit none
