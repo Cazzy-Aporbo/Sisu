@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>🚀 SISU-1 Interstellar Adventure 🚀</title>
+<style>
+  body { background: black; color: white; font-family: monospace; overflow: hidden; margin: 0; }
+  #dashboard { position: absolute; top: 0; left: 0; padding: 10px; background: rgba(0,0,0,0.5); }
+  canvas { display: block; margin: 0 auto; background: black; }
+</style>
+</head>
+<body>
+<div id="dashboard">
+  🚀 SISU-1 Dashboard<br>
+  Hull: <span id="hull">100</span> | Shields: <span id="shields">50</span> | Fuel: <span id="fuel">100</span> | Score: <span id="score">0</span>
+</div>
+<canvas id="gameCanvas" width="800" height="400"></canvas>
+
+<script>
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+
+let ship = {x: 400, y: 200, hull: 100, shields: 50, fuel: 100, score: 0};
+const width = canvas.width;
+const height = canvas.height;
+
+function randomObj(symbol, count) {
+  let arr = [];
+  for (let i=0;i<count;i++) arr.push({x: Math.random()*width, y: Math.random()*height, symbol});
+  return arr;
+}
+
+let stars = randomObj('*', 100);
+let asteroids = randomObj('💥', 10);
+let aliens = randomObj('👾', 5);
+let loot = randomObj('💎', 5);
+
+document.addEventListener('keydown', e => {
+  const step = 10;
+  if(e.key==='w') ship.y -= step;
+  if(e.key==='s') ship.y += step;
+  if(e.key==='a') ship.x -= step;
+  if(e.key==='d') ship.x += step;
+  if(e.key==='f') console.log('💥 Laser fired!');
+});
+
+function draw() {
+  ctx.fillStyle = 'black';
+  ctx.fillRect(0,0,width,height);
+
+  // Stars
+  ctx.fillStyle = 'white';
+  stars.forEach(s=>ctx.fillText(s.symbol, s.x, s.y));
+
+  // Asteroids
+  asteroids.forEach(a=>ctx.fillText(a.symbol, a.x, a.y));
+
+  // Aliens
+  aliens.forEach(a=>ctx.fillText(a.symbol, a.x, a.y));
+
+  // Loot
+  loot.forEach(l=>ctx.fillText(l.symbol, l.x, l.y));
+
+  // Ship
+  ctx.fillText('🛸', ship.x, ship.y);
+
+  // Update positions randomly
+  function moveArr(arr){ arr.forEach(o=>{
+    o.x += Math.random()*20-10;
+    o.y += Math.random()*20-10;
+    if(o.x<0)o.x=width; if(o.x>width)o.x=0;
+    if(o.y<0)o.y=height; if(o.y>height)o.y=0;
+  })}
+
+  moveArr(stars);
+  moveArr(asteroids);
+  moveArr(aliens);
+  moveArr(loot);
+
+  // Collision detection
+  function checkCollisions(arr, type){
+    arr.forEach((o,i)=>{
+      if(Math.abs(o.x-ship.x)<15 && Math.abs(o.y-ship.y)<15){
+        if(type==='asteroid'){ ship.hull-=10; arr.splice(i,1); }
+        if(type==='alien'){ ship.shields-=5; arr.splice(i,1); }
+        if(type==='loot'){ ship.score+=Math.floor(Math.random()*20+5); arr.splice(i,1); }
+      }
+    })
+  }
+
+  checkCollisions(asteroids,'asteroid');
+  checkCollisions(aliens,'alien');
+  checkCollisions(loot,'loot');
+
+  // Random wormhole chaos
+  if(Math.random()<0.01){ ship.x=Math.random()*width; ship.y=Math.random()*height; }
+
+  // Update dashboard
+  document.getElementById('hull').textContent = ship.hull;
+  document.getElementById('shields').textContent = ship.shields;
+  document.getElementById('fuel').textContent = ship.fuel;
+  document.getElementById('score').textContent = ship.score;
+
+  if(ship.hull<=0 || ship.shields<0 || ship.fuel<=0){
+    alert('💀 Ship destroyed! Game over! Final score: '+ship.score);
+    ship.hull=100; ship.shields=50; ship.fuel=100; ship.score=0;
+  }
+
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+</body>
+</html>
