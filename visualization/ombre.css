@@ -1,0 +1,212 @@
+/*
+ * =========================================================
+ * SISU — Ombre Gradient Stylesheet
+ * =========================================================
+ * 
+ * DENSITY:     ███████░░░  [7/10]
+ * ENDURANCE:   ██████████  [10/10]  
+ * ABSTRACTION: ████████░░  [8/10]
+ *
+ * COLOR PHASE: #D4FFE4 to #052E16 (Full Spectrum)
+ *
+ * Historical Context:
+ *   Born from: CSS Gradients, 2009
+ *   Survived:  Countless framework changes
+ *   Evolves:   Into pure visual compression
+ *
+ * Compression Ratio: 21 colors : ∞ combinations
+ *
+ * =========================================================
+ */
+
+:root {
+    /* The 21 Greens of Sisu */
+    --sisu-whisper: #F0FDF4;
+    --sisu-emergence: #ECFDF5;
+    --sisu-dawn: #DCFCE7;
+    --sisu-seed: #D4FFE4;
+    --sisu-tender: #C6F7E2;
+    --sisu-spring-breath: #BBF7D0;
+    --sisu-primary: #A7F3D0;  /* The heartbeat */
+    --sisu-vitality: #94F2C2;
+    --sisu-chlorophyll: #86EFAC;
+    --sisu-verdant: #73E9A0;
+    --sisu-peak: #6EE7B7;     /* Maximum green */
+    --sisu-forest: #5CE1A6;
+    --sisu-deep: #4ADE80;
+    --sisu-canopy: #34D399;
+    --sisu-pine: #22C55E;
+    --sisu-ancient: #16A34A;
+    --sisu-moss: #15803D;
+    --sisu-shadow: #166534;
+    --sisu-floor: #14532D;
+    --sisu-root: #0F462A;
+    --sisu-void: #052E16;
+    
+    /* The Mint-to-Teal Bridge */
+    --sisu-mintcream: #F5FFFA;
+    --sisu-springgreen: #00FF7F;
+    --sisu-mediumspring: #00FA9A;
+    --sisu-seagreen: #2E8B57;
+    --sisu-mediumsea: #3CB371;
+    --sisu-aquamarine: #7FFFD4;
+    --sisu-turquoise: #40E0D0;
+    --sisu-lightsea: #20B2AA;
+    --sisu-teal: #008080;
+    --sisu-darkcyan: #008B8B;
+    --sisu-darkturquoise: #00CED1;
+    
+    /* Breathing timing (matching human respiration) */
+    --breathe-in: 4s;
+    --breathe-hold: 7s;
+    --breathe-out: 8s;
+    --breathe-cycle: 19s;
+}
+
+/* The Primary Gradient - Earth Growth */
+.sisu-gradient {
+    background: linear-gradient(
+        180deg,
+        var(--sisu-whisper) 0%,
+        var(--sisu-dawn) 10%,
+        var(--sisu-seed) 20%,
+        var(--sisu-primary) 40%,
+        var(--sisu-peak) 60%,
+        var(--sisu-deep) 80%,
+        var(--sisu-ancient) 90%,
+        var(--sisu-void) 100%
+    );
+}
+
+/* The Aquatic Bridge */
+.sisu-aquatic {
+    background: linear-gradient(
+        90deg,
+        var(--sisu-mintcream) 0%,
+        var(--sisu-springgreen) 15%,
+        var(--sisu-seagreen) 30%,
+        var(--sisu-aquamarine) 45%,
+        var(--sisu-turquoise) 60%,
+        var(--sisu-lightsea) 75%,
+        var(--sisu-teal) 90%,
+        var(--sisu-darkcyan) 100%
+    );
+}
+
+/* Breathing Animation */
+@keyframes breathe-green {
+    0%, 100% {
+        background-color: var(--sisu-whisper);
+        box-shadow: 0 0 20px var(--sisu-whisper);
+    }
+    21% {  /* 4s inhale */
+        background-color: var(--sisu-primary);
+        box-shadow: 0 0 40px var(--sisu-primary);
+    }
+    58% {  /* 7s hold */
+        background-color: var(--sisu-peak);
+        box-shadow: 0 0 60px var(--sisu-peak);
+    }
+    100% { /* 8s exhale */
+        background-color: var(--sisu-void);
+        box-shadow: 0 0 10px var(--sisu-void);
+    }
+}
+
+.breathing {
+    animation: breathe-green var(--breathe-cycle) ease-in-out infinite;
+}
+
+/* Compression Visualization */
+.compression-level {
+    position: relative;
+    height: 100px;
+    overflow: hidden;
+}
+
+.compression-level::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--sisu-whisper) 0px,
+        var(--sisu-primary) 10px,
+        var(--sisu-peak) 20px,
+        var(--sisu-deep) 30px,
+        var(--sisu-void) 40px,
+        var(--sisu-whisper) 50px
+    );
+    animation: compress 10s linear infinite;
+}
+
+@keyframes compress {
+    from {
+        transform: scaleX(1);
+    }
+    to {
+        transform: scaleX(0.1);
+    }
+}
+
+/* File Type Color Mapping */
+.file-assembly { color: var(--sisu-void); }
+.file-c { color: var(--sisu-root); }
+.file-header { color: var(--sisu-floor); }
+.file-cpp { color: var(--sisu-shadow); }
+.file-rust { color: var(--sisu-moss); }
+.file-go { color: var(--sisu-ancient); }
+.file-python { color: var(--sisu-pine); }
+.file-javascript { color: var(--sisu-canopy); }
+.file-typescript { color: var(--sisu-deep); }
+.file-haskell { color: var(--sisu-peak); }
+.file-lisp { color: var(--sisu-chlorophyll); }
+.file-ml { color: var(--sisu-primary); }
+.file-markdown { color: var(--sisu-spring-breath); }
+.file-css { color: var(--sisu-seed); }
+.file-svg { color: var(--sisu-dawn); }
+.file-json { color: var(--sisu-emergence); }
+.file-yaml { color: var(--sisu-whisper); }
+
+/* The Sacred Green Matrix */
+.green-matrix {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+}
+
+.matrix-cell {
+    aspect-ratio: 1;
+    transition: all 0.3s ease;
+}
+
+.matrix-cell:nth-child(7n+1) { background: var(--sisu-whisper); }
+.matrix-cell:nth-child(7n+2) { background: var(--sisu-primary); }
+.matrix-cell:nth-child(7n+3) { background: var(--sisu-peak); }
+.matrix-cell:nth-child(7n+4) { background: var(--sisu-deep); }
+.matrix-cell:nth-child(7n+5) { background: var(--sisu-ancient); }
+.matrix-cell:nth-child(7n+6) { background: var(--sisu-shadow); }
+.matrix-cell:nth-child(7n) { background: var(--sisu-void); }
+
+.matrix-cell:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px currentColor;
+}
+
+/* Endurance Indicators */
+.endurance-meter {
+    background: linear-gradient(
+        to right,
+        var(--sisu-void) 0%,
+        var(--sisu-void) var(--endurance, 0%),
+        var(--sisu-whisper) var(--endurance, 0%),
+        var(--sisu-whisper) 100%
+    );
+}
+
+/* The philosophy: Every color has survived */
+/* Every gradient tells a story of endurance */
+/* This CSS will outlive the frameworks */
