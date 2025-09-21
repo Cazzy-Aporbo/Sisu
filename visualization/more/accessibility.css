@@ -1,0 +1,30 @@
+/* accessibility.css
+   By Cazzy
+   Purpose: Explicit accessibility helpers and focus management.
+*/
+
+/* Strong focus ring that remains visible */
+:focus {
+  outline: 3px solid rgba(120, 100, 255, 0.32);
+  outline-offset: 3px;
+}
+
+/* Ensure sufficient contrast fallback for text on pastel cards */
+.card, .chip, .btn {
+  color: var(--n-ink);
+}
+@media (prefers-contrast: more) {
+  .card, .chip, .btn { color: #0b1a2b; background-color: #fff; }
+}
+
+/* Reduced motion already set in theme; add focus-visible fallback */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Respect user font-size preferences */
+html { font-size: 16px; }
+@media (max-width:480px) { html { font-size: 15px; } }
+
+/* Keyboard-only hover behaviors (helps when using keyboard nav) */
+.keyboard-user .btn:hover { transform:none; box-shadow: var(--shadow-soft); }
