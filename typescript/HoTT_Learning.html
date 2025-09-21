@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homotopy Type Theory Explorer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3a86ff;
+            --primary-light: #6ba4ff;
+            --primary-dark: #2563eb;
+            --secondary: #8338ec;
+            --accent: #ff006e;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --success: #38b000;
+            --warning: #ff9e00;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e7ec 100%);
+            color: var(--dark);
+            font-family: 'Exo 2', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 30px 20px;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 3.2rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .tagline {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto 25px;
+            opacity: 0.9;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .tab {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+        
+        .tab:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        .tab.active {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        h3 {
+            font-size: 1.6rem;
+            color: var(--secondary);
+            margin: 25px 0 15px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .interactive-demo {
+            background: linear-gradient(135deg, #edf2ff 0%, #e6e6ff 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 5px solid var(--primary);
+        }
+        
+        .demo-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Source Code Pro', monospace;
+            line-height: 1.5;
+        }
+        
+        .keyword {
+            color: #ff79c6;
+        }
+        
+        .function {
+            color: #50fa7b;
+        }
+        
+        .comment {
+            color: #6272a4;
+        }
+        
+        .string {
+            color: #f1fa8c;
+        }
+        
+        .type {
+            color: #8be9fd;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 5px 15px rgba(58, 134, 255, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(58, 134, 255, 0.4);
+        }
+        
+        .visualization {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .viz-box {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            width: 280px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .viz-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-light);
+        }
+        
+        .viz-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .concept-hint {
+            position: relative;
+            background: #edf2ff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: help;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 5px 0;
+            border: 1px solid var(--primary-light);
+        }
+        
+        .concept-hint:hover {
+            background: #e6eeff;
+        }
+        
+        .concept-popup {
+            display: none;
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            width: 300px;
+            z-index: 10;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--primary-light);
+        }
+        
+        .concept-hint:hover .concept-popup {
+            display: block;
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .resource-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 2px solid transparent;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-light);
+        }
+        
+        .resource-title {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 80px;
+            color: var(--gray);
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .hott-visualization {
+            width: 100%;
+            height: 300px;
+            background: white;
+            border-radius: 15px;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .path {
+            position: absolute;
+            height: 4px;
+            background: var(--primary);
+            transform-origin: left center;
+        }
+        
+        .point {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+        
+        .point-label {
+            position: absolute;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .equivalence {
+            position: absolute;
+            height: 30px;
+            border: 2px dashed var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+            100% { opacity: 0.6; transform: scale(1); }
+        }
+        
+        @keyframes drawPath {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
+        }
+        
+        .interactive-concept {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .concept-question {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+        }
+        
+        .concept-answer {
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.1rem;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tab {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .visualization {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-project-diagram"></i> Homotopy Type Theory Explorer</h1>
+        <p class="tagline">Bridging mathematics and computer science through the deep connection between type theory and topology</p>
+        <div class="nav-tabs">
+            <div class="tab active">Introduction</div>
+            <div class="tab">Core Concepts</div>
+            <div class="tab">Type = Space</div>
+            <div class="tab">Proofs & Programming</div>
+            <div class="tab">Resources</div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section class="card">
+            <h2><i class="fas fa-infinity"></i> What is Homotopy Type Theory?</h2>
+            <p>Homotopy Type Theory (HoTT) is a revolutionary field that connects <span class="concept-hint">type theory
+                <div class="concept-popup">
+                    <strong>Type Theory:</strong> A formal system where every value has a type, used as a foundation for mathematics and programming languages.
+                </div>
+            </span> with <span class="concept-hint">homotopy theory
+                <div class="concept-popup">
+                    <strong>Homotopy Theory:</strong> A branch of topology that studies spaces up to continuous deformation.
+                </div>
+            </span>. It proposes that types can be interpreted as topological spaces, and equalities between elements as paths in those spaces.</p>
+            
+            <div class="interactive-demo">
+                <div class="demo-title">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Simple Analogy: Types as Spaces</h3>
+                </div>
+                <p>Think of a type as a space where each point is a value of that type. Two values being equal corresponds to a path between points. Higher equalities (equalities between equalities) correspond to higher-dimensional paths.</p>
+                
+                <div class="hott-visualization" id="hottVisualization">
+                    <!-- Visualization will be generated by JavaScript -->
+                </div>
+                
+                <button class="btn" id="animateVizBtn">
+                    <i class="fas fa-play"></i> Animate Paths
+                </button>
+            </div>
+            
+            <h3>Why is HoTT Important?</h3>
+            <p>HoTT provides a new foundation for mathematics that is particularly well-suited for computer formalization. It also offers new insights into the nature of equality and mathematical structures.</p>
+            
+            <div class="visualization">
+                <div class="viz-box">
+                    <div class="viz-icon">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <h3>Univalence</h3>
+                    <p>Equivalent types are equal - a powerful principle that connects logical equivalence with equality</p>
+                </div>
+                <div class="viz-box">
+                    <div class="viz-icon">
+                        <i class="fas fa-road"></i>
+                    </div>
+                    <h3>Higher Inductive Types</h3>
+                    <p>Types with not only points but also paths and higher paths as inherent structure</p>
+                </div>
+                <div class="viz-box">
+                    <div class="viz-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Proof Assistant Friendly</h3>
+                    <p>HoTT is well-suited for formal verification in proof assistants like Coq and Agda</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="card">
+            <h2><i class="fas fa-puzzle-piece"></i> Core Concepts</h2>
+            <p>HoTT introduces several groundbreaking ideas that reshape how we think about types, equality, and mathematical structures.</p>
+            
+            <h3><span class="concept-hint">Identity Types
+                <div class="concept-popup">
+                    <strong>Identity Types:</strong> In type theory, the type of proofs that two elements are equal. In HoTT, these correspond to paths.
+                </div>
+            </span> as Paths</h3>
+            <p>In HoTT, a proof that a = b is interpreted as a path from point a to point b in the space represented by the type. This geometric interpretation provides intuitive reasoning about equality.</p>
+            
+            <div class="code-block">
+                <span class="comment">// In type theory, identity types are fundamental</span><br>
+                <span class="keyword">Id</span> : <span class="type">A</span> → <span class="type">A</span> → <span class="type">Type</span><br>
+                <span class="comment">// For any x : A, refl(x) : Id(x, x) is the reflexive path</span><br>
+            </div>
+            
+            <h3><span class="concept-hint">Univalence Axiom
+                <div class="concept-popup">
+                    <strong>Univalence Axiom:</strong> States that equivalent types are equal. This is a profound connection between logical equivalence and equality.
+                </div>
+            </span></h3>
+            <p>The Univalence Axiom is perhaps the most revolutionary aspect of HoTT. It states that if two types are equivalent (can be transformed into each other without loss of information), then they are actually equal.</p>
+            
+            <div class="interactive-concept">
+                <div class="concept-question">What does Univalence mean in practice?</div>
+                <div class="concept-answer">It means that if we have two types A and B, and we can prove they're equivalent (there's a bijection between them), then we can treat A and B as literally the same type. This allows us to transfer properties and constructions between equivalent types.</div>
+            </div>
+            
+            <h3><span class="concept-hint">Higher Inductive Types
+                <div class="concept-popup">
+                    <strong>Higher Inductive Types:</strong> Types defined by not only their points but also paths and higher paths between these points.
+                </div>
+            </span></h3>
+            <p>Traditional inductive types define types by specifying how to construct their elements. Higher inductive types also allow specifying paths between elements, enabling the direct definition of spaces with non-trivial topology.</p>
+            
+            <div class="code-block">
+                <span class="comment">// Example: The circle as a higher inductive type</span><br>
+                <span class="keyword">data</span> <span class="type">S¹</span> : <span class="type">Type</span> <span class="keyword">where</span><br>
+                &nbsp;&nbsp;base : S¹<br>
+                &nbsp;&nbsp;loop : Id(base, base)<br>
+            </div>
+        </section>
+        
+        <section class="card">
+            <h2><i class="fas fa-sitemap"></i> Type = Space</h2>
+            <p>The fundamental insight of HoTT is the correspondence between type theory and homotopy theory, often summarized as "types are spaces".</p>
+            
+            <div class="hott-visualization" id="typeSpaceViz">
+                <!-- Visualization will be generated by JavaScript -->
+            </div>
+            
+            <h3>Interpretation Dictionary</h3>
+            <p>HoTT establishes a precise correspondence between type-theoretic concepts and homotopy-theoretic concepts:</p>
+            
+            <div class="code-block">
+                <span class="comment">/* Type Theory */</span>    <span class="comment">/* Homotopy Theory */</span><br>
+                Type            ↔    Space<br>
+                Term            ↔    Point<br>
+                Identity type    ↔    Path space<br>
+                p : Id(a,b)    ↔    Path from a to b<br>
+                Id(p,q)      ↔    Homotopy between paths<br>
+            </div>
+            
+            <h3>Implications for Mathematics</h3>
+            <p>This correspondence allows mathematicians to use geometric intuition when working with types, and computational tools when working with spaces. It has already led to new insights in both fields.</p>
+            
+            <button class="btn">
+                <i class="fas fa-brain"></i> Explore More Connections
+            </button>
+        </section>
+        
+        <section class="card">
+            <h2><i class="fas fa-book-open"></i> Learning Resources</h2>
+            <p>HoTT is an advanced topic, but there are excellent resources available for different experience levels.</p>
+            
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-title">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Beginner Resources</h3>
+                    </div>
+                    <ul>
+                        <li>HoTT Book (standard reference)</li>
+                        <li>Introduction to Homotopy Type Theory</li>
+                        <li>Type Theory and HoTT YouTube lectures</li>
+                    </ul>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-title">
+                        <i class="fas fa-code"></i>
+                        <h3>Practical Implementation</h3>
+                    </div>
+                    <ul>
+                        <li>HoTT in Coq proof assistant</li>
+                        <li>Agda with HoTT support</li>
+                        <li>Cubical Type Theory implementations</li>
+                    </ul>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-title">
+                        <i class="fas fa-users"></i>
+                        <h3>Community</h3>
+                    </div>
+                    <ul>
+                        <li>HoTT GitHub repositories</li>
+                        <li>Homotopy Type Theory mailing list</li>
+                        <li>Specialized conferences and workshops</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="interactive-concept">
+                <div class="concept-question">How to start learning HoTT?</div>
+                <div class="concept-answer">Begin with basic type theory and functional programming. Then move to the HoTT Book, working through examples in a proof assistant like Coq or Agda. Join the community to discuss concepts and ask questions.</div>
+            </div>
+            
+            <button class="btn">
+                <i class="fas fa-external-link-alt"></i> Explore All Resources
+            </button>
+        </section>
+    </div>
+    
+    <footer>
+        <p>Homotopy Type Theory Explorer | An Interactive Educational Resource</p>
+        <p>Made with ♥ for mathematicians and computer scientists</p>
+    </footer>
+
+    <script>
+        // Initialize the HoTT visualization
+        function initVisualization() {
+            const viz = document.getElementById('hottVisualization');
+            viz.innerHTML = '';
+            
+            // Create points
+            const pointA = document.createElement('div');
+            pointA.className = 'point';
+            pointA.style.top = '150px';
+            pointA.style.left = '100px';
+            pointA.id = 'pointA';
+            
+            const pointB = document.createElement('div');
+            pointB.className = 'point';
+            pointB.style.top = '150px';
+            pointB.style.left = '500px';
+            pointB.id = 'pointB';
+            
+            // Create point labels
+            const labelA = document.createElement('div');
+            labelA.className = 'point-label';
+            labelA.textContent = 'a';
+            labelA.style.top = '170px';
+            labelA.style.left = '100px';
+            
+            const labelB = document.createElement('div');
+            labelB.className = 'point-label';
+            labelB.textContent = 'b';
+            labelB.style.top = '170px';
+            labelB.style.left = '500px';
+            
+            // Create paths
+            const path1 = document.createElement('div');
+            path1.className = 'path';
+            path1.style.top = '150px';
+            path1.style.left = '116px';
+            path1.style.width = '384px';
+            path1.style.transform = 'scaleX(0)';
+            path1.style.transformOrigin = 'left center';
+            path1.id = 'path1';
+            
+            const path2 = document.createElement('div');
+            path2.className = 'path';
+            path2.style.top = '100px';
+            path2.style.left = '116px';
+            path2.style.width = '384px';
+            path2.style.transform = 'scaleX(0)';
+            path2.style.transformOrigin = 'left center';
+            path2.id = 'path2';
+            
+            // Create equivalence between paths
+            const equivalence = document.createElement('div');
+            equivalence.className = 'equivalence';
+            equivalence.style.top = '125px';
+            equivalence.style.left = '250px';
+            equivalence.style.width = '200px';
+            equivalence.style.height = '50px';
+            equivalence.style.opacity = '0';
+            equivalence.id = 'equivalence';
+            
+            // Add elements to visualization
+            viz.appendChild(pointA);
+            viz.appendChild(pointB);
+            viz.appendChild(labelA);
+            viz.appendChild(labelB);
+            viz.appendChild(path1);
+            viz.appendChild(path2);
+            viz.appendChild(equivalence);
+        }
+        
+        // Animate the visualization
+        function animateVisualization() {
+            const path1 = document.getElementById('path1');
+            const path2 = document.getElementById('path2');
+            const equivalence = document.getElementById('equivalence');
+            
+            // Reset animation
+            path1.style.transform = 'scaleX(0)';
+            path2.style.transform = 'scaleX(0)';
+            equivalence.style.opacity = '0';
+            
+            // Animate first path
+            setTimeout(() => {
+                path1.style.transition = 'transform 2s ease';
+                path1.style.transform = 'scaleX(1)';
+            }, 500);
+            
+            // Animate second path
+            setTimeout(() => {
+                path2.style.transition = 'transform 2s ease';
+                path2.style.transform = 'scaleX(1)';
+            }, 2000);
+            
+            // Show equivalence
+            setTimeout(() => {
+                equivalence.style.transition = 'opacity 1.5s ease';
+                equivalence.style.opacity = '1';
+            }, 3500);
+        }
+        
+        // Initialize type-space visualization
+        function initTypeSpaceVisualization() {
+            const viz = document.getElementById('typeSpaceViz');
+            viz.innerHTML = '';
+            
+            // Create type theory side
+            const typeTheory = document.createElement('div');
+            typeTheory.style.position = 'absolute';
+            typeTheory.style.left = '50px';
+            typeTheory.style.top = '50px';
+            typeTheory.style.width = '400px';
+            typeTheory.style.height = '200px';
+            typeTheory.style.background = 'rgba(58, 134, 255, 0.1)';
+            typeTheory.style.borderRadius = '10px';
+            typeTheory.style.padding = '20px';
+            
+            const typeTheoryTitle = document.createElement('div');
+            typeTheoryTitle.textContent = 'Type Theory';
+            typeTheoryTitle.style.fontWeight = 'bold';
+            typeTheoryTitle.style.color = 'var(--primary)';
+            typeTheoryTitle.style.marginBottom = '15px';
+            
+            const typeTheoryContent = document.createElement('div');
+            typeTheoryContent.innerHTML = `
+                <div>Types: A, B, C</div>
+                <div>Terms: a : A, b : B</div>
+                <div>Identity: p : Id(a, b)</div>
+                <div>Higher identities</div>
+            `;
+            
+            typeTheory.appendChild(typeTheoryTitle);
+            typeTheory.appendChild(typeTheoryContent);
+            
+            // Create homotopy theory side
+            const homotopyTheory = document.createElement('div');
+            homotopyTheory.style.position = 'absolute';
+            homotopyTheory.style.right = '50px';
+            homotopyTheory.style.top = '50px';
+            homotopyTheory.style.width = '400px';
+            homotopyTheory.style.height = '200px';
+            homotopyTheory.style.background = 'rgba(131, 56, 236, 0.1)';
+            homotopyTheory.style.borderRadius = '10px';
+            homotopyTheory.style.padding = '20px';
+            
+            const homotopyTheoryTitle = document.createElement('div');
+            homotopyTheoryTitle.textContent = 'Homotopy Theory';
+            homotopyTheoryTitle.style.fontWeight = 'bold';
+            homotopyTheoryTitle.style.color = 'var(--secondary)';
+            homotopyTheoryTitle.style.marginBottom = '15px';
+            
+            const homotopyTheoryContent = document.createElement('div');
+            homotopyTheoryContent.innerHTML = `
+                <div>Spaces: X, Y, Z</div>
+                <div>Points: x ∈ X, y ∈ Y</div>
+                <div>Paths: p : x → y</div>
+                <div>Homotopies between paths</div>
+            `;
+            
+            homotopyTheory.appendChild(homotopyTheoryTitle);
+            homotopyTheory.appendChild(homotopyTheoryContent);
+            
+            // Create connecting arrows
+            const arrow1 = document.createElement('div');
+            arrow1.style.position = 'absolute';
+            arrow1.style.left = '450px';
+            arrow1.style.top = '100px';
+            arrow1.style.width = '100px';
+            arrow1.style.height = '2px';
+            arrow1.style.background = 'var(--accent)';
+            arrow1.style.transform = 'rotate(180deg)';
+            
+            const arrowhead1 = document.createElement('div');
+            arrowhead1.style.position = 'absolute';
+            arrowhead1.style.left = '450px';
+            arrowhead1.style.top = '95px';
+            arrowhead1.style.width = '0';
+            arrowhead1.style.height = '0';
+            arrowhead1.style.borderTop = '10px solid transparent';
+            arrowhead1.style.borderBottom = '10px solid transparent';
+            arrowhead1.style.borderRight = '15px solid var(--accent)';
+            
+            const arrow2 = document.createElement('div');
+            arrow2.style.position = 'absolute';
+            arrow2.style.left = '450px';
+            arrow2.style.top = '150px';
+            arrow2.style.width = '100px';
+            arrow2.style.height = '2px';
+            arrow2.style.background = 'var(--accent)';
+            
+            const arrowhead2 = document.createElement('div');
+            arrowhead2.style.position = 'absolute';
+            arrowhead2.style.left = '550px';
+            arrowhead2.style.top = '145px';
+            arrowhead2.style.width = '0';
+            arrowhead2.style.height = '0';
+            arrowhead2.style.borderTop = '10px solid transparent';
+            arrowhead2.style.borderBottom = '10px solid transparent';
+            arrowhead2.style.borderLeft = '15px solid var(--accent)';
+            
+            // Add elements to visualization
+            viz.appendChild(typeTheory);
+            viz.appendChild(homotopyTheory);
+            viz.appendChild(arrow1);
+            viz.appendChild(arrowhead1);
+            viz.appendChild(arrow2);
+            viz.appendChild(arrowhead2);
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initVisualization();
+            initTypeSpaceVisualization();
+            
+            // Add event listener for animate button
+            document.getElementById('animateVizBtn').addEventListener('click', animateVisualization);
+            
+            // Tab functionality
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                });
+            });
+            
+            // Add some initial animation
+            document.querySelectorAll('.viz-box').forEach((box, index) => {
+                box.style.animationDelay = `${index * 0.3}s`;
+            });
+        });
+    </script>
+</body>
+</html>
