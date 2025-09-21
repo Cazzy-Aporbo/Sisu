@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypeScript Advanced Concepts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ts-blue: #3178c6;
+            --ts-dark-blue: #235a97;
+            --ts-light-blue: #4d8dd6;
+            --ts-gray: #2d2d2d;
+            --ts-light-gray: #4a4a4a;
+            --ts-white: #ffffff;
+            --ts-yellow: #f9d71c;
+            --ts-green: #4ec9b0;
+            --ts-purple: #c586c0;
+            --ts-orange: #ff9d00;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--ts-gray) 0%, #1a1a1a 100%);
+            color: var(--ts-white);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: rgba(35, 90, 151, 0.9);
+            padding: 30px 20px;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 40px;
+            text-align: center;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            color: var(--ts-white);
+        }
+        
+        .tagline {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto 25px;
+            color: var(--ts-yellow);
+        }
+        
+        .tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .tab {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--ts-white);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .tab:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .tab.active {
+            background: var(--ts-yellow);
+            color: var(--ts-gray);
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 1000px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .card {
+            background: rgba(45, 45, 45, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        h2 {
+            font-size: 2.2rem;
+            color: var(--ts-yellow);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        h3 {
+            font-size: 1.6rem;
+            color: var(--ts-green);
+            margin: 25px 0 15px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            line-height: 1.5;
+            border-left: 4px solid var(--ts-blue);
+        }
+        
+        .keyword {
+            color: #569cd6;
+        }
+        
+        .function {
+            color: #dcdcaa;
+        }
+        
+        .comment {
+            color: #6a9955;
+        }
+        
+        .string {
+            color: #ce9178;
+        }
+        
+        .type {
+            color: #4ec9b0;
+        }
+        
+        .number {
+            color: #b5cea8;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, var(--ts-blue) 0%, var(--ts-dark-blue) 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(49, 120, 198, 0.4);
+        }
+        
+        .visualization {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .viz-box {
+            background: rgba(49, 120, 198, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            width: 250px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--ts-light-blue);
+        }
+        
+        .viz-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(49, 120, 198, 0.2);
+        }
+        
+        .viz-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--ts-light-blue);
+        }
+        
+        .type-visual {
+            width: 100%;
+            height: 200px;
+            background: #1e1e1e;
+            border-radius: 10px;
+            margin: 20px 0;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .interactive-demo {
+            background: rgba(49, 120, 198, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid var(--ts-green);
+        }
+        
+        .demo-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--ts-green);
+            margin-bottom: 20px;
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .resource-card {
+            background: rgba(49, 120, 198, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--ts-light-blue);
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(49, 120, 198, 0.2);
+        }
+        
+        .resource-title {
+            font-weight: 700;
+            color: var(--ts-light-blue);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 80px;
+            color: var(--ts-light-gray);
+            border-top: 1px solid var(--ts-light-gray);
+        }
+        
+        .playground {
+            background: #1e1e1e;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .playground-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            color: var(--ts-green);
+        }
+        
+        .editor {
+            min-height: 200px;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            font-family: 'Fira Code', monospace;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid var(--ts-light-gray);
+            margin-bottom: 15px;
+            white-space: pre-wrap;
+        }
+        
+        .output {
+            min-height: 100px;
+            background: #2d2d2d;
+            color: #d4d4d4;
+            font-family: 'Fira Code', monospace;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid var(--ts-light-gray);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .animated {
+            animation: pulse 2s infinite ease-in-out;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tab {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .visualization {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fab fa-typescript"></i> Advanced TypeScript</h1>
+        <p class="tagline">Master advanced TypeScript concepts with interactive examples</p>
+        <div class="tabs">
+            <div class="tab active">Generics</div>
+            <div class="tab">Type System</div>
+            <div class="tab">Advanced Types</div>
+            <div class="tab">Decorators</div>
+            <div class="tab">Compiler API</div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="main-content">
+            <div>
+                <section class="card">
+                    <h2><i class="fas fa-cubes"></i> Generics</h2>
+                    <p>Generics allow creating reusable components that can work with multiple types while maintaining type safety.</p>
+                    
+                    <div class="code-block">
+                        <span class="comment">// Generic function</span><br>
+                        <span class="keyword">function</span> <span class="function">identity</span>&lt;T>(arg: T): T {<br>
+                        &nbsp;&nbsp;<span class="keyword">return</span> arg;<br>
+                        }<br>
+                        <br>
+                        <span class="comment">// Generic interface</span><br>
+                        <span class="keyword">interface</span> Box&lt;T> {<br>
+                        &nbsp;&nbsp;value: T;<br>
+                        }<br>
+                        <br>
+                        <span class="comment">// Generic class</span><br>
+                        <span class="keyword">class</span> GenericNumber&lt;T> {<br>
+                        &nbsp;&nbsp;zeroValue: T;<br>
+                        &nbsp;&nbsp;add: (x: T, y: T) => T;<br>
+                        }
+                    </div>
+                    
+                    <h3>Generic Constraints</h3>
+                    <p>You can constrain generics to types that have certain properties using the extends keyword.</p>
+                    
+                    <div class="code-block">
+                        <span class="keyword">interface</span> Lengthwise {<br>
+                        &nbsp;&nbsp;length: <span class="type">number</span>;<br>
+                        }<br>
+                        <br>
+                        <span class="keyword">function</span> <span class="function">loggingIdentity</span>&lt;T <span class="keyword">extends</span> Lengthwise>(arg: T): T {<br>
+                        &nbsp;&nbsp;console.log(arg.length);<br>
+                        &nbsp;&nbsp;<span class="keyword">return</span> arg;<br>
+                        }
+                    </div>
+                    
+                    <button class="btn">
+                        <i class="fas fa-code"></i> Try in Playground
+                    </button>
+                </section>
+                
+                <section class="card">
+                    <h2><i class="fas fa-project-diagram"></i> Advanced Types</h2>
+                    <p>TypeScript's advanced type features enable powerful type manipulation and transformation.</p>
+                    
+                    <h3>Conditional Types</h3>
+                    <p>Conditional types allow types to be selected based on conditions, similar to ternary operators in JavaScript.</p>
+                    
+                    <div class="code-block">
+                        <span class="keyword">type</span> IsString&lt;T> = T <span class="keyword">extends</span> <span class="type">string</span> ? <span class="type">true</span> : <span class="type">false</span>;<br>
+                        <br>
+                        <span class="keyword">type</span> T1 = IsString&lt;<span class="type">string</span>>; <span class="comment">// true</span><br>
+                        <span class="keyword">type</span> T2 = IsString&lt;<span class="type">number</span>>; <span class="comment">// false</span>
+                    </div>
+                    
+                    <h3>Mapped Types</h3>
+                    <p>Mapped types allow creating new types by transforming properties of existing types.</p>
+                    
+                    <div class="code-block">
+                        <span class="keyword">type</span> Readonly&lt;T> = {<br>
+                        &nbsp;&nbsp;<span class="keyword">readonly</span> [P <span class="keyword">in</span> keyof T]: T[P];<br>
+                        };<br>
+                        <br>
+                        <span class="keyword">interface</span> Person {<br>
+                        &nbsp;&nbsp;name: <span class="type">string</span>;<br>
+                        &nbsp;&nbsp;age: <span class="type">number</span>;<br>
+                        }<br>
+                        <br>
+                        <span class="keyword">type</span> ReadonlyPerson = Readonly&lt;Person>;
+                    </div>
+                    
+                    <button class="btn">
+                        <i class="fas fa-code"></i> Try in Playground
+                    </button>
+                </section>
+            </div>
+            
+            <div>
+                <section class="card">
+                    <h2><i class="fas fa-magic"></i> Type System</h2>
+                    <p>TypeScript's structural type system is based on the shape that values have, making it flexible and powerful.</p>
+                    
+                    <h3>Type Inference</h3>
+                    <p>TypeScript can infer types based on usage, reducing the need for explicit type annotations.</p>
+                    
+                    <div class="code-block">
+                        <span class="comment">// TypeScript infers the return type as number</span><br>
+                        <span class="keyword">function</span> <span class="function">add</span>(a: <span class="type">number</span>, b: <span class="type">number</span>) {<br>
+                        &nbsp;&nbsp;<span class="keyword">return</span> a + b;<br>
+                        }<br>
+                        <br>
+                        <span class="comment">// TypeScript infers the type as string[]</span><br>
+                        <span class="keyword">const</span> names = [<span class="string">"Alice"</span>, <span class="string">"Bob"</span>, <span class="string">"Eve"</span>];
+                    </div>
+                    
+                    <h3>Type Compatibility</h3>
+                    <p>TypeScript uses structural typing, meaning types are compatible if their structure is compatible.</p>
+                    
+                    <div class="code-block">
+                        <span class="keyword">interface</span> Named {<br>
+                        &nbsp;&nbsp;name: <span class="type">string</span>;<br>
+                        }<br>
+                        <br>
+                        <span class="keyword">class</span> Person {<br>
+                        &nbsp;&nbsp;name: <span class="type">string</span>;<br>
+                        }<br>
+                        <br>
+                        <span class="keyword">let</span> p: Named;<br>
+                        <span class="comment">// OK, because of structural typing</span><br>
+                        p = <span class="keyword">new</span> Person();
+                    </div>
+                    
+                    <button class="btn">
+                        <i class="fas fa-code"></i> Try in Playground
+                    </button>
+                </section>
+                
+                <section class="card">
+                    <h2><i class="fas fa-wand-magic-sparkles"></i> Decorators</h2>
+                    <p>Decorators provide a way to add annotations and meta-programming syntax for class declarations and members.</p>
+                    
+                    <div class="code-block">
+                        <span class="comment">// Class decorator</span><br>
+                        <span class="keyword">function</span> <span class="function">sealed</span>(constructor: <span class="type">Function</span>) {<br>
+                        &nbsp;&nbsp;Object.seal(constructor);<br>
+                        &nbsp;&nbsp;Object.seal(constructor.prototype);<br>
+                        }<br>
+                        <br>
+                        <span class="comment">// Method decorator</span><br>
+                        <span class="keyword">function</span> <span class="function">enumerable</span>(value: <span class="type">boolean</span>) {<br>
+                        &nbsp;&nbsp;<span class="keyword">return</span> <span class="keyword">function</span> (<span class="type">target</span>: <span class="type">any</span>, propertyKey: <span class="type">string</span>, descriptor: PropertyDescriptor) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;descriptor.enumerable = value;<br>
+                        &nbsp;&nbsp;};<br>
+                        }<br>
+                        <br>
+                        @sealed<br>
+                        <span class="keyword">class</span> Greeter {<br>
+                        &nbsp;&nbsp;greeting: <span class="type">string</span>;<br>
+                        <br>
+                        &nbsp;&nbsp;<span class="keyword">constructor</span>(message: <span class="type">string</span>) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.greeting = message;<br>
+                        &nbsp;&nbsp;}<br>
+                        <br>
+                        &nbsp;&nbsp;@enumerable(<span class="keyword">false</span>)<br>
+                        &nbsp;&nbsp;greet() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="string">"Hello, "</span> + <span class="keyword">this</span>.greeting;<br>
+                        &nbsp;&nbsp;}<br>
+                        }
+                    </div>
+                    
+                    <button class="btn">
+                        <i class="fas fa-code"></i> Try in Playground
+                    </button>
+                </section>
+                
+                <section class="card">
+                    <h2><i class="fas fa-play"></i> Interactive Playground</h2>
+                    <p>Try out TypeScript code and see the compiled JavaScript and type information.</p>
+                    
+                    <div class="playground">
+                        <div class="playground-header">
+                            <h3>TypeScript Editor</h3>
+                            <button class="btn">
+                                <i class="fas fa-play"></i> Run
+                            </button>
+                        </div>
+                        <div class="editor" contenteditable="true">
+function greet(name: string): string {
+    return `Hello, ${name}!`;
+}
+
+const message = greet("TypeScript Developer");
+console.log(message);
+                        </div>
+                        <div class="playground-header">
+                            <h3>Output</h3>
+                        </div>
+                        <div class="output">
+// Output will appear here after execution
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        
+        <section class="card">
+            <h2><i class="fas fa-book"></i> Learning Resources</h2>
+            <p>Explore these resources to deepen your TypeScript knowledge.</p>
+            
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-title">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Official Documentation</h3>
+                    </div>
+                    <ul>
+                        <li>TypeScript Handbook</li>
+                        <li>Advanced Types Guide</li>
+                        <li>Compiler Options</li>
+                    </ul>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-title">
+                        <i class="fas fa-video"></i>
+                        <h3>Video Courses</h3>
+                    </div>
+                    <ul>
+                        <li>Advanced TypeScript Masterclass</li>
+                        <li>TypeScript Design Patterns</li>
+                        <li>TypeScript for Enterprise Applications</li>
+                    </ul>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-title">
+                        <i class="fas fa-tools"></i>
+                        <h3>Tools & Libraries</h3>
+                    </div>
+                    <ul>
+                        <li>TypeScript Playground</li>
+                        <li>TSLint & ESLint for TypeScript</li>
+                        <li>TypeScript AST Viewer</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <button class="btn">
+                <i class="fas fa-external-link-alt"></i> Explore More Resources
+            </button>
+        </section>
+    </div>
+    
+    <footer>
+        <p>TypeScript Advanced Concepts | An Interactive Learning Experience</p>
+        <p>Created with ♥ for developers who want to master TypeScript</p>
+    </footer>
+
+    <script>
+        // Simple tab functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        });
+        
+        // Interactive editor functionality
+        const runButton = document.querySelector('.playground .btn');
+        const editor = document.querySelector('.editor');
+        const output = document.querySelector('.output');
+        
+        runButton.addEventListener('click', () => {
+            const code = editor.textContent;
+            
+            // Clear previous output
+            output.textContent = 'Running...';
+            
+            // Simulate execution (in a real environment, this would use the TypeScript compiler API)
+            setTimeout(() => {
+                try {
+                    // This is a simplified simulation - in reality, we'd need a TypeScript compiler
+                    if (code.includes('greet')) {
+                        output.textContent = 'Hello, TypeScript Developer!';
+                    } else {
+                        output.textContent = 'Code executed successfully (simulated)';
+                    }
+                } catch (error) {
+                    output.textContent = `Error: ${error.message}`;
+                }
+            }, 1000);
+        });
+        
+        // Add some animation to code blocks
+        document.querySelectorAll('.code-block').forEach(block => {
+            block.addEventListener('mouseenter', () => {
+                block.style.transform = 'translateY(-5px)';
+                block.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.3)';
+            });
+            
+            block.addEventListener('mouseleave', () => {
+                block.style.transform = 'translateY(0)';
+                block.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
+            });
+        });
+        
+        // Make the header logo pulse
+        const logo = document.querySelector('.fab.fa-typescript');
+        setInterval(() => {
+            logo.classList.toggle('animated');
+        }, 4000);
+    </script>
+</body>
+</html>
