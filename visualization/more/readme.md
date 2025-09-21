@@ -1,0 +1,1 @@
+These are example .ss files I have used. Not for Sisu repository itself. 
