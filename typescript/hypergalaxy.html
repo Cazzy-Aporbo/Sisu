@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>🚀 HyperGalaxy Level 40,000,000 🚀</title>
+<style>
+  body { margin:0; overflow:hidden; background:black; font-family:monospace; color:white;}
+  #ui { position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; }
+  #dashboard { position:absolute; top:10px; left:10px; background:rgba(0,0,0,0.8); padding:15px; border-radius:12px; max-width:450px; color:#0f0; font-size:13px; }
+  table { border-collapse:collapse; width:100%; margin-bottom:10px;}
+  th, td { border:1px solid #0f0; padding:2px 5px; text-align:left;}
+  canvas { display:block; }
+</style>
+</head>
+<body>
+<canvas id="space"></canvas>
+<div id="ui">
+  <div id="dashboard">
+    <h2>🚀 HyperGalaxy Level 40,000,000 Dashboard</h2>
+    <div>Sector: <span id="sector">0</span></div>
+    <div>Ship Energy: <span id="energy">100</span></div>
+    <div>Hull Integrity: <span id="hull">100</span></div>
+    <div>Shield Strength: <span id="shield">100</span></div>
+    <div>Credits: <span id="credits">500</span></div>
+    <div>Research Points: <span id="research">0</span></div>
+    <table id="ai-table">
+      <tr><th>Faction</th><th>Status</th><th>Influence</th><th>Last Encounter</th></tr>
+    </table>
+    <table id="events-table">
+      <tr><th>Event</th><th>Location</th><th>Severity</th><th>Outcome</th></tr>
+    </table>
+    <div>Controls: WASD=Move | Q=Warp | E=Scan | R=Recharge | F=Fire | Z=Terraform</div>
+  </div>
+</div>
+
+<script>
+// ===================================
+// HyperGalaxy Level 40,000,000 Core
+// ===================================
+const canvas = document.getElementById('space');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+// -----------------------------
+// Universe Parameters
+// -----------------------------
+let stars=[], planets=[], wormholes=[], blackholes=[], nebulae=[], events=[], aliens=[];
+const ship = { x:canvas.width/2, y:canvas.height/2, energy:100, hull:100, shield:100, credits:500, research:0, speed:6 };
+let sector = 0;
+
+// -----------------------------
+// Utilities
+// -----------------------------
+const randRange=(min,max)=>Math.random()*(max-min)+min;
+const randInt=(min,max)=>Math.floor(randRange(min,max+1));
+const randomChoice=(arr)=>arr[randInt(0,arr.length-1)];
+const hsl=(h,s,l)=>`hsl(${h},${s}%,${l}%)`;
+
+// -----------------------------
+// Procedural Generation
+// -----------------------------
+function generateStars(n){
+  stars=[];
+  for(let i=0;i<n;i++){
+    stars.push({x:randRange(0,canvas.width),y:randRange(0,canvas.height),r:randRange(0.5,2),twinkle:randRange(0.05,0.25)});
+  }
+}
+
+function generatePlanets(n){
+  planets=[];
+  for(let i=0;i<n;i++){
+    planets.push({x:randRange(0,canvas.width),y:randRange(0,canvas.height),r:randRange(10,50), color:hsl(randInt(0,360),80,50)});
+  }
+}
+
+function generateWormholes(n){
+  wormholes=[];
+  for(let i=0;i<n;i++){
+    wormholes.push({x:randRange(0,canvas.width),y:randRange(0,canvas.height),r:randRange(30,80), rotation:randRange(0,Math.PI*2)});
+  }
+}
+
+function generateBlackHoles(n){
+  blackholes=[];
+  for(let i=0;i<n;i++){
+    blackholes.push({x:randRange(0,canvas.width),y:randRange(0,canvas.height),r:randRange(20,60), spin:randRange(0.01,0.05)});
+  }
+}
+
+function generateNebulae(n){
+  nebulae=[];
+  for(let i=0;i<n;i++){
+    nebulae.push({x:randRange(0,canvas.width),y:randRange(0,canvas.height),r:randRange(50,150), color:hsl(randInt(0,360),60,40)});
+  }
+}
+
+function generateAliens(n){
+  const factions=['Zyphor','Krell','Lumina','Obsidian','Velari','Aetherian','Noxian','Cryovex'];
+  aliens=[];
+  for(let i=0;i<n;i++){
+    aliens.push({name:randomChoice(factions),status:randomChoice(['Neutral','Hostile','Friendly']), influence:randInt(0,100), lastEncounter:0});
+  }
+}
+
+function generateEvents(n){
+  const evt=['Supernova','Meteor Storm','Pirate Ambush','Cosmic Anomaly','Wormhole Collapse','Alien Encounter','Resource Surge'];
+  events=[];
+  for(let i=0;i<n;i++){
+    events.push({name:randomChoice(evt),x:randRange(0,canvas.width),y:randRange(0,canvas.height),severity:randInt(1,10), outcome:'Pending'});
+  }
+}
+
+// -----------------------------
+// Render Functions
+// -----------------------------
+function drawStars(){
+  stars.forEach(s=>{
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r + Math.sin(Date.now()*0.002+s.x)*s.twinkle,0,Math.PI*2);
+    ctx.fillStyle='white';
+    ctx.fill();
+  });
+}
+
+function drawPlanets(){
+  planets.forEach(p=>{
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=p.color;
+    ctx.shadowColor=p.color;
+    ctx.shadowBlur=25;
+    ctx.fill();
+    ctx.shadowBlur=0;
+  });
+}
+
+function drawWormholes(){
+  wormholes.forEach(w=>{
+    ctx.save();
+    ctx.translate(w.x,w.y);
+    ctx.rotate(w.rotation+Date.now()*0.001);
+    for(let i=0;i<12;i++){
+      ctx.beginPath();
+      ctx.arc(0,0,w.r*i/12,0,Math.PI*2);
+      ctx.strokeStyle=`hsla(${i*30},100%,50%,${0.5-i*0.03})`;
+      ctx.stroke();
+    }
+    ctx.restore();
+  });
+}
+
+function drawBlackHoles(){
+  blackholes.forEach(b=>{
+    ctx.save();
+    ctx.translate(b.x,b.y);
+    ctx.rotate(Date.now()*0.001*b.spin);
+    ctx.beginPath();
+    ctx.arc(0,0,b.r,0,Math.PI*2);
+    ctx.fillStyle='black';
+    ctx.shadowColor='purple';
+    ctx.shadowBlur=50;
+    ctx.fill();
+    ctx.shadowBlur=0;
+    ctx.restore();
+  });
+}
+
+function drawNebulae(){
+  nebulae.forEach(n=>{
+    ctx.beginPath();
+    const grd=ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,n.r);
+    grd.addColorStop(0, n.color);
+    grd.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=grd;
+    ctx.fillRect(n.x-n.r,n.y-n.r,n.r*2,n.r*2);
+  });
+}
+
+function drawShip(){
+  ctx.save();
+  ctx.translate(ship.x,ship.y);
+  ctx.fillStyle='cyan';
+  ctx.beginPath();
+  ctx.moveTo(0,-20); ctx.lineTo(12,12); ctx.lineTo(0,6); ctx.lineTo(-12,12); ctx.closePath();
+  ctx.fill();
+  ctx.restore();
+}
+
+// -----------------------------
+// Dashboard Update
+// -----------------------------
+function updateDashboard(){
+  document.getElementById('sector').innerText=sector;
+  document.getElementById('energy').innerText=ship.energy;
+  document.getElementById('hull').innerText=ship.hull;
+  document.getElementById('shield').innerText=ship.shield;
+  document.getElementById('credits').innerText=ship.credits;
+  document.getElementById('research').innerText=ship.research;
+
+  const aiTable=document.getElementById('ai-table');
+  aiTable.innerHTML='<tr><th>Faction</th><th>Status</th><th>Influence</th><th>Last Encounter</th></tr>';
+  aliens.forEach(a=>{
+    const row=`<tr><td>${a.name}</td><td>${a.status}</td><td>${a.influence}</td><td>${a.lastEncounter}</td></tr>`;
+    aiTable.innerHTML+=row;
+  });
+
+  const evtTable=document.getElementById('events-table');
+  evtTable.innerHTML='<tr><th>Event</th><th>Location</th><th>Severity</th><th>Outcome</th></tr>';
+  events.forEach(e=>{
+    const row=`<tr><td>${e.name}</td><td>${Math.floor(e.x)},${Math.floor(e.y)}</td><td>${e.severity}</td><td>${e.outcome}</td></tr>`;
+    evtTable.innerHTML+=row;
+  });
+}
+
+// -----------------------------
+// Controls & Universe Update
+// -----------------------------
+let keys={};
+window.addEventListener('keydown',e=>{ keys[e.key.toLowerCase()]=true; });
+window.addEventListener('keyup',e=>{ keys[e.key.toLowerCase()]=false; });
+
+function updateShip(){
+  if(keys['w'] && ship.y>0) ship.y-=ship.speed;
+  if(keys['s'] && ship.y<canvas.height) ship.y+=ship.speed;
+  if(keys['a'] && ship.x>0) ship.x-=ship.speed;
+  if(keys['d'] && ship.x<canvas.width) ship.x+=ship.speed;
+  if(keys['q']){ sector++; warpSector(); keys['q']=false; }
+  if(keys['r']){ ship.energy=Math.min(ship.energy+10,100); keys['r']=false; }
+  if(keys['e']){ scanSector(); keys['e']=false; }
+  if(keys['f']){ fireWeapon(); keys['f']=false; }
+  if(keys['z']){ terraformPlanet(); keys['z']=false; }
+}
+
+// -----------------------------
+// HyperSector Functions
+// -----------------------------
+function warpSector(){
+  generateStars(randInt(80,200));
+  generatePlanets(randInt(5,12));
+  generateWormholes(randInt(1,4));
+  generateBlackHoles(randInt(1,3));
+  generateNebulae(randInt(2,6));
+  generateAliens(randInt(5,10));
+  generateEvents(randInt(3,7));
+  ship.energy-=20;
+}
+
+function scanSector(){
+  ship.credits+=randInt(50,300);
+  ship.energy-=5;
+  events.push({name:'Scan Triggered', x:ship.x+randInt(-50,50), y:ship.y+randInt(-50,50), severity:randInt(1,5), outcome:'Scanned'});
+}
+
+function fireWeapon(){
+  ship.energy-=10;
+  ship.credits+=randInt(0,50);
+  events.push({name:'Laser Fired', x:ship.x, y:ship.y, severity:randInt(1,3), outcome:'Hit'});
+}
+
+function terraformPlanet(){
+  if(planets.length>0){
+    ship.energy-=15;
+    ship.research+=randInt(5,20);
+    planets[randInt(0,planets.length-1)].color=hsl(randInt(0,360),80,60);
+  }
+}
+
+// -----------------------------
+// Main Loop
+// -----------------------------
+function loop(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  drawStars();
+  drawNebulae();
+  drawPlanets();
+  drawWormholes();
+  drawBlackHoles();
+  drawShip();
+  updateShip();
+  updateDashboard();
+  requestAnimationFrame(loop);
+}
+
+// -----------------------------
+// Initialize Universe
+// -----------------------------
+warpSector();
+loop();
+
+</script>
+</body>
+</html>
