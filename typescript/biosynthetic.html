@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioCompute | Synthetic Biology for Information Processing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-ocean: #005f73;
+            --teal: #0a9396;
+            --aqua: #94d2bd;
+            --mint: #e9d8a6;
+            --seafoam: #aaf0d1;
+            --cyan: #00ffff;
+            --turquoise: #40e0d0;
+            --marine: #0077be;
+            --forest: #2a9d8f;
+            --jade: #4ca973;
+            --emerald: #50c878;
+            --viridian: #40826d;
+            --coral: #ff6b6b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--deep-ocean) 0%, var(--marine) 35%, var(--teal) 100%);
+            color: white;
+            font-family: 'Exo 2', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 40px;
+            border-bottom: 3px solid var(--cyan);
+            box-shadow: 0 5px 25px rgba(0, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(10, 147, 150, 0.4) 0%, transparent 70%);
+            z-index: -1;
+        }
+        
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--seafoam) 0%, var(--cyan) 50%, var(--aqua) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(148, 210, 189, 0.5);
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: var(--seafoam);
+        }
+        
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .tab {
+            background: rgba(10, 147, 150, 0.3);
+            color: var(--seafoam);
+            border: 1px solid var(--turquoise);
+            padding: 15px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            backdrop-filter: blur(5px);
+        }
+        
+        .tab:hover {
+            background: rgba(0, 255, 255, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.4);
+        }
+        
+        .tab.active {
+            background: linear-gradient(90deg, var(--turquoise) 0%, var(--cyan) 100%);
+            color: var(--deep-ocean);
+        }
+        
+        .card {
+            background: rgba(10, 147, 150, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(148, 210, 189, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 255, 255, 0.3);
+            border-color: var(--cyan);
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            color: var(--cyan);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        h3 {
+            font-size: 1.8rem;
+            margin: 30px 0 20px;
+            color: var(--turquoise);
+        }
+        
+        p {
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: var(--aqua);
+        }
+        
+        .interactive-demo {
+            background: rgba(42, 157, 143, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            border-left: 5px solid var(--cyan);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .interactive-demo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top right, rgba(0, 255, 255, 0.2) 0%, transparent 70%);
+            z-index: -1;
+        }
+        
+        .demo-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--cyan);
+            margin-bottom: 25px;
+        }
+        
+        .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--seafoam);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            overflow-x: auto;
+            font-family: 'Share Tech Mono', monospace;
+            line-height: 1.5;
+            border: 1px solid var(--teal);
+        }
+        
+        .keyword {
+            color: #00ccff;
+        }
+        
+        .function {
+            color: #66ff99;
+        }
+        
+        .comment {
+            color: #66b2ff;
+        }
+        
+        .string {
+            color: #ffcc66;
+        }
+        
+        .btn {
+            background: linear-gradient(90deg, var(--turquoise) 0%, var(--cyan) 100%);
+            color: var(--deep-ocean);
+            border: none;
+            padding: 15px 35px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 20px rgba(0, 255, 255, 0.4);
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 255, 255, 0.6);
+        }
+        
+        .visualization {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 40px 0;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .viz-box {
+            background: rgba(42, 157, 143, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            width: 300px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(148, 210, 189, 0.3);
+        }
+        
+        .viz-box:hover {
+            transform: translateY(-10px);
+            border-color: var(--cyan);
+            box-shadow: 0 10px 25px rgba(0, 255, 255, 0.3);
+        }
+        
+        .viz-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--cyan);
+        }
+        
+        .concept-hint {
+            position: relative;
+            background: rgba(10, 147, 150, 0.3);
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: help;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 5px 0;
+            border: 1px solid var(--turquoise);
+        }
+        
+        .concept-hint:hover {
+            background: rgba(0, 255, 255, 0.2);
+        }
+        
+        .concept-popup {
+            display: none;
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            background: rgba(10, 95, 115, 0.95);
+            padding: 20px;
+            border-radius: 15px;
+            width: 350px;
+            z-index: 10;
+            border: 1px solid var(--cyan);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .concept-hint:hover .concept-popup {
+            display: block;
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .resource-card {
+            background: rgba(42, 157, 143, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(148, 210, 189, 0.3);
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--cyan);
+            box-shadow: 0 10px 25px rgba(0, 255, 255, 0.3);
+        }
+        
+        .resource-title {
+            font-weight: 700;
+            color: var(--cyan);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.4rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            margin-top: 100px;
+            color: var(--aqua);
+            border-top: 1px solid rgba(148, 210, 189, 0.3);
+            background: rgba(0, 95, 115, 0.3);
+        }
+        
+        .bio-visualization {
+            width: 100%;
+            height: 400px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--turquoise);
+        }
+        
+        .cell {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--seafoam) 0%, var(--teal) 70%);
+            box-shadow: 0 0 20px var(--cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--deep-ocean);
+            font-weight: bold;
+            animation: pulse 3s infinite ease-in-out;
+        }
+        
+        .dna-strand {
+            position: absolute;
+            height: 4px;
+            background: linear-gradient(90deg, var(--cyan) 0%, var(--turquoise) 50%, var(--seafoam) 100%);
+            transform-origin: left center;
+            box-shadow: 0 0 10px var(--cyan);
+        }
+        
+        .signal {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--coral);
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--coral);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes glow {
+            0% { box-shadow: 0 0 10px rgba(0, 255, 255, 0.5); }
+            50% { box-shadow: 0 0 25px rgba(0, 255, 255, 0.8); }
+            100% { box-shadow: 0 0 10px rgba(0, 255, 255, 0.5); }
+        }
+        
+        @keyframes flow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .animated {
+            animation: pulse 3s infinite ease-in-out;
+        }
+        
+        .glowing {
+            animation: glow 2s infinite ease-in-out;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tab {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .visualization {
+                flex-direction: column;
+            }
+            
+            .bio-visualization {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-dna"></i> BioCompute</h1>
+        <p class="tagline">Harnessing the power of living cells for computational information processing</p>
+        <div class="nav-tabs">
+            <div class="tab active">Introduction</div>
+            <div class="tab">Biological Circuits</div>
+            <div class="tab">Applications</div>
+            <div class="tab">Ethics & Future</div>
+            <div class="tab">Resources</div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section class="card">
+            <h2><i class="fas fa-seedling"></i> What is Synthetic Biology Computing?</h2>
+            <p>Synthetic biology for computation involves engineering biological cells to function as living computers. By reprogramming cellular processes, we can create biological systems that process information, perform logical operations, and store data.</p>
+            
+            <div class="interactive-demo">
+                <div class="demo-title">
+                    <i class="fas fa-microscope"></i>
+                    <h3>Living Computers: Cells as Circuitry</h3>
+                </div>
+                <p>Imagine cells as tiny computers that can be programmed with biological "code" — DNA sequences that instruct them to perform specific functions in response to environmental signals.</p>
+                
+                <div class="bio-visualization" id="bioVisualization">
+                    <!-- Animation will be generated by JavaScript -->
+                </div>
+                
+                <button class="btn" id="animateBioBtn">
+                    <i class="fas fa-play"></i> Activate Biological Circuit
+                </button>
+            </div>
+            
+            <h3>Why Use Cells for Computation?</h3>
+            <p>Biological systems offer unique advantages: massive parallelism, energy efficiency, self-replication, and the ability to interface directly with biological environments. These properties make them ideal for applications where traditional silicon computers face limitations.</p>
+            
+            <div class="visualization">
+                <div class="viz-box">
+                    <div class="viz-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Energy Efficient</h3>
+                    <p>Biological computations can occur with minimal energy input</p>
+                </div>
+                <div class="viz-box">
+                    <div class="viz-icon">
+                        <i class="fas fa-compress-arrows-alt"></i>
+                    </div>
+                    <h3>Massively Parallel</h3>
+                    <p>Millions of cells can perform computations simultaneously</p>
+                </div>
+                <div class="viz-box">
+                    <div class="viz-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>Self-Replicating</h3>
+                    <p>Biological computers can grow and multiply themselves</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="card">
+            <h2><i class="fas fa-project-diagram"></i> Biological Circuit Design</h2>
+            <p>Just as electronic computers use logic gates, synthetic biologists create genetic circuits that perform logical operations inside cells.</p>
+            
+            <h3><span class="concept-hint">Genetic Logic Gates
+                <div class="concept-popup">
+                    <strong>Genetic Logic Gates:</strong> Biological components that perform Boolean logic operations. For example, an AND gate might only activate a gene when two specific input molecules are present.
+                </div>
+            </span></h3>
+            <p>Researchers have engineered biological versions of all fundamental logic gates (AND, OR, NOT, XOR, etc.) using DNA, RNA, and proteins as computational elements.</p>
+            
+            <div class="code-block">
+                <span class="comment"># Example: Biological AND gate implementation</span><br>
+                <span class="keyword">Inputs:</span> Molecule_A, Molecule_B<br>
+                <span class="keyword">Output:</span> Fluorescent Protein<br>
+                <br>
+                <span class="comment"># Genetic circuit design:</span><br>
+                <span class="keyword">Promoter_A</span> - activated by Molecule_A<br>
+                <span class="keyword">Promoter_B</span> - activated by Molecule_B<br>
+                <span class="keyword">Repressor</span> - inhibits output unless both inputs present<br>
+                <span class="keyword">Output</span> - GFP gene produces green fluorescence<br>
+            </div>
+            
+            <h3><span class="concept-hint">CRISPR-Based Memory
+                <div class="concept-popup">
+                    <strong>CRISPR-Based Memory:</strong> Using CRISPR systems to create biological memory that can record molecular events in DNA sequences.
+                </div>
+            </span></h3>
+            <p>CRISPR systems can be repurposed to create biological memory storage. When a specific event occurs, the cell records it by incorporating a new spacer sequence into its CRISPR array.</p>
+            
+            <div class="interactive-demo">
+                <div class="demo-title">
+                    <i class="fas fa-memory"></i>
+                    <h3>DNA Data Storage</h3>
+                </div>
+                <p>DNA has incredible information density – just one gram can store nearly 1 exabyte of data. Synthetic biologists are developing methods to encode digital information in DNA sequences.</p>
+                
+                <div class="code-block">
+                    <span class="comment"># Converting binary data to DNA sequence</span><br>
+                    <span class="keyword">Binary:</span> 01001000 01100101 01101100 01101100 01101111<br>
+                    <span class="keyword">DNA:</span> AGTC GATC CTAG AGCT TACG<br>
+                    <br>
+                    <span class="comment"># Storage capacity comparison:</span><br>
+                    <span class="keyword">Hard Drive:</span> 1TB ≈ 100g<br>
+                    <span class="keyword">DNA:</span> 1TB ≈ 0.0000001g<br>
+                </div>
+            </div>
+        </section>
+        
+        <section class="card">
+            <h2><i class="fas fa-flask"></i> Applications & Examples</h2>
+            <p>Synthetic biological computers have exciting applications in medicine, environmental monitoring, and biotechnology.</p>
+            
+            <div class="visualization">
+                <div class="viz-box">
+                    <div class="viz-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3>Medical Diagnostics</h3>
+                    <p>Cells engineered to detect disease markers and produce visible signals</p>
+                </div>
+                <div class="viz-box">
+                    <div class="viz-icon">
+                        <i class="fas fa-recycle"></i>
+                    </div>
+                    <h3>Environmental Sensing</h3>
+                    <p>Bacteria that detect pollutants and trigger cleanup processes</p>
+                </div>
+                <div class="viz-box">
+                    <div class="viz-icon">
+                        <i class="fas fa-pills"></i>
+                    </div>
+                    <h3>Smart Therapeutics</h3>
+                    <p>Living medicines that compute appropriate drug delivery timing</p>
+                </div>
+            </div>
+            
+            <h3>Real-World Example: Gut Biosensors</h3>
+            <p>Researchers have engineered bacteria that can sense inflammation markers in the gut, process this information, and produce therapeutic molecules only when needed.</p>
+            
+            <div class="bio-visualization" id="applicationViz">
+                <!-- Application visualization will be generated by JavaScript -->
+            </div>
+            
+            <button class="btn">
+                <i class="fas fa-book-open"></i> Explore More Applications
+            </button>
+        </section>
+        
+        <section class="card">
+            <h2><i class="fas fa-book-open"></i> Learning Resources</h2>
+            <p>Explore these resources to deepen your understanding of synthetic biology and biological computing.</p>
+            
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-title">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Educational Materials</h3>
+                    </div>
+                    <ul>
+                        <li>Introduction to Synthetic Biology (MIT OpenCourseWare)</li>
+                        <li>Biological Circuit Design Textbook</li>
+                        <li>CRISPR Engineering Techniques</li>
+                    </ul>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-title">
+                        <i class="fas fa-video"></i>
+                        <h3>Video Lectures</h3>
+                    </div>
+                    <ul>
+                        <li>Synthetic Biology Seminar Series</li>
+                        <li>Biological Computing TED Talks</li>
+                        <li>Lab Techniques Demonstrations</li>
+                    </ul>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-title">
+                        <i class="fas fa-tools"></i>
+                        <h3>Laboratory Tools</h3>
+                    </div>
+                    <ul>
+                        <li>DNA Synthesis Services</li>
+                        <li>Gene Editing Platforms</li>
+                        <li>Bioinformatics Software</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="interactive-demo">
+                <div class="demo-title">
+                    <i class="fas fa-hands-helping"></i>
+                    <h3>Get Involved</h3>
+                </div>
+                <p>Interested in contributing to synthetic biology? Join iGEM (International Genetically Engineered Machine) – the premier student synthetic biology competition with teams from around the world.</p>
+                
+                <button class="btn">
+                    <i class="fas fa-external-link-alt"></i> Learn About iGEM
+                </button>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>BioCompute | Exploring the Frontier of Biological Information Processing</p>
+        <p>This educational resource is designed to make synthetic biology accessible to everyone</p>
+    </footer>
+
+    <script>
+        // Initialize the biological visualization
+        function initBioVisualization() {
+            const viz = document.getElementById('bioVisualization');
+            viz.innerHTML = '';
+            
+            // Create cells
+            for (let i = 0; i < 5; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'cell';
+                cell.style.width = `${60 + i*10}px`;
+                cell.style.height = `${60 + i*10}px`;
+                cell.style.top = `${100 + i*30}px`;
+                cell.style.left = `${150 + i*60}px`;
+                cell.style.animationDelay = `${i * 0.5}s`;
+                viz.appendChild(cell);
+            }
+            
+            // Create DNA strands
+            for (let i = 0; i < 3; i++) {
+                const dna = document.createElement('div');
+                dna.className = 'dna-strand';
+                dna.style.top = `${120 + i*80}px`;
+                dna.style.left = '50px';
+                dna.style.width = '500px';
+                dna.style.transform = `rotate(${i * 5}deg)`;
+                viz.appendChild(dna);
+            }
+            
+            // Create signals
+            for (let i = 0; i < 4; i++) {
+                const signal = document.createElement('div');
+                signal.className = 'signal';
+                signal.style.top = `${150 + i*60}px`;
+                signal.style.left = '600px';
+                signal.style.animationDelay = `${i * 0.7}s`;
+                viz.appendChild(signal);
+            }
+        }
+        
+        // Animate the biological visualization
+        function animateBioVisualization() {
+            const signals = document.querySelectorAll('.signal');
+            const cells = document.querySelectorAll('.cell');
+            
+            // Reset animation
+            signals.forEach(signal => {
+                signal.style.left = '600px';
+                signal.style.opacity = '0';
+            });
+            
+            cells.forEach(cell => {
+                cell.style.animation = 'none';
+                cell.offsetHeight; // Trigger reflow
+                cell.style.animation = null;
+            });
+            
+            // Animate signals moving through the system
+            signals.forEach((signal, index) => {
+                setTimeout(() => {
+                    signal.style.transition = 'left 3s ease, opacity 3s ease';
+                    signal.style.left = '100px';
+                    signal.style.opacity = '1';
+                    
+                    // When signal reaches cells, make them pulse
+                    setTimeout(() => {
+                        cells.forEach(cell => {
+                            cell.style.animation = 'pulse 0.5s ease 3';
+                        });
+                    }, 1500);
+                    
+                    // Make signals fade out after reaching cells
+                    setTimeout(() => {
+                        signal.style.opacity = '0';
+                    }, 2000);
+                }, index * 800);
+            });
+        }
+        
+        // Initialize application visualization
+        function initApplicationVisualization() {
+            const viz = document.getElementById('applicationViz');
+            viz.innerHTML = '';
+            
+            // Create a gut-like environment
+            const gut = document.createElement('div');
+            gut.style.position = 'absolute';
+            gut.style.width = '100%';
+            gut.style.height = '100%';
+            gut.style.background = 'radial-gradient(ellipse at center, rgba(74, 107, 107, 0.5) 0%, rgba(10, 95, 115, 0.5) 100%)';
+            gut.style.borderRadius = '20px';
+            viz.appendChild(gut);
+            
+            // Create bacteria
+            for (let i = 0; i < 8; i++) {
+                const bacterium = document.createElement('div');
+                bacterium.className = 'cell';
+                bacterium.style.width = '40px';
+                bacterium.style.height = '20px';
+                bacterium.style.borderRadius = '50%';
+                bacterium.style.top = `${100 + Math.random() * 200}px`;
+                bacterium.style.left = `${50 + Math.random() * 700}px`;
+                bacterium.style.animationDelay = `${i * 0.3}s`;
+                viz.appendChild(bacterium);
+            }
+            
+            // Create inflammation markers
+            for (let i = 0; i < 5; i++) {
+                const marker = document.createElement('div');
+                marker.className = 'signal';
+                marker.style.width = '15px';
+                marker.style.height = '15px';
+                marker.style.background = 'var(--coral)';
+                marker.style.top = `${50 + Math.random() * 300}px`;
+                marker.style.left = `${50 + Math.random() * 700}px`;
+                marker.style.animationDelay = `${i * 0.5}s`;
+                viz.appendChild(marker);
+            }
+            
+            // Create therapeutic molecules
+            for (let i = 0; i < 3; i++) {
+                const therapeutic = document.createElement('div');
+                therapeutic.className = 'signal';
+                therapeutic.style.width = '20px';
+                therapeutic.style.height = '20px';
+                therapeutic.style.background = 'var(--emerald)';
+                therapeutic.style.boxShadow = '0 0 15px var(--emerald)';
+                therapeutic.style.top = `${250 + Math.random() * 100}px`;
+                therapeutic.style.left = `${50 + Math.random() * 700}px`;
+                therapeutic.style.opacity = '0';
+                therapeutic.id = `therapeutic-${i}`;
+                viz.appendChild(therapeutic);
+            }
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initBioVisualization();
+            initApplicationVisualization();
+            
+            // Add event listener for animate button
+            document.getElementById('animateBioBtn').addEventListener('click', animateBioVisualization);
+            
+            // Tab functionality
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                });
+            });
+            
+            // Add some initial animation
+            document.querySelectorAll('.viz-box').forEach((box, index) => {
+                box.style.animationDelay = `${index * 0.3}s`;
+                box.classList.add('animated');
+            });
+            
+            // Make the header glow
+            document.querySelector('h1').classList.add('glowing');
+        });
+    </script>
+</body>
+</html>
