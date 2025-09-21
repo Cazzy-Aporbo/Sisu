@@ -1,0 +1,56 @@
+/* animations.css
+   By Cazzy
+   Purpose: Motion tokens and reusable keyframe animations for emergent visuals.
+*/
+
+/* reusable easing */
+:root {
+  --easing-soft: cubic-bezier(.22,.9,.29,1);
+}
+
+/* Pulse (for discovery events) */
+@keyframes pulse-soft {
+  0%   { transform: scale(1); opacity: 1; }
+  50%  { transform: scale(1.06); opacity: 0.9; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.pulse {
+  animation: pulse-soft var(--motion-mid) var(--easing-soft) infinite;
+}
+
+/* Float (gentle up/down for Luminara spirits) */
+@keyframes float {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Bloom (for rare emergent events) */
+@keyframes bloom {
+  0% { transform: scale(0.8) rotate(-6deg); opacity: 0; filter: blur(6px); }
+  60% { transform: scale(1.08) rotate(2deg); opacity: 1; filter: blur(0px); }
+  100% { transform: scale(1); rotate(0deg); opacity: 1; filter: blur(0); }
+}
+.bloom {
+  animation: bloom var(--motion-slow) var(--easing-soft) forwards;
+}
+
+/* Particle trail: tiny shimmering particles */
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.95), rgba(255,255,255,0.2));
+  box-shadow: 0 0 8px rgba(255,255,255,0.4);
+  animation: float 4s ease-in-out infinite, pulse-soft 2.6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .pulse, .float, .bloom, .particle { animation: none !important; }
+}
