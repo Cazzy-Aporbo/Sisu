@@ -1,0 +1,82 @@
+/* layout.css
+   By Cazzy
+   Purpose: Layout building blocks: container, grid, card, stack, center.
+*/
+
+/* Responsive container that centers content */
+.container {
+  width: min(1100px, 94vw);
+  margin-left: auto;
+  margin-right: auto;
+  padding: var(--space-md);
+}
+
+/* Basic responsive grid using CSS Grid */
+.grid {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+/* Grid presets */
+.grid--cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.grid--cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.grid--cols-1 {
+  grid-template-columns: 1fr;
+}
+
+/* Smart responsiveness */
+@media (max-width: 980px) {
+  .grid--cols-3 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .grid--cols-3, .grid--cols-2 { grid-template-columns: 1fr; }
+}
+
+/* Card: glassy, pastel, tactile */
+.card {
+  background: var(--card-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  box-shadow: var(--shadow-soft);
+  transition: transform var(--motion-mid) ease, box-shadow var(--motion-mid) ease;
+  border: 1px solid rgba(255,255,255,0.35);
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-glow);
+}
+
+/* Layout helpers */
+.center {
+  display: grid;
+  place-items: center;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.row {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+/* Hero / full-screen stage for Luminara-like scenes */
+.stage {
+  min-height: 60vh;
+  border-radius: calc(var(--radius-md) * 1.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+  overflow: hidden;
+  position: relative;
+}
