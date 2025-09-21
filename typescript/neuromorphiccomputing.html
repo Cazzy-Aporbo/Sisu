@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroMorph | Understanding Brain-Inspired Computing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neural-purple: #6e2de5;
+            --synapse-blue: #2d7fe5;
+            --axon-teal: #2de5c3;
+            --dendrite-pink: #e52d8a;
+            --neuron-dark: #1a1a2e;
+            --signal-yellow: #e5e52d;
+            --background-dark: #0d0d1a;
+            --card-dark: #141426;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: var(--background-dark);
+            color: white;
+            font-family: 'Exo 2', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        .neural-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+            background: 
+                radial-gradient(circle at 20% 30%, var(--neural-purple) 0%, transparent 25%),
+                radial-gradient(circle at 80% 20%, var(--synapse-blue) 0%, transparent 25%),
+                radial-gradient(circle at 40% 80%, var(--axon-teal) 0%, transparent 25%),
+                radial-gradient(circle at 70% 70%, var(--dendrite-pink) 0%, transparent 25%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(26, 26, 46, 0.8);
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 40px;
+            border-bottom: 3px solid var(--axon-teal);
+            box-shadow: 0 5px 25px rgba(45, 229, 195, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--dendrite-pink) 0%, var(--neural-purple) 50%, var(--synapse-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(110, 45, 229, 0.5);
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: var(--axon-teal);
+        }
+        
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .tab {
+            background: rgba(45, 229, 195, 0.1);
+            color: var(--axon-teal);
+            border: 1px solid var(--axon-teal);
+            padding: 15px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .tab:hover {
+            background: rgba(45, 229, 195, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(45, 229, 195, 0.4);
+        }
+        
+        .tab.active {
+            background: linear-gradient(90deg, var(--axon-teal) 0%, var(--synapse-blue) 100%);
+            color: var(--neuron-dark);
+        }
+        
+        .card {
+            background: rgba(26, 26, 46, 0.6);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(110, 45, 229, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(110, 45, 229, 0.3);
+            border-color: var(--neural-purple);
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            color: var(--axon-teal);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        h3 {
+            font-size: 1.8rem;
+            margin: 30px 0 20px;
+            color: var(--synapse-blue);
+        }
+        
+        p {
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: #e6e6ff;
+        }
+        
+        .interactive-demo {
+            background: rgba(45, 127, 229, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            border-left: 5px solid var(--synapse-blue);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .demo-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--synapse-blue);
+            margin-bottom: 25px;
+        }
+        
+        .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            color: #e6e6ff;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            overflow-x: auto;
+            font-family: 'Share Tech Mono', monospace;
+            line-height: 1.5;
+            border: 1px solid var(--synapse-blue);
+        }
+        
+        .keyword {
+            color: #ff79c6;
+        }
+        
+        .function {
+            color: #50fa7b;
+        }
+        
+        .comment {
+            color: #6272a4;
+        }
+        
+        .string {
+            color: #f1fa8c;
+        }
+        
+        .btn {
+            background: linear-gradient(90deg, var(--dendrite-pink) 0%, var(--neural-purple) 100%);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 20px rgba(229, 45, 138, 0.4);
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(229, 45, 138, 0.6);
+        }
+        
+        .visualization {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 40px 0;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .viz-box {
+            background: rgba(45, 127, 229, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            width: 300px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--synapse-blue);
+        }
+        
+        .viz-box:hover {
+            transform: translateY(-10px);
+            border-color: var(--axon-teal);
+            box-shadow: 0 10px 25px rgba(45, 229, 195, 0.3);
+        }
+        
+        .viz-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--axon-teal);
+        }
+        
+        .concept-hint {
+            position: relative;
+            background: rgba(110, 45, 229, 0.2);
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: help;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 5px 0;
+            border: 1px solid var(--neural-purple);
+        }
+        
+        .concept-hint:hover {
+            background: rgba(110, 45, 229, 0.3);
+        }
+        
+        .concept-popup {
+            display: none;
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            background: rgba(26, 26, 46, 0.95);
+            padding: 20px;
+            border-radius: 15px;
+            width: 350px;
+            z-index: 10;
+            border: 1px solid var(--neural-purple);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .concept-hint:hover .concept-popup {
+            display: block;
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .resource-card {
+            background: rgba(45, 127, 229, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--synapse-blue);
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--axon-teal);
+            box-shadow: 0 10px 25px rgba(45, 229, 195, 0.3);
+        }
+        
+        .resource-title {
+            font-weight: 700;
+            color: var(--axon-teal);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.4rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            margin-top: 100px;
+            color: #e6e6ff;
+            border-top: 1px solid rgba(110, 45, 229, 0.3);
+            background: rgba(26, 26, 46, 0.8);
+        }
+        
+        .neural-visualization {
+            width: 100%;
+            height: 400px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--neural-purple);
+        }
+        
+        .neuron {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, var(--dendrite-pink) 0%, var(--neural-purple) 70%);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--neural-purple);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            animation: pulse 3s infinite ease-in-out;
+        }
+        
+        .axon {
+            position: absolute;
+            height: 4px;
+            background: linear-gradient(90deg, var(--neural-purple) 0%, var(--axon-teal) 50%, var(--synapse-blue) 100%);
+            transform-origin: left center;
+            box-shadow: 0 0 10px var(--neural-purple);
+        }
+        
+        .synapse {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--signal-yellow);
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--signal-yellow);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes glow {
+            0% { box-shadow: 0 0 10px rgba(110, 45, 229, 0.5); }
+            50% { box-shadow: 0 0 25px rgba(110, 45, 229, 0.8); }
+            100% { box-shadow: 0 0 10px rgba(110, 45, 229, 0.5); }
+        }
+        
+        @keyframes flow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .animated {
+            animation: pulse 3s infinite ease-in-out;
+        }
+        
+        .glowing {
+            animation: glow 2s infinite ease-in-out;
+        }
+        
+        /* Quiz styles */
+        .quiz-container {
+            background: rgba(45, 229, 195, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 1px solid var(--axon-teal);
+        }
+        
+        .quiz-question {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: var(--axon-teal);
+        }
+        
+        .quiz-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .quiz-options {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .quiz-option {
+            background: rgba(26, 26, 46, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+        
+        .quiz-option:hover {
+            border-color: var(--axon-teal);
+            transform: translateY(-3px);
+        }
+        
+        .quiz-option.selected {
+            background: rgba(45, 229, 195, 0.2);
+            border-color: var(--axon-teal);
+        }
+        
+        .quiz-feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            display: none;
+        }
+        
+        .quiz-feedback.correct {
+            background: rgba(45, 229, 195, 0.2);
+            border: 1px solid var(--axon-teal);
+            display: block;
+        }
+        
+        .quiz-feedback.incorrect {
+            background: rgba(229, 45, 138, 0.2);
+            border: 1px solid var(--dendrite-pink);
+            display: block;
+        }
+        
+        /* Career banner */
+        .career-banner {
+            background: linear-gradient(90deg, var(--neural-purple) 0%, var(--synapse-blue) 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(110, 45, 229, 0.3);
+        }
+        
+        .career-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        /* Progress tracker */
+        .progress-container {
+            background: rgba(26, 26, 46, 0.7);
+            border-radius: 30px;
+            padding: 5px;
+            margin: 30px 0;
+            border: 1px solid var(--neural-purple);
+        }
+        
+        .progress-bar {
+            height: 20px;
+            background: linear-gradient(90deg, var(--dendrite-pink) 0%, var(--neural-purple) 50%, var(--synapse-blue) 100%);
+            border-radius: 30px;
+            width: 30%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 15px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+            box-shadow: 0 0 10px rgba(110, 45, 229, 0.5);
+            transition: width 1s ease;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tab {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .visualization {
+                flex-direction: column;
+            }
+            
+            .neural-visualization {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="neural-bg"></div>
+    
+    <header>
+        <h1><i class="fas fa-brain"></i> NeuroMorph Explorer</h1>
+        <p class="tagline">Discover how brain-inspired computing is revolutionizing artificial intelligence</p>
+        <div class="nav-tabs">
+            <div class="tab active">Introduction</div>
+            <div class="tab">How It Works</div>
+            <div class="tab">Applications</div>
+            <div class="tab">Career Path</div>
+            <div class="tab">Resources</div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section class="card">
+            <h2><i class="fas fa-lightbulb"></i> What is Neuromorphic Computing?</h2>
+            <p>Neuromorphic computing is an approach to computer engineering that models its elements after the human brain and nervous system. Unlike traditional von Neumann architecture, neuromorphic systems are designed to process information in ways that are fundamentally different from conventional digital computers.</p>
+            
+            <div class="interactive-demo">
+                <div class="demo-title">
+                    <i class="fas fa-microchip"></i>
+                    <h3>Brain vs. Computer: The Efficiency Gap</h3>
+                </div>
+                <p>The human brain consumes about 20 watts of power while performing computations that would require megawatts if done on supercomputers. Neuromorphic chips aim to bridge this efficiency gap.</p>
+                
+                <div class="neural-visualization" id="efficiencyViz">
+                    <!-- Visualization will be generated by JavaScript -->
+                </div>
+                
+                <button class="btn" id="animateEfficiencyBtn">
+                    <i class="fas fa-play"></i> Compare Efficiency
+                </button>
+            </div>
+            
+            <h3>Why Neuromorphic Computing Matters</h3>
+            <p>As we reach the physical limits of traditional silicon-based computing, neuromorphic systems offer a path forward for energy-efficient AI that can learn and adapt in real-time, making them ideal for edge computing, robotics, and other applications where power efficiency is critical.</p>
+            
+            <div class="visualization">
+                <div class="viz-box">
+                    <div class="viz-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Energy Efficient</h3>
+                    <p>Up to 1000x more efficient than traditional AI hardware</p>
+                </div>
+                <div class="viz-box">
+                    <div class="viz-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Adaptive Learning</h3>
+                    <p>Capable of continuous learning and adaptation</p>
+                </div>
+                <div class="viz-box">
+                    <div class="viz-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3>Real-time Processing</h3>
+                    <p>Low latency processing for time-critical applications</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="card">
+            <h2><i class="fas fa-cogs"></i> How Neuromorphic Systems Work</h2>
+            <p>Neuromorphic computing fundamentally rethinks computer architecture by mimicking the brain's structure and function through specialized hardware and algorithms.</p>
+            
+            <h3><span class="concept-hint">Spiking Neural Networks
+                <div class="concept-popup">
+                    <strong>Spiking Neural Networks (SNNs):</strong> Neural networks that more closely mimic biological neural networks by processing information based on discrete events (spikes) rather than continuous activation values.
+                </div>
+            </span></h3>
+            <p>Unlike traditional artificial neural networks, spiking neural networks communicate through discrete events (spikes) at specific points in time, making them more biologically plausible and energy efficient.</p>
+            
+            <div class="code-block">
+                <span class="comment"># Simplified SNN neuron model</span><br>
+                <span class="keyword">class</span> SpikingNeuron:<br>
+                &nbsp;&nbsp;<span class="keyword">def</span> <span class="function">__init__</span>(<span class="keyword">self</span>, threshold):<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">self</span>.membrane_potential = 0<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">self</span>.threshold = threshold<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">self</span>.spike_history = []<br>
+                <br>
+                &nbsp;&nbsp;<span class="keyword">def</span> <span class="function">receive_input</span>(<span class="keyword">self</span>, input_current, time):<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">self</span>.membrane_potential += input_current<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> <span class="keyword">self</span>.membrane_potential >= <span class="keyword">self</span>.threshold:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">self</span>.spike_history.append(time)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">self</span>.membrane_potential = 0  <span class="comment"># Reset after spike</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> True  <span class="comment"># Spike occurred</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> False  <span class="comment"># No spike</span><br>
+            </div>
+            
+            <h3><span class="concept-hint">Memristors
+                <div class="concept-popup">
+                    <strong>Memristors:</strong> Circuit elements that 'remember' the amount of charge that has flowed through them, making them ideal for simulating synaptic plasticity in neuromorphic hardware.
+                </div>
+            </span> and Synaptic Plasticity</h3>
+            <p>Memristors are key components in neuromorphic hardware as they can simulate synaptic weights in neural networks. Their resistance changes based on the history of applied voltage, mimicking how biological synapses strengthen or weaken over time.</p>
+            
+            <div class="interactive-demo">
+                <div class="demo-title">
+                    <i class="fas fa-project-diagram"></i>
+                    <h3>Neural Architecture Simulator</h3>
+                </div>
+                <p>Explore how neural connections form and strengthen through use in this interactive simulation.</p>
+                
+                <div class="neural-visualization" id="architectureViz">
+                    <!-- Visualization will be generated by JavaScript -->
+                </div>
+                
+                <button class="btn" id="animateArchitectureBtn">
+                    <i class="fas fa-play"></i> Simulate Learning
+                </button>
+            </div>
+            
+            <div class="quiz-container">
+                <div class="quiz-question">
+                    What is the primary advantage of spiking neural networks over traditional ANNs?
+                </div>
+                <div class="quiz-options">
+                    <div class="quiz-option">They are more biologically plausible</div>
+                    <div class="quiz-option">They require more computational resources</div>
+                    <div class="quiz-option">They use continuous activation values</div>
+                    <div class="quiz-option">They are less energy efficient</div>
+                </div>
+                <div class="quiz-feedback correct">
+                    <i class="fas fa-check-circle"></i> Correct! SNNs are more biologically plausible and energy efficient.
+                </div>
+                <div class="quiz-feedback incorrect">
+                    <i class="fas fa-times-circle"></i> Incorrect. Try again!
+                </div>
+            </div>
+        </section>
+        
+        <section class="card">
+            <h2><i class="fas fa-rocket"></i> Real-World Applications</h2>
+            <p>Neuromorphic computing is already finding applications in various fields where energy efficiency and real-time processing are critical.</p>
+            
+            <div class="visualization">
+                <div class="viz-box">
+                    <div class="viz-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Robotics</h3>
+                    <p>Enabling autonomous robots with efficient on-board AI</p>
+                </div>
+                <div class="viz-box">
+                    <div class="viz-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3>Medical Devices</h3>
+                    <p>Wearable health monitors with real-time analysis</p>
+                </div>
+                <div class="viz-box">
+                    <div class="viz-icon">
+                        <i class="fas fa-satellite"></i>
+                    </div>
+                    <h3>Edge Computing</h3>
+                    <p>AI processing in remote locations with limited power</p>
+                </div>
+            </div>
+            
+            <h3>Case Study: Intel's Loihi Chip</h3>
+            <p>Intel's Loihi research chip implements a spiking neural network architecture with 130,000 neurons and 130 million synapses. It can perform certain tasks up to 1,000 times more efficiently than conventional processors while continuously learning from data.</p>
+            
+            <div class="neural-visualization" id="loihiViz">
+                <!-- Visualization will be generated by JavaScript -->
+            </div>
+            
+            <div class="quiz-container">
+                <div class="quiz-question">
+                    Which company developed the Loihi neuromorphic research chip?
+                </div>
+                <div class="quiz-options">
+                    <div class="quiz-option">Intel</div>
+                    <div class="quiz-option">Google</div>
+                    <div class="quiz-option">IBM</div>
+                    <div class="quiz-option">NVIDIA</div>
+                </div>
+                <div class="quiz-feedback correct">
+                    <i class="fas fa-check-circle"></i> Correct! Intel developed the Loihi research chip.
+                </div>
+                <div class="quiz-feedback incorrect">
+                    <i class="fas fa-times-circle"></i> Incorrect. Try again!
+                </div>
+            </div>
+            
+            <button class="btn">
+                <i class="fas fa-book-open"></i> Explore More Applications
+            </button>
+        </section>
+        
+        <div class="career-banner">
+            <h3 class="career-title">Ready to Join the Neuromorphic Revolution?</h3>
+            <p>The field is growing rapidly, with opportunities in hardware design, algorithm development, and applications research.</p>
+            <button class="btn" style="background: white; color: var(--neural-purple);">
+                <i class="fas fa-graduation-cap"></i> Explore Career Paths
+            </button>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar">30% Mastered</div>
+        </div>
+        
+        <section class="card">
+            <h2><i class="fas fa-book-open"></i> Learning Resources</h2>
+            <p>Start your journey into neuromorphic computing with these carefully selected resources.</p>
+            
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-title">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Beginner Resources</h3>
+                    </div>
+                    <ul>
+                        <li>Introduction to Neuromorphic Computing</li>
+                        <li>Spiking Neural Networks Tutorial</li>
+                        <li>Neuromorphic Hardware Overview</li>
+                    </ul>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-title">
+                        <i class="fas fa-video"></i>
+                        <h3>Video Lectures</h3>
+                    </div>
+                    <ul>
+                        <li>Stanford Neuromorphic Engineering Course</li>
+                        <li>MIT Brain-Inspired Computing</li>
+                        <li>Intel Neuromorphic Research Webinars</li>
+                    </ul>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-title">
+                        <i class="fas fa-tools"></i>
+                        <h3>Development Tools</h3>
+                    </div>
+                    <ul>
+                        <li>Intel Loihi Access Program</li>
+                        <li>IBM TrueNorth Toolkit</li>
+                        <li>Spiking Neural Network Simulators</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="interactive-demo">
+                <div class="demo-title">
+                    <i class="fas fa-hands-helping"></i>
+                    <h3>Join the Community</h3>
+                </div>
+                <p>Connect with researchers and developers in the neuromorphic computing community through conferences, workshops, and online forums.</p>
+                
+                <button class="btn">
+                    <i class="fas fa-users"></i> Find Community Events
+                </button>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>NeuroMorph Explorer | Your Gateway to Brain-Inspired Computing</p>
+        <p>This educational resource is designed to make neuromorphic computing accessible to everyone</p>
+    </footer>
+
+    <script>
+        // Initialize the efficiency visualization
+        function initEfficiencyVisualization() {
+            const viz = document.getElementById('efficiencyViz');
+            viz.innerHTML = '';
+            
+            // Create brain icon
+            const brain = document.createElement('div');
+            brain.className = 'neuron';
+            brain.style.width = '100px';
+            brain.style.height = '100px';
+            brain.style.top = '150px';
+            brain.style.left = '150px';
+            brain.innerHTML = '<i class="fas fa-brain" style="font-size: 3rem;"></i>';
+            brain.id = 'brainIcon';
+            
+            // Create computer icon
+            const computer = document.createElement('div');
+            computer.className = 'neuron';
+            computer.style.width = '100px';
+            computer.style.height = '100px';
+            computer.style.top = '150px';
+            computer.style.left = '550px';
+            computer.innerHTML = '<i class="fas fa-server" style="font-size: 3rem;"></i>';
+            computer.id = 'computerIcon';
+            
+            // Create power indicators
+            const brainPower = document.createElement('div');
+            brainPower.style.position = 'absolute';
+            brainPower.style.top = '270px';
+            brainPower.style.left = '150px';
+            brainPower.style.color = 'var(--axon-teal)';
+            brainPower.style.fontWeight = 'bold';
+            brainPower.textContent = '20W';
+            brainPower.id = 'brainPower';
+            
+            const computerPower = document.createElement('div');
+            computerPower.style.position = 'absolute';
+            computerPower.style.top = '270px';
+            computerPower.style.left = '550px';
+            computerPower.style.color = 'var(--dendrite-pink)';
+            computerPower.style.fontWeight = 'bold';
+            computerPower.textContent = '20,000W';
+            computerPower.id = 'computerPower';
+            
+            // Add elements to visualization
+            viz.appendChild(brain);
+            viz.appendChild(computer);
+            viz.appendChild(brainPower);
+            viz.appendChild(computerPower);
+        }
+        
+        // Animate the efficiency visualization
+        function animateEfficiencyVisualization() {
+            const brainIcon = document.getElementById('brainIcon');
+            const computerIcon = document.getElementById('computerIcon');
+            const brainPower = document.getElementById('brainPower');
+            const computerPower = document.getElementById('computerPower');
+            
+            // Reset animation
+            brainIcon.style.animation = 'none';
+            computerIcon.style.animation = 'none';
+            brainPower.style.opacity = '0';
+            computerPower.style.opacity = '0';
+            
+            // Animate brain
+            setTimeout(() => {
+                brainIcon.style.animation = 'pulse 1s ease-in-out';
+                brainPower.style.transition = 'opacity 1s ease';
+                brainPower.style.opacity = '1';
+            }, 500);
+            
+            // Animate computer with more intensity (less efficient)
+            setTimeout(() => {
+                computerIcon.style.animation = 'pulse 0.2s ease-in-out infinite';
+                computerPower.style.transition = 'opacity 1s ease';
+                computerPower.style.opacity = '1';
+            }, 2000);
+            
+            // Add heat effect to computer (visualizing inefficiency)
+            setTimeout(() => {
+                const heatEffect = document.createElement('div');
+                heatEffect.style.position = 'absolute';
+                heatEffect.style.top = '120px';
+                heatEffect.style.left = '520px';
+                heatEffect.style.width = '160px';
+                heatEffect.style.height = '160px';
+                heatEffect.style.background = 'radial-gradient(circle, rgba(229,45,138,0.3) 0%, transparent 70%)';
+                heatEffect.style.borderRadius = '50%';
+                heatEffect.style.animation = 'pulse 0.5s infinite';
+                heatEffect.id = 'heatEffect';
+                
+                document.getElementById('efficiencyViz').appendChild(heatEffect);
+            }, 2500);
+        }
+        
+        // Initialize architecture visualization
+        function initArchitectureVisualization() {
+            const viz = document.getElementById('architectureViz');
+            viz.innerHTML = '';
+            
+            // Create neurons
+            for (let i = 0; i < 5; i++) {
+                const neuron = document.createElement('div');
+                neuron.className = 'neuron';
+                neuron.style.width = '50px';
+                neuron.style.height = '50px';
+                neuron.style.top = `${50 + i*80}px`;
+                neuron.style.left = '200px';
+                neuron.textContent = i+1;
+                neuron.id = `neuron-${i+1}`;
+                viz.appendChild(neuron);
+            }
+            
+            // Create axons
+            for (let i = 0; i < 4; i++) {
+                const axon = document.createElement('div');
+                axon.className = 'axon';
+                axon.style.top = `${90 + i*80}px`;
+                axon.style.left = '230px';
+                axon.style.width = '300px';
+                axon.style.transform = 'scaleX(0)';
+                axon.style.transformOrigin = 'left center';
+                axon.id = `axon-${i+1}`;
+                viz.appendChild(axon);
+            }
+            
+            // Create target neurons
+            for (let i = 0; i < 4; i++) {
+                const neuron = document.createElement('div');
+                neuron.className = 'neuron';
+                neuron.style.width = '50px';
+                neuron.style.height = '50px';
+                neuron.style.top = `${90 + i*80}px`;
+                neuron.style.left = '550px';
+                neuron.textContent = i+6;
+                neuron.id = `neuron-${i+6}`;
+                neuron.style.opacity = '0.3';
+                viz.appendChild(neuron);
+            }
+        }
+        
+        // Animate the architecture visualization
+        function animateArchitectureVisualization() {
+            // Reset animation
+            for (let i = 1; i <= 4; i++) {
+                const axon = document.getElementById(`axon-${i}`);
+                const targetNeuron = document.getElementById(`neuron-${i+5}`);
+                
+                axon.style.transform = 'scaleX(0)';
+                axon.style.transition = 'none';
+                targetNeuron.style.opacity = '0.3';
+            }
+            
+            // Animate each connection with increasing strength
+            for (let i = 1; i <= 4; i++) {
+                setTimeout(() => {
+                    const axon = document.getElementById(`axon-${i}`);
+                    const targetNeuron = document.getElementById(`neuron-${i+5}`);
+                    
+                    axon.style.transition = `transform ${1 + i*0.5}s ease`;
+                    axon.style.transform = 'scaleX(1)';
+                    
+                    setTimeout(() => {
+                        targetNeuron.style.transition = 'opacity 0.5s ease';
+                        targetNeuron.style.opacity = '1';
+                    }, (1 + i*0.5) * 1000 - 300);
+                }, i * 800);
+            }
+        }
+        
+        // Initialize Loihi visualization
+        function initLoihiVisualization() {
+            const viz = document.getElementById('loihiViz');
+            viz.innerHTML = '';
+            
+            // Create chip outline
+            const chip = document.createElement('div');
+            chip.style.position = 'absolute';
+            chip.style.width = '80%';
+            chip.style.height = '80%';
+            chip.style.top = '10%';
+            chip.style.left = '10%';
+            chip.style.border = '2px solid var(--axon-teal)';
+            chip.style.borderRadius = '10px';
+            chip.style.background = 'rgba(26, 26, 46, 0.5)';
+            viz.appendChild(chip);
+            
+            // Create cores
+            for (let i = 0; i < 8; i++) {
+                for (let j = 0; j < 8; j++) {
+                    const core = document.createElement('div');
+                    core.className = 'neuron';
+                    core.style.width = '30px';
+                    core.style.height = '30px';
+                    core.style.top = `${15 + i*45}px`;
+                    core.style.left = `${15 + j*45}px`;
+                    core.style.animationDelay = `${(i+j)*0.1}s`;
+                    viz.appendChild(core);
+                }
+            }
+            
+            // Add title
+            const title = document.createElement('div');
+            title.style.position = 'absolute';
+            title.style.bottom = '20px';
+            title.style.left = '0';
+            title.style.width = '100%';
+            title.style.textAlign = 'center';
+            title.style.color = 'var(--axon-teal)';
+            title.style.fontWeight = 'bold';
+            title.textContent = 'Intel Loihi Chip Architecture';
+            viz.appendChild(title);
+        }
+        
+        // Quiz functionality
+        function setupQuizzes() {
+            const quizOptions = document.querySelectorAll('.quiz-option');
+            quizOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    // Remove previous selections
+                    const options = option.parentElement.querySelectorAll('.quiz-option');
+                    options.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Select this option
+                    option.classList.add('selected');
+                    
+                    // Show feedback (simulate correct answer is first option)
+                    const feedback = option.parentElement.nextElementSibling;
+                    const incorrectFeedback = option.parentElement.nextElementSibling.nextElementSibling;
+                    
+                    if (option === options[0]) {
+                        feedback.classList.add('correct');
+                        incorrectFeedback.classList.remove('incorrect');
+                        
+                        // Update progress
+                        updateProgress(10);
+                    } else {
+                        incorrectFeedback.classList.add('incorrect');
+                        feedback.classList.remove('correct');
+                    }
+                });
+            });
+        }
+        
+        // Progress tracking
+        function updateProgress(value) {
+            const progressBar = document.getElementById('progressBar');
+            const currentWidth = parseFloat(progressBar.style.width || '30%');
+            const newWidth = Math.min(currentWidth + value, 100);
+            
+            progressBar.style.width = `${newWidth}%`;
+            progressBar.textContent = `${Math.round(newWidth)}% Mastered`;
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initEfficiencyVisualization();
+            initArchitectureVisualization();
+            initLoihiVisualization();
+            setupQuizzes();
+            
+            // Add event listeners for animate buttons
+            document.getElementById('animateEfficiencyBtn').addEventListener('click', animateEfficiencyVisualization);
+            document.getElementById('animateArchitectureBtn').addEventListener('click', animateArchitectureVisualization);
+            
+            // Tab functionality
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                });
+            });
+            
+            // Add some initial animation
+            document.querySelectorAll('.viz-box').forEach((box, index) => {
+                box.style.animationDelay = `${index * 0.3}s`;
+                box.classList.add('animated');
+            });
+            
+            // Make the header glow
+            document.querySelector('h1').classList.add('glowing');
+        });
+    </script>
+</body>
+</html>
