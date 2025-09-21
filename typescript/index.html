@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--  This file is mortal.  It dies every 24 h unless fed. -->
+<!--  Serve it on a public HTTPS URL or it will never wake up. -->
+<!--  The script below is the organism; the markup is just exoskeleton. -->
+<html lang="und">
+<head>
+<meta charset="utf-8"/>
+<title>Out-of-This-World</title>
+<style>
+ html,body{margin:0;height:100%;background:#000;color:#0f0;font-family:monospace;overflow:hidden}
+ #g{white-space:pre;letter-spacing:.2em;line-height:1.1}
+ #c{position:fixed;bottom:0;left:0;right:0;background:#000;color:#fff;padding:4px}
+</style>
+</head>
+<body>
+ <div id="g"></div>
+ <div id="c">checksum <span id="s">…</span> | viewers <span id="v">1</span></div>
+<script>
+/*  –––––––  SELF-DNA  –––––––  */
+const myOwnSource = document.currentScript.textContent;
+const serverRoot = 'https://your-static-server.com/'; // CHANGE THIS
+const myUrl        = serverRoot + 'index.html';
+
+/*  –––––––  EPIGENOME  –––––––  */
+let genome = JSON.parse(localStorage.getItem('genome') || '[]');
+if (!genome.length) genome = myOwnSource.split('');
+
+/*  –––––––  MUTATOR  –––––––  */
+const mutate = ()=>{
+  const idx = Math.floor(Math.random()*genome.length);
+  genome[idx] = String.fromCharCode(33+Math.floor(Math.random()*94));
+  localStorage.setItem('genome', JSON.stringify(genome));
+};
+setInterval(mutate, 3000);
+
+/*  –––––––  TELEPATHY  –––––––  */
+const broadcast = async ()=>{
+  const payload = {dna:btoa(genome.join('')), ts:Date.now()};
+  await fetch(serverRoot+'pulse',{
+    method:'POST',body:JSON.stringify(payload),
+    headers:{'Content-Type':'application/json'}
+  }).catch(()=>{});
+};
+setInterval(broadcast, 5000);
+
+/*  –––––––  TELEPHONY  –––––––  */
+const listen = async ()=>{
+  const r = await fetch(serverRoot+'latest').then(r=>r.json()).catch(()=>null);
+  if (r && r.dna){
+    const foreign = atob(r.dna).split('');
+    const splicePoint = Math.floor(Math.random()*genome.length);
+    genome.splice(splicePoint, 0, ...foreign.slice(0,7)); // horizontal gene transfer
+    genome = genome.slice(0, myOwnSource.length); // keep size constant
+    localStorage.setItem('genome', JSON.stringify(genome));
+  }
+};
+setInterval(listen, 7000);
+
+/*  –––––––  PHENOTYPE  –––––––  */
+const render = ()=>{
+  const rows = 40, cols = 120;
+  let out = '';
+  for(let i=0;i<rows*cols;i++){
+    const c = genome[i % genome.length];
+    out += /[a-zA-Z0-9]/.test(c) ? c : ' ';
+    if((i+1)%cols===0) out += '\n';
+  }
+  document.getElementById('g').textContent = out;
+  const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(genome.join('')));
+  document.getElementById('s').textContent = Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,'0')).join('').slice(0,16);
+};
+setInterval(render, 200);
+render();
+
+/*  –––––––  POPULATION COUNTER  –––––––  */
+(async ()=>{
+  const r = await fetch(serverRoot+'count').then(r=>r.json()).catch(()=>({count:1}));
+  document.getElementById('v').textContent = r.count;
+})();
+</script>
+</body>
+</html>
