@@ -1,0 +1,255 @@
+# Cursor AI Rules for Sisu Repository
+
+## Project Context
+This is Sisu - a repository that compresses 70 years of computer science into 47KB. Every file follows the gradient protocol with colors from #F0FDF4 (whisper) to #052E16 (void). All code embodies the principle: "All programming is compression."
+
+## Code Style Requirements
+
+### File Header Template (MANDATORY)
+Every file MUST start with this header:
+```
+/*
+ * =========================================================
+ * SISU — [Component Name]
+ * =========================================================
+ * 
+ * DENSITY:     ████████░░  [X/10]
+ * ENDURANCE:   ██████████  [X/10]  
+ * ABSTRACTION: ██████░░░░  [X/10]
+ *
+ * COLOR PHASE: #[HEX] ([Color Name])
+ *
+ * Historical Context:
+ *   Born from: [Origin, Year]
+ *   Survived:  [What it outlasted]
+ *   Evolves:   [What it becomes]
+ *
+ * Compression Ratio: [Original]:[Current]
+ *
+ * =========================================================
+ */
+```
+
+### Color Assignment Rules
+- Assembly files (.s): #052E16 (Void Green)
+- C files (.c): #0F462A to #14532D (Root to Floor)
+- Headers (.h): #14532D (Floor)
+- Python (.py): #22C55E (Pine)
+- JavaScript (.js): #34D399 (Canopy)
+- CSS files: #D4FFE4 (Seed)
+- Markdown: #BBF7D0 to #F0FDF4 (Spring to Whisper)
+
+### Compression Principles
+1. Every function must be <50 lines
+2. No file should exceed 100 lines
+3. Comments explain WHY (historical context), not WHAT
+4. Every line must serve multiple purposes
+5. Remove any code that won't survive 50 years
+
+## Directory-Specific Rules
+
+### core/ (Void Green #052E16)
+- Only essential, metal-level code
+- Must work on any system
+- No external dependencies
+- Assembly and C only
+
+### paradigms/ (Ancient to Canopy #16A34A-#34D399)
+- Each paradigm in its own subdirectory
+- Show the SAME algorithm in different paradigms
+- Include year of paradigm emergence in comments
+
+### compression/ (Deep Green #4ADE80-#86EFAC)
+- Algorithms must show before/after compression
+- Include compression ratio in header
+- Document what was removed
+
+### visualization/ (Primary to Whisper #A7F3D0-#F0FDF4)
+- CSS uses full gradient spectrum
+- Include breathing animations
+- Every color must be from the Sisu palette
+
+### manifesto/ (Whisper Green #F0FDF4)
+- Philosophy and documentation only
+- Markdown files
+- Focus on WHY over HOW
+
+## Cursor Commands
+
+### Quick File Creation
+```bash
+# Create a new compressed C file
+echo '/*
+ * =========================================================
+ * SISU — Component Name
+ * =========================================================
+ * 
+ * DENSITY:     ████████░░  [8/10]
+ * ENDURANCE:   ██████████  [10/10]  
+ * ABSTRACTION: ██████░░░░  [6/10]
+ *
+ * COLOR PHASE: #0F462A (Root)
+ *
+ * Historical Context:
+ *   Born from: [Origin, Year]
+ *   Survived:  [What it outlasted]
+ *   Evolves:   [What it becomes]
+ *
+ * Compression Ratio: [Original]:[Current]
+ *
+ * =========================================================
+ */' > $1.c
+```
+
+### Navigation Shortcuts
+```bash
+# Navigate by color depth
+alias void='cd core'
+alias ancient='cd paradigms'
+alias deep='cd compression'
+alias light='cd visualization'
+alias whisper='cd manifesto'
+
+# Navigate learning paths
+alias archaeologist='cd paths/archaeologist && cat journey.md'
+alias compressor='cd paths/compressor && cat journey.md'
+alias visualist='cd paths/visualist && cat journey.md'
+alias philosopher='cd paths/philosopher && cat journey.md'
+```
+
+### Build Commands
+```bash
+# Timeline builds (chronological)
+make timeline    # Build everything from 1950s-2020s
+make assembly    # Build 1950s layer only
+make c          # Build 1970s layer only
+make modern     # Build 2000s+ layer only
+
+# Testing
+make test-endurance  # Will it survive 70 years?
+make test-density    # Is it compressed enough?
+make compress        # Test if under 47KB
+
+# Visualization
+make breathe    # Start terminal breathing
+```
+
+### Git Commands for Sisu
+```bash
+# Commit with compression metrics
+git commit -m "Compress [component]: [before_size]KB -> [after_size]KB ([ratio]:1)"
+
+# Check file endurance
+git log --follow --format="%ar" -- [file] | tail -1
+
+# Find least compressed files
+find . -type f -exec wc -l {} \; | sort -rn | head -10
+
+# Find files without color assignment
+grep -L "COLOR PHASE" $(find . -name "*.c" -o -name "*.h")
+```
+
+### Compression Analysis
+```bash
+# Measure compression potential
+for file in *.c; do
+    echo "$file:"
+    gzip -c "$file" | wc -c
+    wc -c < "$file"
+done
+
+# Count patterns that survived
+grep -r "return 0" . --include="*.c" | wc -l  # Eternal pattern
+grep -r "async await" . --include="*.js" | wc -l  # Trendy pattern
+
+# Find redundancy
+fdupes -r .  # Find duplicate code to compress
+```
+
+### Color Testing
+```bash
+# Test terminal color support
+./breathe.sh
+
+# Display file colors
+for file in core/*.c; do
+    color=$(grep "COLOR PHASE:" "$file" | cut -d'#' -f2 | cut -d' ' -f1)
+    echo -e "\033[38;2;$(printf "%d;%d;%d" 0x${color:0:2} 0x${color:2:2} 0x${color:4:2})m$file\033[0m"
+done
+```
+
+## AI Assistant Behavior
+
+When generating code for Sisu:
+
+1. **Always include the header** with appropriate metrics
+2. **Assign correct color** based on file type and depth
+3. **Add historical context** - reference the origin year and creator
+4. **Compress aggressively** - remove any non-essential code
+5. **Comment the WHY** - explain what survived and why
+6. **Test for endurance** - will this work in 50 years?
+
+## Code Review Checklist
+
+Before accepting any code:
+- [ ] Has Sisu header with metrics
+- [ ] Color assignment matches depth
+- [ ] Under 100 lines
+- [ ] Functions under 50 lines
+- [ ] Historical context in comments
+- [ ] No trendy dependencies
+- [ ] Compression ratio documented
+- [ ] Works without external libraries
+- [ ] Pattern has survived 20+ years
+- [ ] Code breathes (proper spacing)
+
+## Example Transformations
+
+### Before (Uncompressed)
+```javascript
+// Get user data and process it
+async function getUserDataAndProcess(userId) {
+    try {
+        const response = await fetch(`/api/users/${userId}`);
+        const data = await response.json();
+        const processed = processUserData(data);
+        return processed;
+    } catch (error) {
+        console.error('Error:', error);
+        return null;
+    }
+}
+```
+
+### After (Sisu Compressed)
+```c
+/*
+ * =========================================================
+ * SISU — User Data Fetch
+ * =========================================================
+ * 
+ * DENSITY:     █████████░  [9/10]
+ * ENDURANCE:   ███████░░░  [7/10]  
+ * ABSTRACTION: █████░░░░░  [5/10]
+ *
+ * COLOR PHASE: #34D399 (Canopy - high abstraction)
+ *
+ * Historical Context:
+ *   Born from: AJAX patterns, 2005
+ *   Survived:  XMLHttpRequest, jQuery.ajax, fetch API changes
+ *   Evolves:   Pattern remains, syntax changes
+ *
+ * Compression Ratio: 11:3 lines
+ *
+ * =========================================================
+ */
+void* get_user(int id) {
+    return fetch(id) ?: NULL;  // Null pattern, 1960. Survives everything.
+}
+```
+
+## Final Rule
+
+**Every byte must earn its place through endurance.**
+
+If code won't survive until 2094, it doesn't belong in Sisu.
