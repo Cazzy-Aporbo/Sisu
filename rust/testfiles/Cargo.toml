@@ -1,0 +1,18 @@
+[package]
+name = "sisu_repo"
+version = "0.1.0"
+edition = "2021"
+authors = ["Your Name <you@example.com>"]
+description = "Sisu-themed Rust repository with comprehensive beginner-to-advanced tests"
+license = "MIT"
+
+[dependencies]
+
+# Tokio for async tests
+tokio = { version = "1", features = ["full"] }
+
+# Proptest for property-based testing
+proptest = "1.0"
+
+[dev-dependencies]
+# No extra dev dependencies needed since tests are self-contained
