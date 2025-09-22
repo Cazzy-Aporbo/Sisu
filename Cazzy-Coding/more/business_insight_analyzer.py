@@ -2,7 +2,7 @@
 Business Insight Analyzer
 Author: Cazzy
 Purpose: Analyze structured business data to generate actionable insights, detect anomalies, and visualize trends.
-This program is designed to showcase mastery of software engineering, data analysis, and human-centered reporting.
+This program is designed to showcase mastery of software engineering, data analysis, and reporting.
 """
 
 # Standard libraries for data handling
