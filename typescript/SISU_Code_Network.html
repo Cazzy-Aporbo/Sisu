@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SISU - Resilient Code Network</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: #e94560;
+            overflow: hidden;
+            height: 100vh;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            position: relative;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0,0,0,0.3);
+            border-bottom: 2px solid #e94560;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px #e94560;
+            animation: pulse 2s infinite;
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            color: #a8c8ec;
+            opacity: 0.8;
+        }
+        
+        .network-display {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .node {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #e94560;
+            background: rgba(233, 69, 96, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            animation: nodeFloat 3s ease-in-out infinite;
+        }
+        
+        .node.healthy {
+            background: rgba(76, 175, 80, 0.3);
+            border-color: #4CAF50;
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.5);
+        }
+        
+        .node.damaged {
+            background: rgba(244, 67, 54, 0.5);
+            border-color: #f44336;
+            animation: shake 0.5s infinite, nodeFloat 3s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(244, 67, 54, 0.7);
+        }
+        
+        .node.healing {
+            background: rgba(255, 193, 7, 0.4);
+            border-color: #ffc107;
+            animation: heal 1s infinite, nodeFloat 3s ease-in-out infinite;
+            box-shadow: 0 0 25px rgba(255, 193, 7, 0.8);
+        }
+        
+        .connection {
+            position: absolute;
+            background: linear-gradient(90deg, #e94560, transparent, #e94560);
+            height: 2px;
+            transform-origin: left;
+            opacity: 0.6;
+            animation: dataFlow 2s linear infinite;
+        }
+        
+        .connection.broken {
+            background: linear-gradient(90deg, #f44336, transparent, #f44336);
+            animation: brokenFlow 0.5s linear infinite;
+        }
+        
+        .controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+        
+        .btn {
+            background: rgba(233, 69, 96, 0.8);
+            border: 2px solid #e94560;
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        
+        .btn:hover {
+            background: #e94560;
+            box-shadow: 0 0 15px rgba(233, 69, 96, 0.7);
+            transform: scale(1.05);
+        }
+        
+        .status {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.7);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #e94560;
+            min-width: 300px;
+        }
+        
+        .log {
+            height: 150px;
+            overflow-y: auto;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+        
+        .log-entry {
+            margin-bottom: 5px;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        .log-entry.info { color: #a8c8ec; }
+        .log-entry.warning { color: #ffc107; }
+        .log-entry.error { color: #f44336; }
+        .log-entry.success { color: #4CAF50; }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        @keyframes nodeFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0px) translateY(0px); }
+            25% { transform: translateX(-2px) translateY(-2px); }
+            75% { transform: translateX(2px) translateY(2px); }
+        }
+        
+        @keyframes heal {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        @keyframes dataFlow {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+        
+        @keyframes brokenFlow {
+            0%, 100% { opacity: 0.1; }
+            50% { opacity: 0.5; }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #e94560;
+            border-radius: 50%;
+            animation: particleMove 3s linear infinite;
+        }
+        
+        @keyframes particleMove {
+            from { transform: translateX(0px); opacity: 1; }
+            to { transform: translateX(100px); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>SISU</h1>
+            <div class="subtitle">Resilient Self-Healing Code Network</div>
+        </div>
+        
+        <div class="controls">
+            <button class="btn" onclick="inflictDamage()">Inflict Damage</button>
+            <button class="btn" onclick="massCorruption()">Mass Corruption</button>
+            <button class="btn" onclick="resetNetwork()">Reset Network</button>
+        </div>
+        
+        <div class="network-display" id="network"></div>
+        
+        <div class="status">
+            <div><strong>Network Status:</strong> <span id="networkStatus">RESILIENT</span></div>
+            <div><strong>Active Nodes:</strong> <span id="activeNodes">0</span></div>
+            <div><strong>Healing Processes:</strong> <span id="healingProcesses">0</span></div>
+            <div class="log" id="log"></div>
+        </div>
+    </div>
+
+    <script>
+        // The SISU Network - A self-healing, resilient code ecosystem
+        class SisuNode {
+            constructor(id, x, y) {
+                this.id = id;
+                this.x = x;
+                this.y = y;
+                this.health = 100;
+                this.connections = [];
+                this.codeSegments = this.generateCode();
+                this.healingFactor = Math.random() * 0.5 + 0.5; // Finnish resilience varies
+                this.element = this.createElement();
+            }
+            
+            generateCode() {
+                const functions = [
+                    "function persist() { return this.health > 0; }",
+                    "function adapt(challenge) { this.resilience += challenge * 0.1; }",
+                    "function rebuild() { this.connections.forEach(c => c.strengthen()); }",
+                    "function endure(damage) { this.health = Math.max(1, this.health - damage); }",
+                    "function inspire(node) { node.healingFactor *= 1.1; }"
+                ];
+                return functions[Math.floor(Math.random() * functions.length)];
+            }
+            
+            createElement() {
+                const node = document.createElement('div');
+                node.className = 'node healthy';
+                node.style.left = this.x + 'px';
+                node.style.top = this.y + 'px';
+                node.textContent = this.id;
+                node.style.animationDelay = Math.random() * 3 + 's';
+                
+                node.onclick = () => this.showCode();
+                return node;
+            }
+            
+            showCode() {
+                log(`Node ${this.id} executing: ${this.codeSegments}`, 'info');
+            }
+            
+            takeDamage(amount) {
+                this.health -= amount;
+                if (this.health <= 0) {
+                    this.health = 0;
+                    this.element.className = 'node damaged';
+                    log(`Node ${this.id} has been corrupted!`, 'error');
+                    this.startHealing();
+                } else if (this.health < 50) {
+                    this.element.className = 'node damaged';
+                    log(`Node ${this.id} is under stress (${this.health}% integrity)`, 'warning');
+                }
+            }
+            
+            startHealing() {
+                if (this.health <= 0) {
+                    this.element.className = 'node healing';
+                    log(`Node ${this.id} beginning self-repair sequence...`, 'info');
+                    
+                    const healInterval = setInterval(() => {
+                        this.health += this.healingFactor * 10;
+                        
+                        if (this.health >= 100) {
+                            this.health = 100;
+                            this.element.className = 'node healthy';
+                            clearInterval(healInterval);
+                            log(`Node ${this.id} fully recovered! Sisu prevails!`, 'success');
+                            this.codeSegments = this.generateCode(); // Evolved code
+                            
+                            // Inspire nearby nodes
+                            this.connections.forEach(conn => {
+                                if (conn.target.health < 100) {
+                                    conn.target.healingFactor *= 1.05;
+                                }
+                            });
+                        }
+                    }, 200);
+                }
+            }
+        }
+        
+        class Connection {
+            constructor(source, target) {
+                this.source = source;
+                this.target = target;
+                this.strength = 1;
+                this.element = this.createElement();
+                source.connections.push(this);
+            }
+            
+            createElement() {
+                const conn = document.createElement('div');
+                conn.className = 'connection';
+                
+                const dx = this.target.x - this.source.x;
+                const dy = this.target.y - this.source.y;
+                const length = Math.sqrt(dx * dx + dy * dy);
+                const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+                
+                conn.style.left = this.source.x + 20 + 'px';
+                conn.style.top = this.source.y + 20 + 'px';
+                conn.style.width = length + 'px';
+                conn.style.transform = `rotate(${angle}deg)`;
+                
+                return conn;
+            }
+            
+            updateStatus() {
+                if (this.source.health <= 0 || this.target.health <= 0) {
+                    this.element.className = 'connection broken';
+                } else {
+                    this.element.className = 'connection';
+                }
+            }
+            
+            strengthen() {
+                this.strength *= 1.1;
+                this.element.style.height = Math.min(4, 2 * this.strength) + 'px';
+            }
+        }
+        
+        class SisuNetwork {
+            constructor() {
+                this.nodes = [];
+                this.connections = [];
+                this.container = document.getElementById('network');
+                this.initialize();
+                this.startNetworkUpdates();
+            }
+            
+            initialize() {
+                const numNodes = 12;
+                const centerX = window.innerWidth / 2;
+                const centerY = window.innerHeight / 2;
+                
+                // Create nodes in a resilient mesh pattern
+                for (let i = 0; i < numNodes; i++) {
+                    const angle = (i / numNodes) * 2 * Math.PI;
+                    const radius = 200 + Math.random() * 100;
+                    const x = centerX + Math.cos(angle) * radius - 20;
+                    const y = centerY + Math.sin(angle) * radius - 20;
+                    
+                    const node = new SisuNode(i + 1, x, y);
+                    this.nodes.push(node);
+                    this.container.appendChild(node.element);
+                }
+                
+                // Create resilient connections
+                this.nodes.forEach((node, i) => {
+                    // Connect to next node (ring structure)
+                    const nextNode = this.nodes[(i + 1) % this.nodes.length];
+                    const conn = new Connection(node, nextNode);
+                    this.connections.push(conn);
+                    this.container.appendChild(conn.element);
+                    
+                    // Additional resilient connections
+                    if (i < this.nodes.length / 2) {
+                        const oppositeNode = this.nodes[i + Math.floor(this.nodes.length / 2)];
+                        const crossConn = new Connection(node, oppositeNode);
+                        this.connections.push(crossConn);
+                        this.container.appendChild(crossConn.element);
+                    }
+                });
+                
+                log('SISU Network initialized with Finnish resilience', 'success');
+                log('Each node contains self-modifying code that adapts under pressure', 'info');
+            }
+            
+            startNetworkUpdates() {
+                setInterval(() => {
+                    this.updateStatus();
+                    this.connections.forEach(conn => conn.updateStatus());
+                    
+                    // Occasional self-improvement
+                    if (Math.random() < 0.1) {
+                        const healthyNodes = this.nodes.filter(n => n.health > 50);
+                        if (healthyNodes.length > 0) {
+                            const node = healthyNodes[Math.floor(Math.random() * healthyNodes.length)];
+                            node.healingFactor *= 1.01;
+                            log(`Node ${node.id} evolved its healing algorithms`, 'info');
+                        }
+                    }
+                }, 1000);
+            }
+            
+            updateStatus() {
+                const activeNodes = this.nodes.filter(n => n.health > 0).length;
+                const healingNodes = this.nodes.filter(n => n.health > 0 && n.health < 100).length;
+                
+                document.getElementById('activeNodes').textContent = activeNodes;
+                document.getElementById('healingProcesses').textContent = healingNodes;
+                
+                let status = 'RESILIENT';
+                if (activeNodes < this.nodes.length * 0.3) {
+                    status = 'CRITICAL - BUT ENDURING';
+                } else if (activeNodes < this.nodes.length * 0.7) {
+                    status = 'DAMAGED - HEALING';
+                }
+                
+                document.getElementById('networkStatus').textContent = status;
+            }
+        }
+        
+        // Logging system
+        function log(message, type = 'info') {
+            const logDiv = document.getElementById('log');
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logDiv.appendChild(entry);
+            logDiv.scrollTop = logDiv.scrollHeight;
+            
+            // Keep only last 20 entries
+            while (logDiv.children.length > 20) {
+                logDiv.removeChild(logDiv.firstChild);
+            }
+        }
+        
+        // Global network instance
+        let network;
+        
+        // Control functions
+        function inflictDamage() {
+            const targetCount = Math.floor(Math.random() * 3) + 1;
+            for (let i = 0; i < targetCount; i++) {
+                const node = network.nodes[Math.floor(Math.random() * network.nodes.length)];
+                const damage = Math.random() * 60 + 40; // 40-100 damage
+                node.takeDamage(damage);
+            }
+            log(`Inflicted damage on ${targetCount} nodes - testing network resilience`, 'warning');
+        }
+        
+        function massCorruption() {
+            log('MASS CORRUPTION EVENT - Testing ultimate SISU!', 'error');
+            network.nodes.forEach(node => {
+                if (Math.random() < 0.7) {
+                    node.takeDamage(Math.random() * 100 + 50);
+                }
+            });
+        }
+        
+        function resetNetwork() {
+            document.getElementById('network').innerHTML = '';
+            network = new SisuNetwork();
+            log('Network reset - Ready to demonstrate resilience again!', 'success');
+        }
+        
+        // Initialize the network when page loads
+        window.onload = function() {
+            network = new SisuNetwork();
+            
+            // Add some dynamic particles for visual flair
+            setInterval(() => {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * window.innerWidth + 'px';
+                particle.style.top = Math.random() * window.innerHeight + 'px';
+                document.body.appendChild(particle);
+                
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.parentNode.removeChild(particle);
+                    }
+                }, 3000);
+            }, 500);
+        };
+        
+        // Handle window resize
+        window.onresize = function() {
+            resetNetwork();
+        };
+    </script>
+</body>
+</html>
