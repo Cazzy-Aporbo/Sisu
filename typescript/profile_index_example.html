@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cazzy Aporbo — Creative Links (Live)</title>
+
+  <!-- Google Font + Chart.js -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    :root{
+      --bg1: #f7fbff; --bg2:#eef6ff; --card:#ffffff;
+      --accent:#0066ff; --accent-2:#ff6fb5; --muted:#6b7280;
+      --glass: rgba(255,255,255,0.7);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%; margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
+    body{
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(0,115,230,0.06), transparent),
+                  radial-gradient(1000px 500px at 95% 80%, rgba(255,111,181,0.04), transparent),
+                  linear-gradient(180deg,var(--bg1),var(--bg2));
+      color:#0b1220; -webkit-font-smoothing:antialiased;
+      overflow-y:auto;
+    }
+
+    /* Layout */
+    .wrap{max-width:1100px; margin:36px auto; padding:28px; position:relative;}
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.85), var(--card));
+      border-radius:16px; padding:26px; box-shadow: 0 12px 40px rgba(12,24,60,0.08);
+      backdrop-filter: blur(6px);
+    }
+
+    /* Header / hero */
+    header {display:flex; gap:20px; align-items:center; margin-bottom:22px;}
+    .avatar{
+      width:120px; height:120px; border-radius:20px; overflow:hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08); border:4px solid rgba(0,115,230,0.08);
+      transition:transform .45s cubic-bezier(.2,.9,.2,1);
+      background:linear-gradient(135deg,#fff,#f3f8ff);
+    }
+    .avatar img{width:100%; height:100%; object-fit:cover; display:block;}
+    .avatar:hover{transform:rotate(-2deg) scale(1.03)}
+
+    .hero-text{flex:1;}
+    .name{font-weight:800; font-size:1.5rem; letter-spacing:-0.02em; display:flex; gap:10px; align-items:center;}
+    .title{color:var(--muted); margin-top:6px; font-weight:600;}
+    .typing{margin-top:10px; color:#334155; font-weight:500; min-height:20px}
+
+    /* Action buttons */
+    .actions{display:flex; gap:12px; margin-top:14px; flex-wrap:wrap}
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      background:linear-gradient(90deg,var(--accent), #0051d6); color:white;
+      padding:10px 14px; border-radius:12px; text-decoration:none; font-weight:700;
+      box-shadow:0 8px 18px rgba(0,102,255,0.12); transition:transform .18s ease, box-shadow .18s;
+    }
+    .btn.secondary{background:transparent; color:var(--accent); border:1px solid rgba(0,102,255,0.1); font-weight:700;}
+    .btn:hover{transform:translateY(-4px); box-shadow:0 18px 36px rgba(0,102,255,0.12)}
+
+    /* Search & controls */
+    .controls{display:flex; justify-content:space-between; gap:12px; margin:20px 0; align-items:center}
+    .search{
+      flex:1; display:flex; gap:12px; align-items:center;
+      background:var(--glass); padding:10px; border-radius:12px; border:1px solid rgba(15,23,42,0.04)
+    }
+    .search input{border:0; outline:0; background:transparent; font-weight:600; width:100%}
+    .small{font-size:0.85rem; color:var(--muted)}
+
+    /* Grid: repos + side */
+    .grid{display:grid; grid-template-columns: 1fr 340px; gap:20px; margin-top:12px}
+    @media (max-width:980px){ .grid{grid-template-columns:1fr; } .actions{justify-content:center;}}
+
+    /* Repo list */
+    .repos{display:grid; gap:14px}
+    .repo-card{
+      background:linear-gradient(180deg,#ffffff, #fbfdff);
+      border-radius:12px; padding:14px; display:flex; gap:12px; align-items:flex-start;
+      border-left:6px solid rgba(0,115,230,0.12); transform:translateY(14px); opacity:0;
+      transition:transform .45s cubic-bezier(.2,.9,.2,1), opacity .45s;
+    }
+    .repo-card.visible{transform:none; opacity:1}
+    .repo-meta{flex:1}
+    .repo-meta a{font-weight:800; color:var(--accent); text-decoration:none}
+    .repo-desc{margin-top:6px; color:#475569; font-size:0.95rem}
+    .repo-badges{margin-top:10px; display:flex; gap:8px; flex-wrap:wrap}
+    .badge{background:rgba(255,255,255,0.9); padding:6px 8px; border-radius:999px; font-weight:700; color:#475569; font-size:0.85rem; box-shadow:0 6px 16px rgba(8,16,40,0.04)}
+
+    /* language dot & activity */
+    .lang{display:inline-flex; align-items:center; gap:8px}
+    .dot{width:10px;height:10px;border-radius:50%}
+    .activity{display:flex; gap:3px; margin-left:8px}
+    .act-dot{width:8px;height:8px;border-radius:2px; opacity:.6; transform:scale(.8); transition:transform .15s ease,opacity .15s}
+
+    /* tilt effect on mouse move */
+    .tilt { perspective:1000px; }
+    .tilt-inner { transform-style:preserve-3d; transition:transform .18s ease; }
+
+    /* right column: stats */
+    .side{position:sticky; top:22px}
+    .panel{background:linear-gradient(180deg,#fff,#fbfdff); padding:16px; border-radius:12px; box-shadow:0 8px 28px rgba(12,24,60,0.06)}
+    .chart-wrap{height:260px}
+
+    /* modal */
+    .modal{position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(8,12,24,0.6); z-index:60; opacity:0; pointer-events:none; transition:opacity .18s}
+    .modal.open{opacity:1; pointer-events:auto}
+    .modal-card{width:min(720px,96%); background:white; border-radius:14px; padding:18px}
+    .modal-close{float:right; cursor:pointer; font-weight:800; color:#334155}
+
+    /* floating emojis / confetti */
+    .float-emojis{position:fixed; left:6%; top:6%; z-index:0; pointer-events:none}
+    .emoji{font-size:22px; opacity:.9; animation:floaty 6s linear infinite}
+    @keyframes floaty{0%{transform:translateY(0) rotate(0)}50%{transform:translateY(-18px) rotate(12deg)}100%{transform:translateY(0) rotate(0)}}
+
+    /* small helpers */
+    .muted{color:var(--muted)}
+    .tiny{font-size:0.82rem}
+  </style>
+</head>
+<body>
+  <div class="wrap card tilt" id="app">
+    <!-- Header -->
+    <header>
+      <div class="avatar tilt-inner" id="avatarWrap">
+        <!-- Replace with your image file in repo -->
+        <img id="avatar" src="your-profile.jpg" alt="Cazzy Aporbo">
+      </div>
+
+      <div class="hero-text">
+        <div class="name">Cazandra “Cazzy” Aporbo <span class="tiny muted">• Data Scientist</span></div>
+        <div class="title small muted">Building ML systems, beautiful viz, & playful experiments</div>
+        <div class="typing" id="typing">✨</div>
+
+        <div class="actions">
+          <a class="btn" href="https://www.becaziam.com" target="_blank">🌐 Website</a>
+          <a class="btn secondary" href="https://github.com/Cazzy-Aporbo" target="_blank">💻 GitHub</a>
+          <a class="btn secondary" href="https://www.linkedin.com/in/cazandra-aporbo" target="_blank">🔗 LinkedIn</a>
+          <a class="btn secondary" href="https://substack.com/@logofchi" target="_blank">✍️ Substack</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- controls -->
+    <div class="controls">
+      <div class="search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.7"><path d="M21 21l-4.35-4.35" stroke="#0b1220" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="5.2" stroke="#0b1220" stroke-width="1.6"/></svg>
+        <input id="q" placeholder="Search repos (name, language, topic) — try “mochi”, “python”, etc." autocomplete="off">
+        <div style="width:12px"></div>
+        <div class="small muted tiny">Sort:
+          <select id="sort" style="font-weight:700; border:0; background:transparent; outline:none;">
+            <option value="updated">recent</option>
+            <option value="stars">stars</option>
+            <option value="name">name</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:10px; align-items:center">
+        <div class="small muted tiny">Token (optional):</div>
+        <input id="token" placeholder="ghp_... (optional for higher rate limits)" style="padding:8px 10px; border-radius:8px; border:1px solid rgba(11,17,34,0.06)"/>
+        <button id="refresh" class="btn" style="padding:10px 12px">🔄 Refresh</button>
+      </div>
+    </div>
+
+    <!-- Main grid -->
+    <div class="grid">
+      <div>
+        <div class="repos" id="repos">Loading repositories... ⏳</div>
+      </div>
+
+      <aside class="side">
+        <div class="panel">
+          <div style="display:flex; justify-content:space-between; align-items:center">
+            <div><strong>📊 Language Breakdown</strong><div class="tiny muted">Auto-updated</div></div>
+            <div class="tiny muted">Updated: <span id="updatedAt">—</span></div>
+          </div>
+          <div class="chart-wrap" style="margin-top:12px">
+            <canvas id="langChart"></canvas>
+          </div>
+        </div>
+
+        <div style="height:18px"></div>
+
+        <div class="panel" style="margin-top:12px">
+          <strong>🔥 Activity Snapshot</strong>
+          <div class="tiny muted">Recent push activity across repos</div>
+          <div id="activityMini" style="margin-top:12px"></div>
+        </div>
+
+        <div style="height:18px"></div>
+
+        <div class="panel" style="margin-top:12px">
+          <strong>🌈 Quick facts</strong>
+          <ul style="margin-top:8px; padding-left:16px">
+            <li class="tiny">Lo-fi + jazz when I code 🎧</li>
+            <li class="tiny">Books & experiments monthly 📚🧪</li>
+            <li class="tiny">Dream: AI that writes fairytales 🦄</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- modal -->
+  <div class="modal" id="modal">
+    <div class="modal-card card">
+      <div style="display:flex; justify-content:space-between; align-items:center">
+        <div><strong id="modalTitle">Repo details</strong><div id="modalUrl" class="tiny muted"></div></div>
+        <div class="modal-close" id="modalClose">✕</div>
+      </div>
+      <div id="modalBody" style="margin-top:12px"></div>
+    </div>
+  </div>
+
+  <!-- floating emojis -->
+  <div class="float-emojis" aria-hidden>
+    <div class="emoji" style="animation-delay:0s">🦄</div>
+    <div class="emoji" style="animation-delay:1s">📊</div>
+    <div class="emoji" style="animation-delay:2s">🎧</div>
+    <div class="emoji" style="animation-delay:3s">💡</div>
+  </div>
+
+  <script>
+  /*************** Utility & UI ******************/
+  const username = "Cazzy-Aporbo";
+  const reposEl = document.getElementById('repos');
+  const qInput = document.getElementById('q');
+  const sortSel = document.getElementById('sort');
+  const tokenInput = document.getElementById('token');
+  const refreshBtn = document.getElementById('refresh');
+  const updatedAtEl = document.getElementById('updatedAt');
+  const modal = document.getElementById('modal');
+  const modalClose = document.getElementById('modalClose');
+
+  let allRepos = [];
+  let langChart = null;
+
+  // small typing intro
+  const typingEl = document.getElementById('typing');
+  const lines = ["👋 Hi — I’m Cazzy.", "📊 I tell stories with data.", "🤖 I experiment with ML, AI & art.", "✨ Welcome — explore my repos below."];
+  let lp=0, lc=0, del=false;
+  (function typer(){
+    const str = lines[lp];
+    typingEl.textContent = str.slice(0, lc);
+    if(!del){ lc++; if(lc>str.length){ del=true; setTimeout(typer,900); return } }
+    else{ lc--; if(lc<0){ del=false; lp=(lp+1)%lines.length; setTimeout(typer,200); return } }
+    setTimeout(typer, del?30:60);
+  })();
+
+  /*************** GitHub fetching ******************/
+  async function fetchAllRepos(token) {
+    const headers = token ? { Authorization: "token " + token } : {};
+    // fetch first page of user's repos (per_page=100) sorted by updated by default; get all with pagination if needed
+    const url = `https://api.github.com/users/${username}/repos?per_page=100`;
+    const resp = await fetch(url, { headers });
+    if(resp.status === 403){ throw new Error('rate_limited'); }
+    const data = await resp.json();
+    // if data is not array, throw
+    if(!Array.isArray(data)) throw new Error('bad_response');
+    return data;
+  }
+
+  /*************** Render repo cards ******************/
+  function languageEmoji(lang){
+    if(!lang) return "📦";
+    const map = {
+      "Python":"🐍","JavaScript":"✨","TypeScript":"🔷","Jupyter Notebook":"📓",
+      "R":"📊","HTML":"🌐","CSS":"🎨","Go":"🐹","C++":"💠","C":"🔹","Java":"☕",
+      "Rust":"🦀","Shell":"💻","Ruby":"💎","Dart":"🎯","Swift":"🍎"
+    };
+    return map[lang] || "🧩";
+  }
+
+  function repoCardDOM(repo, idx){
+    const card = document.createElement('div');
+    card.className = 'repo-card tilt';
+    card.innerHTML = `
+      <div style="width:10px"></div>
+      <div class="repo-meta">
+        <a href="${repo.html_url}" target="_blank"> ${languageEmoji(repo.language)} ${repo.name}</a>
+        <div class="repo-desc">${repo.description ? escapeHTML(repo.description) : '<span class="muted tiny">No description — add one!</span>'}</div>
+        <div class="repo-badges">
+          <div class="badge">${repo.fork ? "🍴 fork" : "📦 repo"}</div>
+          <div class="badge">${repo.stargazers_count} ★</div>
+          <div class="badge">${repo.watchers_count} 👀</div>
+          <div class="badge lang"><span class="dot" style="background:${pickLangColor(repo.language)}"></span> ${repo.language || '—'}</div>
+          <div class="badge tiny muted">Updated ${timeAgo(repo.pushed_at)}</div>
+          <div class="badge tiny">Size: ${repo.size} KB</div>
+        </div>
+      </div>
+    `;
+    // attach click to open modal with details
+    card.addEventListener('click', (e)=>{
+      if(e.target.tagName.toLowerCase()==='a') return; // let link click through
+      openModal(repo);
+    });
+
+    // add little inline activity (dots) from pushed_at (simulate)
+    const act = document.createElement('div');
+    act.style.marginLeft='12px';
+    act.className='activity';
+    // create 7 dots varying by recency (simple heuristic)
+    const daysAgo = Math.floor((Date.now() - new Date(repo.pushed_at))/ (1000*60*60*24));
+    for(let i=0;i<7;i++){
+      const ad = document.createElement('div');
+      ad.className='act-dot';
+      const val = Math.max(0, 7 - Math.abs(daysAgo - i*2)); // playful mapping
+      ad.style.background = `rgba(0,115,230,${Math.min(0.9, 0.12 + val*0.12)})`;
+      ad.style.transform = `scale(${0.7 + Math.min(1, val*0.12)})`;
+      act.appendChild(ad);
+    }
+    // append under badges
+    card.querySelector('.repo-badges').appendChild(act);
+    return card;
+  }
+
+  function escapeHTML(s){ return s ? s.replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])) : s; }
+
+  function pickLangColor(lang){
+    const colors = {
+      "Python":"#3572A5","JavaScript":"#f1e05a","TypeScript":"#2b7489","Jupyter Notebook":"#DA5B0B",
+      "R":"#198CE7","HTML":"#E34C26","CSS":"#563d7c","Go":"#00ADD8","C++":"#f34b7d","Java":"#b07219",
+      "Rust":"#dea584","Shell":"#89e051","Ruby":"#701516","Dart":"#00B4AB","Swift":"#ffac45"
+    };
+    return colors[lang] || '#9aa4b2';
+  }
+
+  function timeAgo(iso){
+    if(!iso) return "never";
+    const d = new Date(iso);
+    const sec = Math.floor((Date.now()-d)/1000);
+    if(sec < 60) return `${sec}s`;
+    if(sec < 3600) return `${Math.floor(sec/60)}m`;
+    if(sec < 86400) return `${Math.floor(sec/3600)}h`;
+    if(sec < 2592000) return `${Math.floor(sec/86400)}d`;
+    return d.toLocaleDateString();
+  }
+
+  /*************** Chart: languages ******************/
+  function renderLangChart(langCounts){
+    const ctx = document.getElementById('langChart').getContext('2d');
+    const labels = Object.keys(langCounts);
+    const data = Object.values(langCounts);
+    const colors = labels.map(l=>pickLangColor(l));
+    if(langChart) langChart.destroy();
+    langChart = new Chart(ctx, {
+      type:'doughnut',
+      data:{labels, datasets:[{data, backgroundColor:colors, hoverOffset:10, borderWidth:0}]},
+      options:{plugins:{legend:{position:'bottom', labels:{boxWidth:10}}}, maintainAspectRatio:false}
+    });
+  }
+
+  /*************** Activity mini visualization ******************/
+  function renderActivityMini(repos){
+    const wrap = document.getElementById('activityMini');
+    wrap.innerHTML = '';
+    // Sort repos by pushed_at desc and use top 7 for sparkline-like rows
+    const top = repos.slice().sort((a,b)=> new Date(b.pushed_at)-new Date(a.pushed_at)).slice(0,7);
+    top.forEach(r=>{
+      const line = document.createElement('div');
+      line.style.display='flex'; line.style.justifyContent='space-between'; line.style.alignItems='center'; line.style.gap='12px';
+      line.style.marginBottom='8px';
+      const title = document.createElement('div'); title.innerHTML = `<strong style="font-weight:700">${r.name}</strong>`;
+      title.style.flex='1'; title.style.fontSize='0.9rem';
+      const dots = document.createElement('div'); dots.style.display='flex'; dots.style.gap='6px';
+      // produce 12 monthly dots with opacity based on pushes? using pushed_at proximity
+      for(let i=11;i>=0;i--){
+        const d = new Date(); d.setMonth(d.getMonth()-i);
+        const days = Math.abs((new Date(r.pushed_at) - d)/(1000*60*60*24));
+        const el = document.createElement('div');
+        el.style.width='10px'; el.style.height='10px'; el.style.borderRadius='2px';
+        const alpha = Math.max(0.06, Math.min(0.95, 1 - Math.min(300, Math.abs(days))/300));
+        el.style.background = `rgba(0,115,230,${alpha})`;
+        el.style.transition='transform .18s ease';
+        el.addEventListener('mouseenter', ()=> el.style.transform='scale(1.25)');
+        el.addEventListener('mouseleave', ()=> el.style.transform='scale(1)');
+        dots.appendChild(el);
+      }
+      line.appendChild(title); line.appendChild(dots); wrap.appendChild(line);
+    });
+  }
+
+  /*************** Modal ******************/
+  function openModal(repo){
+    document.getElementById('modalTitle').textContent = `${repo.name} • ${repo.language || '—'}`;
+    document.getElementById('modalUrl').innerHTML = `<a href="${repo.html_url}" target="_blank" class="tiny">${repo.html_url}</a>`;
+    document.getElementById('modalBody').innerHTML = `
+      <p class="tiny muted">⭐ ${repo.stargazers_count} • Forks: ${repo.forks_count} • Size: ${repo.size} KB</p>
+      <p style="margin-top:8px">${escapeHTML(repo.description || 'No description yet.')}</p>
+      <p class="tiny muted" style="margin-top:10px">Created: ${new Date(repo.created_at).toLocaleDateString()} • Updated: ${new Date(repo.updated_at).toLocaleDateString()}</p>
+      <div style="margin-top:12px">
+        <a class="btn" href="${repo.html_url}" target="_blank">Open on GitHub</a>
+      </div>
+    `;
+    modal.classList.add('open');
+  }
+  modalClose.addEventListener('click', ()=> modal.classList.remove('open'));
+  modal.addEventListener('click', (e)=> { if(e.target === modal) modal.classList.remove('open'); });
+
+  /*************** Main load & UI interactions ******************/
+  async function loadAndRender(){
+    try{
+      reposEl.innerHTML = 'Loading repositories... ⏳';
+      const token = tokenInput.value.trim() || null;
+      const repos = await fetchAllRepos(token);
+      // store
+      allRepos = repos;
+
+      // allow sort
+      const s = sortSel.value;
+      const sorted = repos.slice().sort((a,b)=>{
+        if(s==='stars') return b.stargazers_count - a.stargazers_count;
+        if(s==='name') return a.name.localeCompare(b.name);
+        // default updated
+        return new Date(b.updated_at) - new Date(a.updated_at);
+      });
+
+      // render repo cards (staggered)
+      reposEl.innerHTML = '';
+      sorted.forEach((r, i)=>{
+        const card = repoCardDOM(r, i);
+        reposEl.appendChild(card);
+        setTimeout(()=> card.classList.add('visible'), 80 + i*60);
+      });
+
+      // language counts
+      const langCounts = {};
+      repos.forEach(r=> { if(r.language) langCounts[r.language] = (langCounts[r.language]||0) + 1; });
+      renderLangChart(langCounts);
+
+      // activity mini
+      renderActivityMini(repos);
+
+      // updated date
+      updatedAtEl.textContent = new Date().toLocaleString();
+
+    }catch(err){
+      console.error(err);
+      reposEl.innerHTML = (err.message==='rate_limited') ? `<div style="padding:14px; border-radius:10px; background:#fff4f4; color:#7a1720">⚠️ GitHub API rate limit hit. Add a personal access token in the token field or try again later.</div>` : `<div style="padding:14px; border-radius:10px; background:#fff8e1; color:#7a5c00">⚠️ Could not load repos. Try refreshing.</div>`;
+    }
+  }
+
+  // search/filter live
+  qInput.addEventListener('input', ()=>{
+    const q = qInput.value.trim().toLowerCase();
+    const cards = Array.from(document.querySelectorAll('.repo-card'));
+    cards.forEach(card=>{
+      const text = card.innerText.toLowerCase();
+      card.style.display = text.includes(q) ? '' : 'none';
+    });
+  });
+  // sort change
+  sortSel.addEventListener('change', loadAndRender);
+  refreshBtn.addEventListener('click', loadAndRender);
+
+  // initial load
+  loadAndRender();
+
+  // small tilt follow mouse on avatar
+  const avatarWrap = document.getElementById('avatarWrap');
+  avatarWrap.addEventListener('mousemove', (e)=>{
+    const rect = avatarWrap.getBoundingClientRect();
+    const cx = rect.left + rect.width/2;
+    const cy = rect.top + rect.height/2;
+    const dx = (e.clientX - cx) / rect.width;
+    const dy = (e.clientY - cy) / rect.height;
+    avatarWrap.querySelector('img').style.transform = `rotateX(${dy*8}deg) rotateY(${dx*8}deg) translateZ(6px)`;
+  });
+  avatarWrap.addEventListener('mouseleave', ()=> avatarWrap.querySelector('img').style.transform='none');
+
+  // small lazy-load: re-render chart on visible
+  let chartRendered = true; // already rendering on load
+
+  </script>
+</body>
+</html>
