@@ -1,0 +1,34 @@
+extends Node2D
+
+# Global gravity vector (can be flipped)
+var gravity = Vector2(0, 400)
+
+# List of all objects affected by gravity
+var objects = []
+
+func _ready():
+    randomize()
+    # Spawn example objects
+    for i in range(10):
+        var obj = Node2D.new()
+        obj.position = Vector2(rand_range(100, 900), rand_range(100, 600))
+        obj.name = "Box" + str(i)
+        add_child(obj)
+        objects.append({"node": obj, "vel": Vector2.ZERO})
+
+func _process(delta):
+    for obj_data in objects:
+        var obj = obj_data["node"]
+        obj_data["vel"] += gravity * delta
+        obj.position += obj_data["vel"] * delta
+
+func _input(event):
+    if event is InputEventKey and event.pressed and event.scancode == KEY_SPACE:
+        flip_world()
+
+func flip_world():
+    gravity = -gravity
+    for obj_data in objects:
+        obj_data["vel"] = -obj_data["vel"]
+    # Optional: rotate camera or world node
+    rotation += PI
