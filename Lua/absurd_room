@@ -1,0 +1,149 @@
+-- Ultra-Surreal Absurd Room 🌸🪞
+math.randomseed(os.time())
+
+-- Define objects, actions, and environmental events
+objects = {"spoon", "clock", "cup", "chair", "lamp", "door", "window"}
+actions = {"is staring at you", "walks sideways", "whispers nonsense", 
+           "spins slowly", "hides under the rug", "floats briefly"}
+env_events = {"the floor laughs backward", "the ceiling sighs quietly", 
+              "the chair forgets itself", "the rug trembles in confusion"}
+
+-- Pastel ANSI colors approximation (subset)
+pastels = {
+    "\27[38;5;224m","\27[38;5;225m","\27[38;5;186m","\27[38;5;189m",
+    "\27[38;5;216m","\27[38;5;217m","\27[38;5;152m","\27[38;5;153m",
+    "\27[38;5;195m","\27[38;5;186m"
+}
+
+-- Memory of events
+memory = {}
+
+-- Reverse letters in string
+function reverse_letters(str)
+    local reversed = ""
+    for i = #str, 1, -1 do
+        reversed = reversed .. str:sub(i,i)
+    end
+    return reversed
+end
+
+-- Randomly swap object and action mid-sentence
+function swap_objects_actions(obj, act)
+    if math.random() < 0.5 then
+        return act .. " " .. obj
+    else
+        return obj .. " " .. act
+    end
+end
+
+-- Ultra-backward function
+function ultra_reverse(str)
+    local r = math.random()
+    if r < 0.4 then
+        return reverse_letters(str)
+    elseif r < 0.8 then
+        local words = {}
+        for word in str:gmatch("%S+") do
+            table.insert(words, 1, word)
+        end
+        return table.concat(words, " ")
+    else
+        return reverse_letters((table.concat((function()
+            local w={}
+            for word in str:gmatch("%S+") do table.insert(w,1,word) end
+            return w
+        end)(), " ")))
+    end
+end
+
+-- Generate absurd event with environmental surrealism
+function absurd_event()
+    local obj = objects[math.random(1,#objects)]
+    local act = actions[math.random(1,#actions)]
+    
+    -- Swap objects/actions randomly
+    local line = swap_objects_actions(obj, act)
+    
+    -- Occasionally include environmental surrealism
+    if math.random() < 0.3 then
+        line = line .. " while " .. env_events[math.random(1,#env_events)]
+    end
+    
+    -- Occasionally ultra-reverse line
+    if math.random() < 0.7 then
+        line = ultra_reverse(line)
+    end
+    
+    -- Colorize with pastel
+    local color = pastels[math.random(1,#pastels)]
+    line = color .. line .. "\27[0m"  -- reset color
+    
+    table.insert(memory, line)
+    return line
+end
+
+-- Mutate objects, actions, env events
+function mutate_room()
+    if math.random() < 0.3 then
+        table.insert(objects, "mysterious " .. objects[math.random(1,#objects)])
+    end
+    if math.random() < 0.2 then
+        table.insert(actions, "does something inexplicable")
+    end
+    if math.random() < 0.1 then
+        table.insert(env_events, "the wall hums softly")
+    end
+end
+
+-- Interact with user input
+function interact(input)
+    local reply
+    local type_choice = math.random()
+    
+    if type_choice < 0.3 then
+        reply = swap_objects_actions(objects[math.random(1,#objects)], "reacts to '"..input.."'")
+    elseif type_choice < 0.6 then
+        reply = "Suddenly, " .. objects[math.random(1,#objects)] .. " " .. actions[math.random(1,#actions)] .. " in response to '"..input.."'"
+    else
+        if #memory > 0 then
+            reply = "The room recalls: '" .. memory[math.random(1,#memory)] .. "' in response to '"..input.."'"
+        else
+            reply = "The room stares silently at '"..input.."'"
+        end
+    end
+    
+    -- Ultra-backwardize reply
+    if math.random() < 0.8 then reply = ultra_reverse(reply) end
+    
+    -- Pastel colorize
+    local color = pastels[math.random(1,#pastels)]
+    return color .. reply .. "\27[0m"
+end
+
+-- Timed mutation: evolve every few seconds
+local timer = os.time()
+local interval = 5  -- seconds
+
+-- Main loop
+while true do
+    -- Print 2-5 absurd events
+    for i = 1, math.random(2,5) do
+        print(absurd_event())
+    end
+    
+    -- Timed mutation
+    if os.time() - timer >= interval then
+        mutate_room()
+        timer = os.time()
+        print("\27[38;5;225m--- The room subtly mutates over time ---\27[0m")
+    end
+    
+    -- User interaction
+    io.write("\nSay something (or Enter to watch room evolve): ")
+    local input = io.read()
+    if input ~= "" then
+        print(interact(input))
+    end
+    
+    print("\n--- The room distorts and shifts ---\n")
+end
