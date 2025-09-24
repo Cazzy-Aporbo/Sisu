@@ -29,31 +29,31 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│ StephenOS v2.0 [Build 2025.neural]                    ─ □ ✕     │
+│ StephenOS v2.0 [Build 2025.neural]                    ─ □ ✕    │
 ├─────────────────────────────────────────────────────────────────┤
 │ Desktop                                                         │
 │                                                                 │
-│  📁 Unfinished_Projects_2019    📁 Random_3AM_Ideas            │
+│  📁 Unfinished_Projects_2019    📁 Random_3AM_Ideas           │
 │  📁 Overthinking_Archive_TB      📁 Color_Palettes_∞           │
 │  📁 Medical_Knowledge_85GB       📁 Code_Snippets_Hoarded      │
-│  📁 Things_That_Make_Me_Happy    📁 Bug_Graveyard_RIP          │
+│  📁 Things_That_Make_Me_Happy    📁 Bug_Graveyard_RIP         │
 │  📁 Flow_States_Captured         📁 Abandoned_Brilliance       │
-│                                                                │
-│  🗒️ TODO_List_v847_FINAL_FINAL_ACTUALLY_FINAL.txt              │
-│  🎨 sunset_gradient_collection_10000_samples.psd               │
-│  🧪 hallucination_harvester_v42.py                             │
-│  💊 pharmacology_notes_annotated_highlighted_memorized.pdf     │
-│  🌅 that_one_perfect_gradient.css                              │
-│                                                                │
+│                                                                 │
+│  🗒️ TODO_List_v847_FINAL_FINAL_ACTUALLY_FINAL.txt            │
+│  🎨 sunset_gradient_collection_10000_samples.psd              │
+│  🧪 hallucination_harvester_v42.py                            │
+│  💊 pharmacology_notes_annotated_highlighted_memorized.pdf    │
+│  🌅 that_one_perfect_gradient.css                             │
+│                                                                 │
 ├─────────────────────────────────────────────────────────────────┤
-│ Currently Running Processes:                                    │
-│ ▶ overthinking.exe (247% CPU) [Cannot terminate]                │
-│ ▶ creativity_daemon (∞ threads) [Priority: REALTIME]            │
-│ ▶ coffee_monitor.sh [CRITICAL - Do not kill]                    │
-│ ▶ flow_state.app [Status: 🌊]                                   │
-│ ▶ pattern_recognition.ai [Analyzing everything]                 │
-│ ▶ color_harmony_engine.gpu [Ray tracing enabled]                │
-│ ▶ happiness_generator.love [Spreading joy...]                   │
+│ Currently Running Processes:                                   │
+│ ▶ overthinking.exe (247% CPU) [Cannot terminate]              │
+│ ▶ creativity_daemon (∞ threads) [Priority: REALTIME]          │
+│ ▶ coffee_monitor.sh [CRITICAL - Do not kill]                 │
+│ ▶ flow_state.app [Status: 🌊]                                 │
+│ ▶ pattern_recognition.ai [Analyzing everything]               │
+│ ▶ color_harmony_engine.gpu [Ray tracing enabled]             │
+│ ▶ happiness_generator.love [Spreading joy...]                 │
 └─────────────────────────────────────────────────────────────────┘
 
 RAM Usage: 186% (How is this possible? I don't know)
@@ -124,40 +124,40 @@ function solve(problem) {
 
 ```
 ╔══════════════════════════════════════════════════════════════════╗
-║                     SYSTEM ERROR LOG                             ║
+║                     SYSTEM ERROR LOG                            ║
 ╠══════════════════════════════════════════════════════════════════╣
 ║                                                                  ║
-║  ERROR 404: Sleep.exe not found                                  ║
-║  Last detected: 2019                                             ║
+║  ERROR 404: Sleep.exe not found                                ║
+║  Last detected: 2019                                           ║
 ║                                                                  ║
-║  WARNING: Coffee levels critically low                           ║
-║  System performance decreased by 97%                             ║
+║  WARNING: Coffee levels critically low                         ║
+║  System performance decreased by 97%                           ║
 ║                                                                  ║
-║  STACK OVERFLOW: Too many nested thoughts                        ║
-║  Current depth: 4,826 levels                                     ║
-║  Maximum recommended: 10                                         ║
+║  STACK OVERFLOW: Too many nested thoughts                      ║
+║  Current depth: 4,826 levels                                   ║
+║  Maximum recommended: 10                                       ║
 ║                                                                  ║
-║  MEMORY LEAK: Forgot why I walked into this room                 ║
-║  Lost pointers: 47                                               ║
-║  Recovery suggestion: Walk back to previous room                 ║
+║  MEMORY LEAK: Forgot why I walked into this room              ║
+║  Lost pointers: 47                                            ║
+║  Recovery suggestion: Walk back to previous room              ║
 ║                                                                  ║
-║  INFINITE LOOP DETECTED: Overthinking.exe                        ║
-║  Runtime: 72 hours 43 minutes                                    ║
-║  CPU usage: YES                                                  ║
+║  INFINITE LOOP DETECTED: Overthinking.exe                     ║
+║  Runtime: 72 hours 43 minutes                                 ║
+║  CPU usage: YES                                               ║
 ║                                                                  ║
-║  MERGE CONFLICT: Creative_side.git vs Analytical_side.git        ║
-║  <<<<<<< HEAD                                                    ║
-║  Make it beautiful with gradients                                ║
-║  =======                                                         ║
-║  But is it optimally efficient?                                  ║
-║  >>>>>>> analytical-brain                                        ║
+║  MERGE CONFLICT: Creative_side.git vs Analytical_side.git     ║
+║  <<<<<<< HEAD                                                  ║
+║  Make it beautiful with gradients                             ║
+║  =======                                                       ║
+║  But is it optimally efficient?                               ║
+║  >>>>>>> analytical-brain                                     ║
 ║                                                                  ║
-║  DEPRECATION WARNING: Social battery will be removed             ║
-║  in next update. Please migrate to introvert mode.               ║
+║  DEPRECATION WARNING: Social battery will be removed          ║
+║  in next update. Please migrate to introvert mode.           ║
 ║                                                                  ║
-║  SUCCESS: Flow state achieved!🌊                                 ║
-║  All systems optimal. Productivity at 900%.                      ║
-║  Time perception altered. What year is it?                       ║
+║  SUCCESS: Flow state achieved! 🌊                             ║
+║  All systems optimal. Productivity at 900%.                   ║
+║  Time perception altered. What year is it?                    ║
 ║                                                                  ║
 ╚══════════════════════════════════════════════════════════════════╝
 ```
@@ -303,163 +303,24 @@ The foundation. Earth. Grounding. It's the color of coffee, of late-night coding
 ![](https://img.shields.io/badge/Monochrome-Never-228B22?style=for-the-badge)
 ![](https://img.shields.io/badge/Vibes-Sunset_Forest_Ocean-FFD700?style=for-the-badge)
 
-<table width="100%" bgcolor="#0d1117">
-<tr>
-<td colspan="5" align="center" style="background: linear-gradient(135deg, #FF6347 0%, #FFD700 100%); padding: 15px;">
-<h3><strong>How Different Code Feels in My Brain</strong></h3>
-</td>
-</tr>
-<tr style="background: linear-gradient(90deg, #228B22 0%, #32CD32 100%);">
-<th width="20%" style="padding: 10px; color: #fff;">Concept</th>
-<th width="25%" style="padding: 10px; color: #fff;">How It Feels</th>
-<th width="15%" style="padding: 10px; color: #fff;">Color</th>
-<th width="20%" style="padding: 10px; color: #fff;">Texture</th>
-<th width="20%" style="padding: 10px; color: #fff;">Temperature</th>
-</tr>
-<tr bgcolor="#FF6347">
-<td><strong>Debugging</strong></td>
-<td>Like untangling Christmas lights in the dark</td>
-<td align="center">
+</div>
 
-![](https://img.shields.io/badge/Color-DC143C-DC143C?style=for-the-badge)
+---------|--------------|-------|---------|-------------|
+| **Debugging** | Like untangling Christmas lights in the dark | #DC143C | Spiky metal | Hot frustration |
+| **Clean Code** | Fresh sheets on Sunday morning | #2ECC71 | Smooth silk | Cool breeze |
+| **Recursion** | Mirrors facing each other infinitely | #4B0082 | Infinite spiral | Dizzy warmth |
+| **Async/Await** | Juggling while riding a unicycle | #FFA500 | Bouncy rubber | Energetic heat |
+| **Git Merge Conflict** | Two songs playing at once | #FF6347 | Scratchy wool | Uncomfortable warm |
+| **Successfully Deployed** | Sunset over the ocean | #FFD700 | Warm honey | Perfect temperature |
+| **Null Pointer Exception** | Stepping on a LEGO barefoot | #8B0000 | Sharp plastic | Sudden cold |
+| **Perfect Algorithm** | Mozart's Symphony No. 40 | #FFD700 | Liquid gold | Transcendent warmth |
+| **Machine Learning** | Teaching a child to paint | #228B22 | Soft clay | Growing warmth |
+| **Database Query** | Mining for diamonds | #4682B4 | Rough stone | Deep earth cool |
+| **CSS Animation** | Ballet performance | #FF69B4 | Flowing fabric | Light and airy |
+| **Memory Leak** | Bathtub overflowing | #00CED1 | Slippery water | Gradually cooling |
+| **Flow State** | Surfing the perfect wave | #20B2AA | Ocean mist | Perfect 🌊 |
 
-</td>
-<td>Spiky metal</td>
-<td>Hot frustration</td>
-</tr>
-<tr bgcolor="#228B22">
-<td><strong>Clean Code</strong></td>
-<td>Fresh sheets on Sunday morning</td>
-<td align="center">
-
-![](https://img.shields.io/badge/Color-2ECC71-2ECC71?style=for-the-badge)
-
-</td>
-<td>Smooth silk</td>
-<td>Cool breeze</td>
-</tr>
-<tr bgcolor="#FFA500">
-<td><strong>Recursion</strong></td>
-<td>Mirrors facing each other infinitely</td>
-<td align="center">
-
-![](https://img.shields.io/badge/Color-4B0082-4B0082?style=for-the-badge)
-
-</td>
-<td>Infinite spiral</td>
-<td>Dizzy warmth</td>
-</tr>
-<tr bgcolor="#FFD700">
-<td><strong>Async/Await</strong></td>
-<td>Juggling while riding a unicycle</td>
-<td align="center">
-
-![](https://img.shields.io/badge/Color-FFA500-FFA500?style=for-the-badge)
-
-</td>
-<td>Bouncy rubber</td>
-<td>Energetic heat</td>
-</tr>
-<tr bgcolor="#20B2AA">
-<td><strong>Git Merge Conflict</strong></td>
-<td>Two songs playing at once</td>
-<td align="center">
-
-![](https://img.shields.io/badge/Color-FF6347-FF6347?style=for-the-badge)
-
-</td>
-<td>Scratchy wool</td>
-<td>Uncomfortable warm</td>
-</tr>
-<tr bgcolor="#DAA520">
-<td><strong>Successfully Deployed</strong></td>
-<td>Sunset over the ocean</td>
-<td align="center">
-
-![](https://img.shields.io/badge/Color-FFD700-FFD700?style=for-the-badge)
-
-</td>
-<td>Warm honey</td>
-<td>Perfect temperature</td>
-</tr>
-<tr bgcolor="#FF7F50">
-<td><strong>Null Pointer Exception</strong></td>
-<td>Stepping on a LEGO barefoot</td>
-<td align="center">
-
-![](https://img.shields.io/badge/Color-8B0000-8B0000?style=for-the-badge)
-
-</td>
-<td>Sharp plastic</td>
-<td>Sudden cold</td>
-</tr>
-<tr bgcolor="#32CD32">
-<td><strong>Perfect Algorithm</strong></td>
-<td>Mozart's Symphony No. 40</td>
-<td align="center">
-
-![](https://img.shields.io/badge/Color-FFD700-FFD700?style=for-the-badge)
-
-</td>
-<td>Liquid gold</td>
-<td>Transcendent warmth</td>
-</tr>
-<tr bgcolor="#CD853F">
-<td><strong>Machine Learning</strong></td>
-<td>Teaching a child to paint</td>
-<td align="center">
-
-![](https://img.shields.io/badge/Color-228B22-228B22?style=for-the-badge)
-
-</td>
-<td>Soft clay</td>
-<td>Growing warmth</td>
-</tr>
-<tr bgcolor="#48D1CC">
-<td><strong>Database Query</strong></td>
-<td>Mining for diamonds</td>
-<td align="center">
-
-![](https://img.shields.io/badge/Color-4682B4-4682B4?style=for-the-badge)
-
-</td>
-<td>Rough stone</td>
-<td>Deep earth cool</td>
-</tr>
-<tr bgcolor="#B8860B">
-<td><strong>CSS Animation</strong></td>
-<td>Ballet performance</td>
-<td align="center">
-
-![](https://img.shields.io/badge/Color-FF69B4-FF69B4?style=for-the-badge)
-
-</td>
-<td>Flowing fabric</td>
-<td>Light and airy</td>
-</tr>
-<tr bgcolor="#FF8C00">
-<td><strong>Memory Leak</strong></td>
-<td>Bathtub overflowing</td>
-<td align="center">
-
-![](https://img.shields.io/badge/Color-00CED1-00CED1?style=for-the-badge)
-
-</td>
-<td>Slippery water</td>
-<td>Gradually cooling</td>
-</tr>
-<tr bgcolor="#2ECC71">
-<td><strong>Eb & Flow State</strong></td>
-<td>Surfing the perfect wave</td>
-<td align="center">
-
-![](https://img.shields.io/badge/Color-20B2AA-20B2AA?style=for-the-badge)
-
-</td>
-<td>Ocean mist</td>
-<td>Perfect 🌊</td>
-</tr>
-</table>
+</div>
 
 <div align="center">
 <img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=0,2,4,6,8,10,12,10,8,6,4,2,0&height=3&section=header&text=&fontSize=0" />
@@ -1553,13 +1414,13 @@ class StephenGreen:
 ```ascii
 ╔════════════════════════════════════════════════════════════════╗
 ║                                                                ║
-║   NEURAL NETWORK STATUS                                        ║
-║   ├── Creativity Level: ████████████████████ ∞                 ║
-║   ├── Innovation Mode: ████████████████████ MAXIMUM            ║
-║   ├── Happiness Generated: ████████████████████ OVERFLOWING    ║
-║   └── Collaboration Ready: ████████████████████ ALWAYS         ║
+║   NEURAL NETWORK STATUS                                       ║
+║   ├── Creativity Level: ████████████████████ ∞                ║
+║   ├── Innovation Mode: ████████████████████ MAXIMUM           ║
+║   ├── Happiness Generated: ████████████████████ OVERFLOWING   ║
+║   └── Collaboration Ready: ████████████████████ ALWAYS        ║
 ║                                                                ║
-║   "In the space between thoughts, we find infinite potential"  ║
+║   "In the space between thoughts, we find infinite potential" ║
 ║                                                                ║
 ╚════════════════════════════════════════════════════════════════╝
 ```
