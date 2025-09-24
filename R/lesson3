@@ -1,0 +1,86 @@
+library(tidyverse)
+
+# ----------------------------
+# 1. Data Cleaning: Handling Missing Values
+# ----------------------------
+students <- tibble(
+  Name = c("Alice", "Bob", "Charlie", "Diana", "Evan"),
+  Age = c(25, 30, NA, 28, 35),
+  Score = c(88, 92, 79, NA, 95)
+)
+
+# Check for missing values
+print(students)
+print(colSums(is.na(students)))
+
+# Fill missing values
+students <- students %>%
+  mutate(
+    Age = ifelse(is.na(Age), round(mean(Age, na.rm = TRUE)), Age),
+    Score = ifelse(is.na(Score), round(mean(Score, na.rm = TRUE)), Score)
+  )
+
+print("After filling missing values:")
+print(students)
+
+# ----------------------------
+# 2. Data Transformation
+# ----------------------------
+# Create a new column: Pass/Fail
+students <- students %>%
+  mutate(Result = ifelse(Score >= 85, "Pass", "Fail"))
+
+# Normalize scores to 0-1 range
+students <- students %>%
+  mutate(ScoreNormalized = (Score - min(Score)) / (max(Score) - min(Score)))
+
+print(students)
+
+# ----------------------------
+# 3. Merging Data Frames
+# ----------------------------
+# Another dataset with extra info
+extra_info <- tibble(
+  Name = c("Alice", "Bob", "Charlie", "Diana", "Evan"),
+  Club = c("Math", "Science", "Art", "Math", "Science")
+)
+
+# Merge using Name
+students_full <- left_join(students, extra_info, by = "Name")
+print(students_full)
+
+# ----------------------------
+# 4. Grouped Summaries
+# ----------------------------
+# Average score by Club
+club_summary <- students_full %>%
+  group_by(Club) %>%
+  summarise(
+    mean_score = mean(Score),
+    max_score = max(Score),
+    min_score = min(Score),
+    count = n()
+  )
+print(club_summary)
+
+# ----------------------------
+# 5. Conditional Filtering
+# ----------------------------
+# Students who passed and belong to Math club
+math_pass <- students_full %>%
+  filter(Result == "Pass" & Club == "Math")
+print(math_pass)
+
+# ----------------------------
+# 6. Mini Project: Score Analysis & Plot
+# ----------------------------
+# Bar plot of normalized scores by student
+ggplot(students_full, aes(x = Name, y = ScoreNormalized, fill = Result)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Normalized Student Scores", x = "Student", y = "Normalized Score") +
+  theme_minimal()
+
+# ----------------------------
+# 7. Export Cleaned Data
+# ----------------------------
+write_csv(students_full, "students_cleaned.csv")
