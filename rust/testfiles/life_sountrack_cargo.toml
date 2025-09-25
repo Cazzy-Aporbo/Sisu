@@ -1,0 +1,8 @@
+[package]
+name = "life_soundtrack"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+rimd = "0.4"   # MIDI file writing
+chrono = "0.4" # For timestamps
