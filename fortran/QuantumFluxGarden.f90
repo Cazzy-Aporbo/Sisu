@@ -1,7 +1,7 @@
 !========================================================
 ! File: QuantumFluxGarden.f90
 ! Author: Cazzy
-! Purpose: First-of-its-kind emergent ecosystem with flux fields in Fortran
+! Purpose: create emergent ecosystem with flux fields in Fortran
 !========================================================
 module flux_utils
   implicit none
