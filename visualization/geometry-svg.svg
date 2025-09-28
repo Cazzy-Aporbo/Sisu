@@ -1,0 +1,213 @@
+<!--
+=========================================================
+SISU — Sacred Geometry of Silicon
+=========================================================
+
+DENSITY:     ██████████  [10/10]
+ENDURANCE:   ██████████  [10/10]  
+ABSTRACTION: █████████░  [9/10]
+
+COLOR PHASE: Full Spectrum (#F0FDF4 to #052E16)
+
+Historical Context:
+  Born from: Euclidean geometry, 300 BCE / SVG, 2001
+  Survived:  Every rendering engine since IE6
+  Evolves:   Geometry is eternal, only rendering changes
+
+Compression Ratio: ∞ forms : 7 shapes
+
+=========================================================
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000">
+  
+  <!-- Define gradients - The Sisu spectrum -->
+  <defs>
+    <!-- Primary green gradient -->
+    <linearGradient id="greenGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F0FDF4" />
+      <stop offset="10%" style="stop-color:#DCFCE7" />
+      <stop offset="20%" style="stop-color:#D4FFE4" />
+      <stop offset="30%" style="stop-color:#BBF7D0" />
+      <stop offset="40%" style="stop-color:#A7F3D0" />
+      <stop offset="50%" style="stop-color:#86EFAC" />
+      <stop offset="60%" style="stop-color:#6EE7B7" />
+      <stop offset="70%" style="stop-color:#4ADE80" />
+      <stop offset="80%" style="stop-color:#34D399" />
+      <stop offset="90%" style="stop-color:#16A34A" />
+      <stop offset="100%" style="stop-color:#052E16" />
+    </linearGradient>
+    
+    <!-- Radial void gradient -->
+    <radialGradient id="voidGradient">
+      <stop offset="0%" style="stop-color:#052E16;stop-opacity:0" />
+      <stop offset="50%" style="stop-color:#052E16;stop-opacity:0.5" />
+      <stop offset="100%" style="stop-color:#052E16;stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- Aquatic gradient -->
+    <linearGradient id="aquaticGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#F5FFFA" />
+      <stop offset="20%" style="stop-color:#00FF7F" />
+      <stop offset="40%" style="stop-color:#2E8B57" />
+      <stop offset="60%" style="stop-color:#7FFFD4" />
+      <stop offset="80%" style="stop-color:#40E0D0" />
+      <stop offset="100%" style="stop-color:#008080" />
+    </linearGradient>
+    
+    <!-- Breathing animation -->
+    <animate id="breathe" attributeName="opacity" values="0.3;1;0.3" dur="19s" repeatCount="indefinite"/>
+  </defs>
+  
+  <!-- Background: The void -->
+  <rect width="1000" height="1000" fill="#052E16"/>
+  
+  <!-- 1. The Circle of Recursion (Center) -->
+  <!-- Represents: Eternal return, the while(true) loop -->
+  <g id="recursion" transform="translate(500,500)">
+    <circle r="150" fill="none" stroke="url(#greenGradient)" stroke-width="2" opacity="0.9">
+      <animateTransform attributeName="transform" type="rotate" 
+        from="0 0 0" to="360 0 0" dur="60s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="120" fill="none" stroke="#A7F3D0" stroke-width="1.5" opacity="0.7">
+      <animateTransform attributeName="transform" type="rotate" 
+        from="0 0 0" to="-360 0 0" dur="45s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="90" fill="none" stroke="#6EE7B7" stroke-width="1" opacity="0.5">
+      <animateTransform attributeName="transform" type="rotate" 
+        from="0 0 0" to="360 0 0" dur="30s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="60" fill="none" stroke="#34D399" stroke-width="0.5" opacity="0.3"/>
+    <circle r="30" fill="none" stroke="#16A34A" stroke-width="0.25" opacity="0.2"/>
+    
+    <!-- The void at center -->
+    <circle r="10" fill="url(#voidGradient)"/>
+  </g>
+  
+  <!-- 2. The Triangle of Hierarchy (Top) -->
+  <!-- Represents: Tree structures, inheritance, the stack -->
+  <g id="hierarchy" transform="translate(500,200)">
+    <path d="M 0,-100 L -86.6,50 L 86.6,50 Z" 
+          fill="none" stroke="url(#greenGradient)" stroke-width="2" opacity="0.8">
+      <animate attributeName="opacity" values="0.3;0.8;0.3" dur="7s" repeatCount="indefinite"/>
+    </path>
+    <!-- Inner triangles - fractal hierarchy -->
+    <path d="M 0,-50 L -43.3,25 L 43.3,25 Z" fill="none" stroke="#86EFAC" stroke-width="1" opacity="0.6"/>
+    <path d="M 0,-25 L -21.65,12.5 L 21.65,12.5 Z" fill="none" stroke="#4ADE80" stroke-width="0.5" opacity="0.4"/>
+  </g>
+  
+  <!-- 3. The Square of Memory (Right) -->
+  <!-- Represents: Memory blocks, arrays, the grid -->
+  <g id="memory" transform="translate(750,500)">
+    <rect x="-75" y="-75" width="150" height="150" 
+          fill="none" stroke="url(#aquaticGradient)" stroke-width="2" opacity="0.8"/>
+    <!-- Memory cells -->
+    <g id="cells">
+      <rect x="-75" y="-75" width="50" height="50" fill="#A7F3D0" opacity="0.2"/>
+      <rect x="-25" y="-75" width="50" height="50" fill="#6EE7B7" opacity="0.2"/>
+      <rect x="25" y="-75" width="50" height="50" fill="#34D399" opacity="0.2"/>
+      <rect x="-75" y="-25" width="50" height="50" fill="#4ADE80" opacity="0.2"/>
+      <rect x="-25" y="-25" width="50" height="50" fill="#22C55E" opacity="0.3"/>
+      <rect x="25" y="-25" width="50" height="50" fill="#16A34A" opacity="0.2"/>
+      <rect x="-75" y="25" width="50" height="50" fill="#166534" opacity="0.2"/>
+      <rect x="-25" y="25" width="50" height="50" fill="#14532D" opacity="0.2"/>
+      <rect x="25" y="25" width="50" height="50" fill="#052E16" opacity="0.3"/>
+    </g>
+  </g>
+  
+  <!-- 4. The Pentagon of Paradigms (Bottom Right) -->
+  <!-- Represents: The 5 major paradigms -->
+  <g id="paradigms" transform="translate(700,750)">
+    <path d="M 0,-80 L -76.08,-24.72 L -47.02,64.72 L 47.02,64.72 L 76.08,-24.72 Z"
+          fill="none" stroke="url(#greenGradient)" stroke-width="2" opacity="0.8">
+      <animateTransform attributeName="transform" type="rotate" 
+        from="0 0 0" to="72 0 0" dur="5s" repeatCount="indefinite"/>
+    </path>
+  </g>
+  
+  <!-- 5. The Hexagon of Networks (Left) -->
+  <!-- Represents: Network topology, distributed systems -->
+  <g id="network" transform="translate(250,500)">
+    <path d="M 0,-80 L -69.28,-40 L -69.28,40 L 0,80 L 69.28,40 L 69.28,-40 Z"
+          fill="none" stroke="url(#aquaticGradient)" stroke-width="2" opacity="0.8"/>
+    <!-- Connection lines -->
+    <line x1="0" y1="-80" x2="0" y2="80" stroke="#40E0D0" stroke-width="0.5" opacity="0.5"/>
+    <line x1="-69.28" y1="-40" x2="69.28" y2="40" stroke="#40E0D0" stroke-width="0.5" opacity="0.5"/>
+    <line x1="-69.28" y1="40" x2="69.28" y2="-40" stroke="#40E0D0" stroke-width="0.5" opacity="0.5"/>
+  </g>
+  
+  <!-- 6. The Spiral of Complexity (Bottom Left) -->
+  <!-- Represents: Algorithm complexity, Big O, growth -->
+  <g id="complexity" transform="translate(300,750)">
+    <path d="M 0,0 
+             Q -20,-20 -40,0
+             T -40,40
+             Q -20,60 0,40
+             T 40,0
+             Q 60,-20 40,-40
+             T 0,-40
+             Q -20,-60 -40,-40"
+          fill="none" stroke="url(#greenGradient)" stroke-width="2" opacity="0.8"
+          stroke-linecap="round">
+      <animateTransform attributeName="transform" type="scale" 
+        values="1,1;1.2,1.2;1,1" dur="4s" repeatCount="indefinite"/>
+    </path>
+  </g>
+  
+  <!-- 7. The Binary Tree (Top corners) -->
+  <!-- Represents: Binary trees, decisions, if/else -->
+  <g id="binaryLeft" transform="translate(150,150)">
+    <line x1="0" y1="0" x2="-30" y2="40" stroke="#A7F3D0" stroke-width="2"/>
+    <line x1="0" y1="0" x2="30" y2="40" stroke="#A7F3D0" stroke-width="2"/>
+    <line x1="-30" y1="40" x2="-45" y2="70" stroke="#6EE7B7" stroke-width="1.5"/>
+    <line x1="-30" y1="40" x2="-15" y2="70" stroke="#6EE7B7" stroke-width="1.5"/>
+    <line x1="30" y1="40" x2="15" y2="70" stroke="#6EE7B7" stroke-width="1.5"/>
+    <line x1="30" y1="40" x2="45" y2="70" stroke="#6EE7B7" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="5" fill="#F0FDF4"/>
+    <circle cx="-30" cy="40" r="4" fill="#A7F3D0"/>
+    <circle cx="30" cy="40" r="4" fill="#A7F3D0"/>
+    <circle cx="-45" cy="70" r="3" fill="#6EE7B7"/>
+    <circle cx="-15" cy="70" r="3" fill="#6EE7B7"/>
+    <circle cx="15" cy="70" r="3" fill="#6EE7B7"/>
+    <circle cx="45" cy="70" r="3" fill="#6EE7B7"/>
+  </g>
+  
+  <!-- Mirror tree -->
+  <use href="#binaryLeft" transform="translate(700,0)"/>
+  
+  <!-- The Golden Ratio Rectangle (subtle background) -->
+  <g id="golden" opacity="0.1">
+    <rect x="100" y="200" width="610" height="377" fill="none" stroke="#A7F3D0" stroke-width="1"/>
+    <rect x="100" y="200" width="377" height="377" fill="none" stroke="#A7F3D0" stroke-width="0.5"/>
+    <rect x="477" y="200" width="233" height="233" fill="none" stroke="#A7F3D0" stroke-width="0.5"/>
+    <rect x="477" y="433" width="144" height="144" fill="none" stroke="#A7F3D0" stroke-width="0.5"/>
+    <rect x="621" y="343" width="89" height="89" fill="none" stroke="#A7F3D0" stroke-width="0.5"/>
+  </g>
+  
+  <!-- Floating point particles -->
+  <g id="particles">
+    <circle cx="100" cy="400" r="2" fill="#A7F3D0" opacity="0.6">
+      <animate attributeName="cy" values="400;350;400" dur="8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="200" cy="600" r="1.5" fill="#6EE7B7" opacity="0.5">
+      <animate attributeName="cy" values="600;550;600" dur="6s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="800" cy="300" r="2.5" fill="#34D399" opacity="0.7">
+      <animate attributeName="cy" values="300;250;300" dur="7s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="900" cy="700" r="1" fill="#16A34A" opacity="0.4">
+      <animate attributeName="cy" values="700;650;700" dur="9s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- The Sisu signature -->
+  <text x="500" y="950" font-family="monospace" font-size="14" fill="#A7F3D0" 
+        text-anchor="middle" opacity="0.5">
+    SISU: GEOMETRY ENDURES
+  </text>
+  
+  <!-- Hidden message in the void -->
+  <text x="500" y="500" font-family="monospace" font-size="8" fill="#052E16" 
+        text-anchor="middle" opacity="0.05">
+    ALL COMPUTATION IS GEOMETRY
+  </text>
+</svg>
