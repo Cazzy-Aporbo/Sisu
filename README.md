@@ -24,6 +24,17 @@
 
 When you clone Sisu, you're not downloading code. You're downloading time itself, compressed and color-coded. Every function here has survived multiple extinction events: the death of mainframes, the browser wars, the framework churns. What remains is essential—the DNA of computation, annotated with the scars of its journey.
 
+
+<div align="center">
+
+  <img src="https://raw.githubusercontent.com/Cazzy-Aporbo/pretty-vizuals/master/Images_created/sisu.png" alt="Sisu Screenshot 1" width="420">
+  <img src="https://raw.githubusercontent.com/Cazzy-Aporbo/pretty-vizuals/master/Images_created/sisu2.png" alt="Sisu Screenshot 2" width="420"><br/>
+
+  <img src="https://raw.githubusercontent.com/Cazzy-Aporbo/pretty-vizuals/master/Images_created/sisu3.png" alt="Sisu Screenshot 3" width="420">
+  <img src="https://raw.githubusercontent.com/Cazzy-Aporbo/pretty-vizuals/master/Images_created/sisu4.png" alt="Sisu Screenshot 4" width="420">
+
+</div>
+
 ---
 
 ## The Gradient Philosophy
