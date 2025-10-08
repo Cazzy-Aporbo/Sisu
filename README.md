@@ -100,6 +100,71 @@ These are not arbitrary hex codes. Each green was chosen after meditation on wha
 
 ---
 
+# Sisu-Finder
+
+<div align="center">
+
+### [Experience Sisu Live](https://htmlpreview.github.io/?https://github.com/Cazzy-Aporbo/Sisu/blob/main/typescript/index.html)
+
+*Click any link below to view the interactive visualization*
+
+</div>
+
+### [Breathe](https://htmlpreview.github.io/?https://github.com/Cazzy-Aporbo/Sisu/blob/main/typescript/breathe-html.html)
+
+### [Sisu Compression: Aurora](https://htmlpreview.github.io/?https://github.com/Cazzy-Aporbo/Sisu/blob/main/typescript/sisu-compression-aurora.html)
+
+### [Sisu Compression: Observatory](https://htmlpreview.github.io/?https://github.com/Cazzy-Aporbo/Sisu/blob/main/typescript/sisu-compression-observatory.html)
+
+### [Sisu Living Core](https://htmlpreview.github.io/?https://github.com/Cazzy-Aporbo/Sisu/blob/main/typescript/sisu-living-core.html)
+
+### [HoTT Learning](https://htmlpreview.github.io/?https://github.com/Cazzy-Aporbo/Sisu/blob/main/typescript/HoTT_Learning.html)
+
+### [Learn TypeScript](https://htmlpreview.github.io/?https://github.com/Cazzy-Aporbo/Sisu/blob/main/typescript/LearnTypescript.html)
+
+### [Sisu Code Network](https://htmlpreview.github.io/?https://github.com/Cazzy-Aporbo/Sisu/blob/main/typescript/SISU_Code_Network.html)
+
+### [Category Theory](https://htmlpreview.github.io/?https://github.com/Cazzy-Aporbo/Sisu/blob/main/typescript/category_theory.html)
+
+### [Biosynthetic](https://htmlpreview.github.io/?https://github.com/Cazzy-Aporbo/Sisu/blob/main/typescript/biosynthetic.html)
+
+### [Explain Hypergalaxy](https://htmlpreview.github.io/?https://github.com/Cazzy-Aporbo/Sisu/blob/main/typescript/explain_hypergalaxy.html)
+
+### [Hypergalaxy](https://htmlpreview.github.io/?https://github.com/Cazzy-Aporbo/Sisu/blob/main/typescript/hypergalaxy.html)
+
+### [Interstellar Adventure](https://htmlpreview.github.io/?https://github.com/Cazzy-Aporbo/Sisu/blob/main/typescript/interstellar_adventure.html)
+
+### [Omnipal](https://htmlpreview.github.io/?https://github.com/Cazzy-Aporbo/Sisu/blob/main/typescript/omnipal.html)
+
+### [Edu](https://htmlpreview.github.io/?https://github.com/Cazzy-Aporbo/Sisu/blob/main/typescript/edu.html)
+
+### [Enhanced Edu](https://htmlpreview.github.io/?https://github.com/Cazzy-Aporbo/Sisu/blob/main/typescript/enhanced_edu.html)
+
+### [TS Interactive](https://htmlpreview.github.io/?https://github.com/Cazzy-Aporbo/Sisu/blob/main/typescript/ts_interactive.html)
+
+### [Zero Knowledge Proof](https://htmlpreview.github.io/?https://github.com/Cazzy-Aporbo/Sisu/blob/main/typescript/zero_knowledge_proof.html)
+
+### [ZKP Learning](https://htmlpreview.github.io/?https://github.com/Cazzy-Aporbo/Sisu/blob/main/typescript/zkp_learning.html)
+
+### [Profile Index Example](https://htmlpreview.github.io/?https://github.com/Cazzy-Aporbo/Sisu/blob/main/typescript/profile_index_example.html)
+
+### [Just For Fun](https://htmlpreview.github.io/?https://github.com/Cazzy-Aporbo/Sisu/blob/main/typescript/just_for_fun.html)
+
+### [Neuromorphic Computing](https://htmlpreview.github.io/?https://github.com/Cazzy-Aporbo/Sisu/blob/main/typescript/neuromorphiccomputing.html)
+
+---
+
+<div align="center">
+
+### TypeScript Modules
+
+[`advanced_visuals.ts`](https://github.com/Cazzy-Aporbo/Sisu/blob/main/typescript/advanced_visuals.ts)
+[`animations.ts`](https://github.com/Cazzy-Aporbo/Sisu/blob/main/typescript/animations.ts)
+[`color-badges.ts`](https://github.com/Cazzy-Aporbo/Sisu/blob/main/typescript/color-badges.ts)
+[`ethereal.ts`](https://github.com/Cazzy-Aporbo/Sisu/blob/main/typescript/ethereal.ts)
+
+</div>
+
 ## Architecture of Endurance
 
 Every directory in Sisu is a time capsule. The `core/` directory contains code patterns from the 1950s that still run today—proof that some solutions are eternal. The `paradigms/` directory shows evolution in action: how the same problem gets solved differently as our understanding deepens. The `compression/` directory is where we perform our alchemy, turning verbosity into essence.
