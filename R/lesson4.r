@@ -1,121 +1,112 @@
-# ============================
-# Advanced R Tutor Project
-# Simulated Portfolio & Risk Analysis
-# ============================
-
-# Load libraries
 library(tidyverse)
 library(zoo)
 library(forecast)
 library(plotly)
 
-# ----------------------------
-# 1. Simulate Portfolio Data
-# ----------------------------
 set.seed(42)
-numPortfolios <- 3
-numYears <- 10
+
+num_portfolios <- 3
+num_years <- 10
+
 assets <- tibble(
-  name = c("StockA", "StockB", "BondA", "CryptoA"),
-  meanReturn = c(0.08, 0.12, 0.03, 0.25),
-  sdReturn = c(0.15, 0.2, 0.05, 0.4)
+  name        = c("StockA", "StockB", "BondA", "CryptoA"),
+  mean_return = c(0.08,     0.12,     0.03,   0.25),
+  sd_return   = c(0.15,     0.20,     0.05,   0.40)
 )
 
-# Function to generate yearly returns
-simulatePortfolio <- function(weights, assets, years) {
-  returns <- numeric(years)
-  for (y in 1:years) {
-    returns[y] <- sum(weights * rnorm(nrow(assets), assets$meanReturn, assets$sdReturn))
-  }
-  returns
+dirichlet_like <- function(n) {
+  w <- runif(n); w / sum(w)
 }
 
-# Random weights for portfolios
-portfolios <- tibble(portfolioId = 1:numPortfolios) %>%
-  mutate(weights = map(1:numPortfolios, ~{
-    w <- runif(nrow(assets))
-    w / sum(w)
-  })) %>%
-  mutate(yearlyReturns = map(weights, ~simulatePortfolio(.x, assets, numYears)))
+simulate_portfolio <- function(weights, assets, years) {
+  stopifnot(length(weights) == nrow(assets))
+  draws <- map2_dfc(assets$mean_return, assets$sd_return,
+                    ~ rnorm(years, mean = .x, sd = .y))
+  as.numeric(as.matrix(draws) %*% weights)
+}
 
-# ----------------------------
-# 2. Aggregate Portfolio Statistics
-# ----------------------------
+portfolios <- tibble(portfolio_id = seq_len(num_portfolios)) %>%
+  mutate(weights = map(portfolio_id, ~ dirichlet_like(nrow(assets)) %>% set_names(assets$name))) %>%
+  mutate(yearly_returns = map(weights, ~ simulate_portfolio(.x, assets, num_years)))
+
 portfolios <- portfolios %>%
   mutate(
-    meanReturn = map_dbl(yearlyReturns, mean),
-    sdReturn = map_dbl(yearlyReturns, sd),
-    cumulativeReturn = map_dbl(yearlyReturns, ~prod(1 + .x) - 1)
+    mean_return       = map_dbl(yearly_returns, ~ mean(.x)),
+    sd_return         = map_dbl(yearly_returns, ~ sd(.x)),
+    cumulative_return = map_dbl(yearly_returns, ~ prod(1 + .x) - 1),
+    geo_mean_annual   = map_dbl(yearly_returns, ~ (prod(1 + .x))^(1/length(.x)) - 1)
   )
 
-print(portfolios)
+print(portfolios %>% select(portfolio_id, mean_return, sd_return, cumulative_return, geo_mean_annual))
 
-# ----------------------------
-# 3. Rolling Averages and Rankings
-# ----------------------------
-portfolioReturnsDF <- portfolios %>%
-  select(portfolioId, yearlyReturns) %>%
-  unnest(cols = c(yearlyReturns)) %>%
-  group_by(portfolioId) %>%
+portfolio_returns_df <- portfolios %>%
+  select(portfolio_id, yearly_returns) %>%
+  unnest(yearly_returns) %>%
+  group_by(portfolio_id) %>%
   mutate(
-    year = row_number(),
-    rollingAverage = zoo::rollmean(yearlyReturns, k = 3, fill = NA, align = "right"),
-    rankReturn = rank(-yearlyReturns)
+    year            = row_number(),
+    rolling_avg_3   = zoo::rollmean(yearly_returns, k = 3, fill = NA, align = "right"),
+    intra_rank_year = rank(-yearly_returns, ties.method = "first")
   ) %>%
+  ungroup() %>%
+  group_by(year) %>%
+  mutate(cross_rank = rank(-yearly_returns, ties.method = "first")) %>%
   ungroup()
 
-print(portfolioReturnsDF)
+print(portfolio_returns_df)
 
-# ----------------------------
-# 4. Monte Carlo Simulation for Risk
-# ----------------------------
-numSimulations <- 10000
-simulatedReturns <- rnorm(numSimulations, mean = mean(portfolioReturnsDF$yearlyReturns), sd = sd(portfolioReturnsDF$yearlyReturns))
-probabilityLoss <- mean(simulatedReturns < 0)
-cat("Probability of portfolio loss:", round(probabilityLoss, 3), "\n")
+risk_summary <- portfolios %>%
+  transmute(portfolio_id, mu = mean_return, sigma = sd_return) %>%
+  mutate(
+    prob_loss = pnorm(0, mean = mu, sd = sigma),
+    VaR_95    = qnorm(0.05, mean = mu, sd = sigma),
+    ES_95     = mu - sigma * dnorm(qnorm(0.05)) / 0.05
+  )
 
-# ----------------------------
-# 5. Time-Series Forecast
-# ----------------------------
-tsReturns <- ts(portfolioReturnsDF$yearlyReturns, frequency = 1)
-forecastFit <- auto.arima(tsReturns)
-forecastedReturns <- forecast(forecastFit, h = 5)
-plot(forecastedReturns, main = "Forecasted Portfolio Returns")
+print(risk_summary)
 
-# ----------------------------
-# 6. Advanced Visualization
-# ----------------------------
-# Line plot with rolling average
-ggplot(portfolioReturnsDF, aes(x = year, y = yearlyReturns, color = factor(portfolioId))) +
-  geom_line(size = 1) +
-  geom_line(aes(y = rollingAverage), linetype = "dashed", size = 1) +
-  labs(title = "Portfolio Returns with Rolling Average", x = "Year", y = "Return", color = "Portfolio ID") +
+ts_forecasts <- portfolios %>%
+  mutate(ts_obj = map(yearly_returns, ~ ts(.x, frequency = 1))) %>%
+  mutate(model = map(ts_obj, auto.arima)) %>%
+  mutate(fc = map(model, forecast, h = 5))
+
+forecast_df <- ts_forecasts %>%
+  transmute(portfolio_id, fc_tbl = map(fc, ~ as_tibble(.x))) %>%
+  unnest(fc_tbl)
+
+print(forecast_df %>% group_by(portfolio_id) %>% summarise(h = max(Index), .groups = "drop"))
+
+ggplot(portfolio_returns_df, aes(x = year, y = yearly_returns, color = factor(portfolio_id))) +
+  geom_line(linewidth = 1) +
+  geom_line(aes(y = rolling_avg_3), linetype = "dashed", linewidth = 1) +
+  labs(title = "Portfolio Returns with 3-Year Rolling Average",
+       x = "Year", y = "Return", color = "Portfolio") +
   theme_minimal()
 
-# Interactive plot with plotly
-interactivePlot <- plot_ly(
-  portfolioReturnsDF, x = ~year, y = ~yearlyReturns, color = ~factor(portfolioId),
-  type = 'scatter', mode = 'lines+markers', text = ~paste("Portfolio:", portfolioId)
+interactive_plot <- plot_ly(
+  portfolio_returns_df,
+  x = ~year, y = ~yearly_returns, color = ~factor(portfolio_id),
+  type = "scatter", mode = "lines+markers",
+  text = ~paste("Portfolio:", portfolio_id,
+                "<br>Year:", year,
+                "<br>Return:", round(yearly_returns, 3),
+                "<br>Rolling(3):", round(rolling_avg_3, 3))
 )
-interactivePlot
+interactive_plot
 
-# ----------------------------
-# 7. Export Results
-# ----------------------------
-write_csv(portfolioReturnsDF, "portfolio_returns.csv")
+write_csv(portfolio_returns_df, "portfolio_returns.csv")
+write_csv(risk_summary, "portfolio_risk_summary.csv")
 
-# ----------------------------
-# 8. Combine Concepts: Identify Top Portfolio per Year
-# ----------------------------
-topPortfolios <- portfolioReturnsDF %>%
+top_portfolios <- portfolio_returns_df %>%
   group_by(year) %>%
-  slice_max(order_by = yearlyReturns, n = 1) %>%
+  slice_max(order_by = yearly_returns, n = 1, with_ties = FALSE) %>%
   ungroup()
 
-print(topPortfolios)
+print(top_portfolios)
 
-# Loop to print top portfolio messages
-for (i in 1:nrow(topPortfolios)) {
-  cat(paste("Year", topPortfolios$year[i], "- Top Portfolio:", topPortfolios$portfolioId[i],
-            "with Return:", round(topPortfolios$yearlyReturns[i], 3), "\n"))
-}
+walk(seq_len(nrow(top_portfolios)), ~ {
+  cat(sprintf("Year %d — Top Portfolio: %d with Return: %.3f\n",
+              top_portfolios$year[.x],
+              top_portfolios$portfolio_id[.x],
+              top_portfolios$yearly_returns[.x]))
+})
