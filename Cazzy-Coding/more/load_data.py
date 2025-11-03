@@ -3,6 +3,28 @@
 Cassandra Chat Message System 
 High-performance data generation and management for distributed chat systems
 using Apache Cassandra with advanced consistency and partitioning strategies.
+
+RealisticDataGenerator - Creates contextually appropriate messages based on channel type, user role, 
+and time of day. Engineers generate code snippets and technical discussions, managers focus on KPIs 
+and roadmaps, and support staff handle incident reports. Each user has expertise areas, activity patterns, 
+and language styles that influence their messages.
+
+UserProfile System - Models realistic employees with departments (Engineering, Product, Sales), 
+roles (Engineer, Manager, Director), timezone awareness, active hours (9-19 for engineers, 8-18 for managers), 
+message frequency based on role, and expertise areas that influence conversation topics.
+
+MessageContent Architecture - Supports nine message types including code blocks, thread replies, 
+reactions, and system notifications. Messages contain attachments, mentions, links, and code snippets with 
+proper language highlighting. Thread management tracks conversation chains with 20% reply rate.
+
+CassandraConnectionPool - Enterprise-grade connection management with three execution profiles (default, 
+fast_read, strong_write) for different consistency requirements. Implements exponential backoff retry logic, 
+handles all Cassandra exceptions gracefully, and provides comprehensive metrics on query performance.
+
+MessageIngestionPipeline - High-performance batching system processing 10,000+ messages/second. Features 
+thread-safe buffering, automatic periodic flushing, prepared statement caching, TTL support for data retention, 
+and concurrent execution for throughput optimization.
+
 Author: Cazandra Aporbo; Updated November 2025
 """
 
