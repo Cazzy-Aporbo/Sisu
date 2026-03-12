@@ -1,4 +1,4 @@
-/* -----------------------------------------------------------------------------
+/* 
    CAZZY'S MASTERPIECE — "The Teaching Engine"
    A single-file educational C program with multiple interactive chapters that
    explain core CS/math ideas in plain, friendly cadence while demonstrating them.
@@ -17,7 +17,7 @@
      4) Life Canvas (Conway's Game of Life + emergent explanation)
 
    Designed to be read, run, and modified. Enjoy — be curious. ✨
-   ----------------------------------------------------------------------------- */
+    */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,7 +26,7 @@
 #include <unistd.h>
 #include <math.h>
 
-/* -------------------- small utilities -------------------- */
+/* Small utilities */
 
 void cls() { printf("\033[2J\033[H"); fflush(stdout); }
 void pause_ms(int ms) { usleep(ms * 1000); }
@@ -75,7 +75,7 @@ int read_int_prompt(const char *prompt, int lo, int hi) {
     }
 }
 
-/* -------------------- Chapter 1: Prime Garden --------------------
+/* Chapter 1: Prime Garden
    Demonstrates Sieve of Eratosthenes, micro-explorations, and "why it works".
    Includes gentle narration.
 */
@@ -139,7 +139,7 @@ void chapter_primes() {
     wait_for_enter();
 }
 
-/* -------------------- Chapter 2: Fractal Tree (recursion) --------------------
+/* Chapter 2: Fractal Tree (recursion)
    Shows recursion in a gentle, visual way, printing a text-art fractal tree.
    It also prints small explanation lines as recursion unfolds.
 */
@@ -179,7 +179,7 @@ void chapter_fractal() {
     wait_for_enter();
 }
 
-/* -------------------- Chapter 3: Sorting Studio --------------------
+/* Chapter 3: Sorting Studio
    Interactive visual demo of bubble sort (visualized) and quicksort (explain only).
 */
 
@@ -228,7 +228,7 @@ void chapter_sorting() {
     wait_for_enter();
 }
 
-/* -------------------- Chapter 4: Life Canvas (Conway) --------------------
+/* Chapter 4: Life Canvas (Conway)
    A small interactive Game of Life with narration about emergence and simple rules.
 */
 
@@ -289,7 +289,7 @@ void chapter_life() {
     wait_for_enter();
 }
 
-/* -------------------- Main menu & orchestration -------------------- */
+/* Main menu & orchestration */
 
 int main(void) {
     srand((unsigned)time(NULL) ^ (unsigned)getpid());

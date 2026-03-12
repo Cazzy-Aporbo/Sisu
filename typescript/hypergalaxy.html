@@ -34,32 +34,24 @@
 </div>
 
 <script>
-// ===================================
 // HyperGalaxy Level 40,000,000 Core
-// ===================================
 const canvas = document.getElementById('space');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-// -----------------------------
 // Universe Parameters
-// -----------------------------
 let stars=[], planets=[], wormholes=[], blackholes=[], nebulae=[], events=[], aliens=[];
 const ship = { x:canvas.width/2, y:canvas.height/2, energy:100, hull:100, shield:100, credits:500, research:0, speed:6 };
 let sector = 0;
 
-// -----------------------------
 // Utilities
-// -----------------------------
 const randRange=(min,max)=>Math.random()*(max-min)+min;
 const randInt=(min,max)=>Math.floor(randRange(min,max+1));
 const randomChoice=(arr)=>arr[randInt(0,arr.length-1)];
 const hsl=(h,s,l)=>`hsl(${h},${s}%,${l}%)`;
 
-// -----------------------------
 // Procedural Generation
-// -----------------------------
 function generateStars(n){
   stars=[];
   for(let i=0;i<n;i++){
@@ -111,9 +103,7 @@ function generateEvents(n){
   }
 }
 
-// -----------------------------
 // Render Functions
-// -----------------------------
 function drawStars(){
   stars.forEach(s=>{
     ctx.beginPath();
@@ -187,9 +177,7 @@ function drawShip(){
   ctx.restore();
 }
 
-// -----------------------------
 // Dashboard Update
-// -----------------------------
 function updateDashboard(){
   document.getElementById('sector').innerText=sector;
   document.getElementById('energy').innerText=ship.energy;
@@ -213,9 +201,7 @@ function updateDashboard(){
   });
 }
 
-// -----------------------------
 // Controls & Universe Update
-// -----------------------------
 let keys={};
 window.addEventListener('keydown',e=>{ keys[e.key.toLowerCase()]=true; });
 window.addEventListener('keyup',e=>{ keys[e.key.toLowerCase()]=false; });
@@ -232,9 +218,7 @@ function updateShip(){
   if(keys['z']){ terraformPlanet(); keys['z']=false; }
 }
 
-// -----------------------------
 // HyperSector Functions
-// -----------------------------
 function warpSector(){
   generateStars(randInt(80,200));
   generatePlanets(randInt(5,12));
@@ -266,9 +250,7 @@ function terraformPlanet(){
   }
 }
 
-// -----------------------------
 // Main Loop
-// -----------------------------
 function loop(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   drawStars();
@@ -282,9 +264,7 @@ function loop(){
   requestAnimationFrame(loop);
 }
 
-// -----------------------------
 // Initialize Universe
-// -----------------------------
 warpSector();
 loop();
 

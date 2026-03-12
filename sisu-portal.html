@@ -3,669 +3,470 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SISU - The Compression of Computing History</title>
+    <title>Sisu — Polyglot Code Repository</title>
     <style>
-        /*
-         * =========================================================
-         * SISU — Portal Stylesheet
-         * =========================================================
-         * COLOR PHASE: Full Spectrum Animation
-         * =========================================================
-         */
-        
         :root {
-            /* The 21 Greens of Sisu */
-            --sisu-whisper: #F0FDF4;
-            --sisu-emergence: #ECFDF5;
-            --sisu-dawn: #DCFCE7;
-            --sisu-seed: #D4FFE4;
-            --sisu-tender: #C6F7E2;
-            --sisu-spring: #BBF7D0;
-            --sisu-primary: #A7F3D0;
-            --sisu-vitality: #94F2C2;
-            --sisu-chlorophyll: #86EFAC;
-            --sisu-verdant: #73E9A0;
-            --sisu-peak: #6EE7B7;
-            --sisu-forest: #5CE1A6;
-            --sisu-deep: #4ADE80;
-            --sisu-canopy: #34D399;
-            --sisu-pine: #22C55E;
-            --sisu-ancient: #16A34A;
-            --sisu-moss: #15803D;
-            --sisu-shadow: #166534;
-            --sisu-floor: #14532D;
-            --sisu-root: #0F462A;
-            --sisu-void: #052E16;
-            
-            /* Mint-to-Teal Bridge */
-            --sisu-mintcream: #F5FFFA;
-            --sisu-springgreen: #00FF7F;
-            --sisu-seagreen: #2E8B57;
-            --sisu-aquamarine: #7FFFD4;
-            --sisu-turquoise: #40E0D0;
-            --sisu-teal: #008080;
-            --sisu-darkcyan: #008B8B;
+            --bg: #0a0a0f;
+            --surface: #12121a;
+            --border: #1e1e2e;
+            --text: #e0e0e8;
+            --muted: #8888a0;
+            --accent: #6EE7B7;
+            --accent2: #34D399;
+            --glow: rgba(110, 231, 183, 0.15);
         }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: 'Courier New', monospace;
-            background: linear-gradient(180deg, 
-                var(--sisu-whisper) 0%,
-                var(--sisu-primary) 25%,
-                var(--sisu-peak) 50%,
-                var(--sisu-deep) 75%,
-                var(--sisu-void) 100%);
+            font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+            background: var(--bg);
+            color: var(--text);
             min-height: 100vh;
-            color: var(--sisu-void);
             overflow-x: hidden;
         }
-        
-        /* Header with breathing animation */
+
         .header {
             text-align: center;
-            padding: 3rem 1rem;
-            animation: breathe 19s ease-in-out infinite;
-        }
-        
-        @keyframes breathe {
-            0%, 100% {
-                background: var(--sisu-whisper);
-                transform: scale(1);
-            }
-            21% {
-                background: var(--sisu-primary);
-                transform: scale(1.02);
-            }
-            58% {
-                background: var(--sisu-peak);
-                transform: scale(1.05);
-            }
-            100% {
-                background: var(--sisu-void);
-                transform: scale(1);
-            }
-        }
-        
-        h1 {
-            font-size: 4rem;
-            letter-spacing: 0.5rem;
-            text-shadow: 2px 2px 4px rgba(5, 46, 22, 0.3);
-            margin-bottom: 0.5rem;
-        }
-        
-        .tagline {
-            font-size: 1.2rem;
-            color: var(--sisu-ancient);
-            margin-bottom: 1rem;
-        }
-        
-        .compression-ratio {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background: var(--sisu-void);
-            color: var(--sisu-whisper);
-            border-radius: 4px;
-            font-weight: bold;
-        }
-        
-        /* Main container */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        
-        /* Philosophy Section */
-        .philosophy {
-            background: linear-gradient(90deg, 
-                var(--sisu-whisper) 0%,
-                var(--sisu-seed) 50%,
-                var(--sisu-whisper) 100%);
-            padding: 3rem;
-            margin: 2rem 0;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(5, 46, 22, 0.2);
-        }
-        
-        .axiom {
-            font-size: 2rem;
-            text-align: center;
-            color: var(--sisu-void);
-            margin: 2rem 0;
-            font-weight: bold;
-        }
-        
-        /* Color Spectrum Display */
-        .spectrum-container {
-            margin: 3rem 0;
-        }
-        
-        .spectrum-title {
-            text-align: center;
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            color: var(--sisu-ancient);
-        }
-        
-        .color-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-        
-        .color-card {
-            text-align: center;
-            padding: 1rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            cursor: pointer;
+            padding: 4rem 2rem 2rem;
             position: relative;
-            overflow: hidden;
         }
-        
-        .color-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-        }
-        
-        .color-hex {
-            font-size: 0.9rem;
-            font-weight: bold;
-            margin-top: 0.5rem;
-        }
-        
-        .color-name {
-            font-size: 0.8rem;
-            opacity: 0.8;
-        }
-        
-        /* Directory Tree Visualization */
-        .tree-container {
-            background: var(--sisu-void);
-            color: var(--sisu-whisper);
-            padding: 2rem;
-            border-radius: 8px;
-            margin: 3rem 0;
-            font-family: monospace;
-            overflow-x: auto;
-        }
-        
-        .tree-node {
-            margin: 0.5rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        
-        .tree-node:hover {
-            transform: translateX(5px);
-        }
-        
-        .tree-node::before {
-            content: "├─ ";
+
+        .header::after {
+            content: '';
             position: absolute;
-            left: 0;
-        }
-        
-        .tree-node.last::before {
-            content: "└─ ";
-        }
-        
-        .core { color: var(--sisu-void); background: var(--sisu-whisper); padding: 2px 8px; border-radius: 4px; }
-        .paradigms { color: var(--sisu-whisper); }
-        .compression { color: var(--sisu-deep); }
-        .visualization { color: var(--sisu-primary); }
-        .manifesto { color: var(--sisu-dawn); }
-        
-        /* Learning Paths */
-        .paths-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-        
-        .path-card {
-            background: linear-gradient(135deg, var(--sisu-whisper), var(--sisu-primary));
-            padding: 2rem;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .path-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, transparent, var(--sisu-deep));
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            left: 10%;
+            right: 10%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
         }
-        
-        .path-card:hover::before {
-            opacity: 0.3;
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            letter-spacing: 0.4rem;
+            background: linear-gradient(135deg, #F0FDF4, #6EE7B7, #16A34A);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 8s ease-in-out infinite;
+            background-size: 200% 200%;
         }
-        
-        .path-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(5, 46, 22, 0.3);
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
-        
-        .path-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+
+        .subtitle {
+            color: var(--muted);
+            font-size: 1rem;
+            margin-top: 0.75rem;
+            letter-spacing: 0.1rem;
         }
-        
-        .path-title {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--sisu-void);
-            position: relative;
-            z-index: 1;
-        }
-        
-        .path-description {
-            color: var(--sisu-shadow);
-            line-height: 1.6;
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* Breathing Gradient Animation */
-        .breathing-bar {
-            height: 100px;
-            background: linear-gradient(90deg, 
-                var(--sisu-whisper) 0%,
-                var(--sisu-primary) 20%,
-                var(--sisu-peak) 40%,
-                var(--sisu-deep) 60%,
-                var(--sisu-ancient) 80%,
-                var(--sisu-void) 100%);
-            animation: breathe-gradient 19s ease-in-out infinite;
-            border-radius: 8px;
-            margin: 3rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .breathing-bar::before {
-            content: "THE REPOSITORY BREATHES";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-weight: bold;
-            font-size: 1.5rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            letter-spacing: 0.3rem;
-        }
-        
-        @keyframes breathe-gradient {
-            0%, 100% {
-                opacity: 0.3;
-                transform: scaleY(1);
-            }
-            50% {
-                opacity: 1;
-                transform: scaleY(1.1);
-            }
-        }
-        
-        /* Code Examples */
-        .code-example {
-            background: var(--sisu-void);
-            color: var(--sisu-primary);
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin: 2rem 0;
-            overflow-x: auto;
-            font-family: 'Courier New', monospace;
-            border: 2px solid var(--sisu-deep);
-        }
-        
-        .code-comment {
-            color: var(--sisu-forest);
-        }
-        
-        /* Compression Metrics */
-        .metrics-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 3rem 0;
-        }
-        
-        .metric-card {
-            background: linear-gradient(135deg, var(--sisu-primary), var(--sisu-deep));
-            padding: 1.5rem;
-            border-radius: 8px;
-            text-align: center;
-            color: var(--sisu-whisper);
-        }
-        
-        .metric-value {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-        
-        .metric-label {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-        
-        /* Sacred Matrix */
-        .matrix-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 4px;
-            margin: 3rem 0;
-            padding: 2rem;
-            background: var(--sisu-void);
-            border-radius: 8px;
-        }
-        
-        .matrix-cell {
-            aspect-ratio: 1;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .matrix-cell:hover {
-            transform: scale(1.2);
-            box-shadow: 0 0 20px currentColor;
-            z-index: 10;
-        }
-        
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 3rem;
-            background: var(--sisu-void);
-            color: var(--sisu-whisper);
-            margin-top: 4rem;
-        }
-        
-        .footer-links {
+
+        .lang-bar {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            margin-top: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            padding: 0 1rem;
         }
-        
-        .footer-links a {
-            color: var(--sisu-primary);
+
+        .lang-pill {
+            padding: 0.3rem 0.8rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .lang-pill:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: 0 0 12px var(--glow);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.05rem;
+        }
+
+        section { margin-bottom: 3rem; }
+
+        .demos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .demo-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.2rem;
+            transition: all 0.3s ease;
             text-decoration: none;
-            transition: color 0.3s ease;
+            color: var(--text);
+            display: block;
         }
-        
-        .footer-links a:hover {
-            color: var(--sisu-peak);
+
+        .demo-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4), 0 0 0 1px var(--glow);
         }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-                letter-spacing: 0.2rem;
-            }
-            
-            .paths-container {
-                grid-template-columns: 1fr;
-            }
+
+        .demo-card h3 {
+            font-size: 0.95rem;
+            margin-bottom: 0.4rem;
+            color: var(--accent);
+        }
+
+        .demo-card p {
+            font-size: 0.8rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--muted);
+            margin-top: 0.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05rem;
+        }
+
+        .tree {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            font-size: 0.85rem;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+
+        .tree .dir { color: var(--accent); }
+        .tree .count { color: var(--muted); }
+
+        .code-block {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            font-size: 0.82rem;
+            line-height: 1.7;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .code-block .lang-label {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.8rem;
+            font-size: 0.65rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05rem;
+        }
+
+        .code-block .comment { color: #6a9955; }
+        .code-block .keyword { color: #c586c0; }
+        .code-block .type { color: #4ec9b0; }
+        .code-block .string { color: #ce9178; }
+        .code-block .fn { color: #dcdcaa; }
+
+        .breathe-bar {
+            height: 4px;
+            background: linear-gradient(90deg, #052E16, #16A34A, #6EE7B7, #F0FDF4, #6EE7B7, #16A34A, #052E16);
+            background-size: 200% 100%;
+            animation: breathe 8s ease-in-out infinite;
+            border-radius: 2px;
+            margin: 3rem 0;
+            opacity: 0.6;
+        }
+
+        @keyframes breathe {
+            0%, 100% { background-position: 0% 50%; opacity: 0.4; }
+            50% { background-position: 100% 50%; opacity: 0.8; }
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+            margin: 0 0.8rem;
+        }
+
+        footer a:hover { text-decoration: underline; }
+
+        .quote {
+            text-align: center;
+            font-style: italic;
+            color: var(--muted);
+            padding: 2rem;
+            line-height: 1.8;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 640px) {
+            .header { padding: 2.5rem 1rem 1.5rem; }
+            .demos-grid { grid-template-columns: 1fr; }
+            .stats-row { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
 <body>
     <header class="header">
-        <h1>░▒▓█ SISU █▓▒░</h1>
-        <p class="tagline">The Compression of Computing History into Living Code</p>
-        <div class="compression-ratio">70 YEARS → 47 KB</div>
+        <h1>SISU</h1>
+        <p class="subtitle">15 languages · 420 files · one person</p>
+        <div class="lang-bar">
+            <span class="lang-pill">C</span>
+            <span class="lang-pill">Rust</span>
+            <span class="lang-pill">Swift</span>
+            <span class="lang-pill">Python</span>
+            <span class="lang-pill">Haskell</span>
+            <span class="lang-pill">TypeScript</span>
+            <span class="lang-pill">Lua</span>
+            <span class="lang-pill">GDScript</span>
+            <span class="lang-pill">R</span>
+            <span class="lang-pill">COBOL</span>
+            <span class="lang-pill">Fortran</span>
+            <span class="lang-pill">Lisp</span>
+            <span class="lang-pill">Assembly</span>
+            <span class="lang-pill">SQL</span>
+            <span class="lang-pill">CQL</span>
+        </div>
     </header>
 
     <div class="container">
-        <!-- Philosophy Section -->
-        <section class="philosophy">
-            <div class="axiom">All programming is compression.</div>
-            <p style="text-align: center; line-height: 1.8; margin: 1rem 0;">
-                We don't write code. We compress thought into syntax, syntax into bytes, bytes into electrons.<br>
-                Every function is a compression algorithm for human intention.
-            </p>
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-value">420</div>
+                <div class="stat-label">Files</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">15</div>
+                <div class="stat-label">Languages</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">13</div>
+                <div class="stat-label">Live Demos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">54</div>
+                <div class="stat-label">C Programs</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">51</div>
+                <div class="stat-label">Rust Files</div>
+            </div>
+        </div>
+
+        <div class="breathe-bar"></div>
+
+        <section>
+            <h2 class="section-title">Interactive Demos</h2>
+            <div class="demos-grid">
+                <a class="demo-card" href="typescript/breathe-html.html">
+                    <h3>Breathe</h3>
+                    <p>Terminal colors pulse at human respiration rate. 4-7-8 breathing in your browser.</p>
+                </a>
+                <a class="demo-card" href="typescript/sisu-compression-aurora.html">
+                    <h3>Aurora</h3>
+                    <p>Particle aurora driven by mouse input. Canvas-based, zero dependencies.</p>
+                </a>
+                <a class="demo-card" href="typescript/sisu-compression-observatory.html">
+                    <h3>Observatory</h3>
+                    <p>Interactive constellation map of every file in the repository.</p>
+                </a>
+                <a class="demo-card" href="typescript/sisu-living-core.html">
+                    <h3>Living Core</h3>
+                    <p>Real-time system visualization. Tracks mouse movement, renders organic patterns.</p>
+                </a>
+                <a class="demo-card" href="typescript/SISU_Code_Network.html">
+                    <h3>Code Network</h3>
+                    <p>Force-directed graph showing how files relate to each other across languages.</p>
+                </a>
+                <a class="demo-card" href="typescript/hypergalaxy.html">
+                    <h3>Hypergalaxy</h3>
+                    <p>Space exploration game. WASD controls, warp drives, alien encounters.</p>
+                </a>
+                <a class="demo-card" href="typescript/category_theory.html">
+                    <h3>Category Theory</h3>
+                    <p>Interactive functor and monad explorer. Learn abstract math visually.</p>
+                </a>
+                <a class="demo-card" href="typescript/HoTT_Learning.html">
+                    <h3>HoTT Learning</h3>
+                    <p>Homotopy Type Theory concepts made interactive and visual.</p>
+                </a>
+                <a class="demo-card" href="typescript/biosynthetic.html">
+                    <h3>Biosynthetic</h3>
+                    <p>Biological systems simulated in code. Emergent behavior from simple rules.</p>
+                </a>
+                <a class="demo-card" href="typescript/zkp_learning.html">
+                    <h3>Zero-Knowledge Proofs</h3>
+                    <p>Interactive walkthrough of ZKP protocols. Prove without revealing.</p>
+                </a>
+                <a class="demo-card" href="typescript/neuromorphiccomputing.html">
+                    <h3>Neuromorphic Computing</h3>
+                    <p>Spiking neural network simulator in the browser.</p>
+                </a>
+                <a class="demo-card" href="typescript/interstellar_adventure.html">
+                    <h3>Interstellar Adventure</h3>
+                    <p>Space exploration game engine built with Canvas 2D.</p>
+                </a>
+            </div>
         </section>
 
-        <!-- Color Spectrum -->
-        <section class="spectrum-container">
-            <h2 class="spectrum-title">The Sacred Green Spectrum</h2>
-            
-            <div class="color-grid" id="colorGrid"></div>
+        <div class="breathe-bar"></div>
+
+        <section>
+            <h2 class="section-title">Code Samples</h2>
+            <div class="code-block">
+                <span class="lang-label">C</span>
+<span class="comment">// c/abstract/concepts.c</span>
+<span class="comment">// Complex numbers with semantic payloads + function introspection</span>
+<span class="keyword">typedef struct</span> {
+    <span class="type">double</span> real;
+    <span class="type">double</span> imaginary;
+    <span class="type">char</span> *meaning;
+} <span class="type">OntologicalNumber</span>;
+
+<span class="keyword">void</span> <span class="fn">introspective_function</span>(<span class="keyword">void</span> (*f)(<span class="type">OntologicalNumber</span>*), <span class="type">OntologicalNumber</span> *n) {
+    <span class="fn">printf</span>(<span class="string">"Function at %p, input: %.3f + %.3fi\n"</span>, f, n->real, n->imaginary);
+    <span class="fn">f</span>(n);
+}
+            </div>
+
+            <div class="code-block">
+                <span class="lang-label">Rust</span>
+<span class="comment">// src/lib.rs</span>
+<span class="comment">// Run-length encoding that works on any Eq type</span>
+<span class="keyword">pub fn</span> <span class="fn">rle_encode</span>&lt;T: <span class="type">Eq</span> + <span class="type">Clone</span>&gt;(input: &amp;[T]) -> <span class="type">Vec</span>&lt;(T, <span class="type">usize</span>)&gt; {
+    <span class="keyword">let mut</span> result = <span class="type">Vec</span>::new();
+    <span class="keyword">let mut</span> current = &amp;input[<span class="string">0</span>];
+    <span class="keyword">let mut</span> count = <span class="string">1</span>;
+    <span class="keyword">for</span> item <span class="keyword">in</span> input.iter().skip(<span class="string">1</span>) {
+        <span class="keyword">if</span> item == current { count += <span class="string">1</span>; }
+        <span class="keyword">else</span> { result.push((current.clone(), count)); current = item; count = <span class="string">1</span>; }
+    }
+    result.push((current.clone(), count));
+    result
+}
+            </div>
+
+            <div class="code-block">
+                <span class="lang-label">Haskell</span>
+<span class="comment">-- Haskell/HaskellFundamentalsPro.hs</span>
+<span class="comment">-- Safe head, curried addition, function composition</span>
+<span class="fn">headSafe</span> :: [a] -> <span class="type">Maybe</span> a
+<span class="fn">headSafe</span> []    = <span class="type">Nothing</span>
+<span class="fn">headSafe</span> (x:_) = <span class="type">Just</span> x
+
+<span class="fn">composeDemo</span> :: <span class="type">String</span>
+<span class="fn">composeDemo</span> = (map toUpper . reverse) <span class="string">"haskell"</span>
+            </div>
         </section>
 
-        <!-- Breathing Bar -->
-        <div class="breathing-bar"></div>
-
-        <!-- Directory Structure -->
-        <section class="tree-container">
-            <h2 style="color: var(--sisu-primary); margin-bottom: 1.5rem;">Repository Structure</h2>
+        <section>
+            <h2 class="section-title">Repository</h2>
             <div class="tree">
-                <div class="tree-node core">core/ — The Primordial Layer [#052E16]</div>
-                <div class="tree-node paradigms">├─ paradigms/ — Evolution Chamber [#16A34A → #34D399]</div>
-                <div class="tree-node compression">├─ compression/ — The Density Engine [#4ADE80 → #86EFAC]</div>
-                <div class="tree-node visualization">├─ visualization/ — The Gradient Canvas [#A7F3D0 → #F0FDF4]</div>
-                <div class="tree-node manifesto last">└─ manifesto/ — Living Documentation [#DCFCE7 → #F0FDF4]</div>
+<span class="dir">Sisu/</span>
+├── <span class="dir">c/</span>               <span class="count">54 files</span> — memory arenas, math games, cellular automata
+├── <span class="dir">rust/</span>            <span class="count">51 files</span> — ownership patterns, game engines, concurrency
+├── <span class="dir">swift/</span>           <span class="count">28 files</span> — protocol-oriented design, education
+├── <span class="dir">Cazzy-Coding/</span>    <span class="count">52 files</span> — AI prototypes, ML pipelines, bias detection
+├── <span class="dir">Haskell/</span>         <span class="count">3 files</span>  — GADTs, type families, pure functional
+├── <span class="dir">GoDot/</span>           <span class="count">18 files</span> — fractals, physics, quantum canvas
+├── <span class="dir">fortran/</span>         <span class="count">13 files</span> — numerical computing
+├── <span class="dir">cobol/</span>           <span class="count">12 files</span> — business logic
+├── <span class="dir">lisp/</span>            <span class="count">14 files</span> — symbolic computation, macros
+├── <span class="dir">R/</span>               <span class="count">11 files</span> — statistics, pandemic sims
+├── <span class="dir">Lua/</span>             <span class="count">3 files</span>  — scripting, game logic
+├── <span class="dir">cassandra/</span>       <span class="count">25 files</span> — distributed data modeling
+├── <span class="dir">snowflake/</span>       <span class="count">12 files</span> — analytics SQL
+├── <span class="dir">typescript/</span>      <span class="count">26 files</span> — all the live demos above
+├── <span class="dir">core/</span>            assembly, C headers
+├── <span class="dir">paradigms/</span>       functional, concurrent, OOP
+├── Cargo.toml       Rust workspace
+├── Makefile         polyglot build system
+└── breath.sh        terminal breathing exercise
             </div>
         </section>
 
-        <!-- Learning Paths -->
-        <section>
-            <h2 class="spectrum-title">The Four Learning Paths</h2>
-            <div class="paths-container">
-                <div class="path-card">
-                    <div class="path-icon">🏺</div>
-                    <h3 class="path-title">The Archaeologist</h3>
-                    <p class="path-description">
-                        Descend through seven decades of computational sediment. 
-                        From void (#052E16) to quantum (#A7F3D0).
-                        Understand how we got here.
-                    </p>
-                </div>
-                
-                <div class="path-card">
-                    <div class="path-icon">🗜️</div>
-                    <h3 class="path-title">The Compressor</h3>
-                    <p class="path-description">
-                        Learn to reduce any algorithm to its essence.
-                        Study patterns that survived because they cannot be simplified.
-                        Understand why less is more.
-                    </p>
-                </div>
-                
-                <div class="path-card">
-                    <div class="path-icon">🎨</div>
-                    <h3 class="path-title">The Visualist</h3>
-                    <p class="path-description">
-                        Trace color through computation.
-                        Learn how gradients encode information.
-                        Understand code as art.
-                    </p>
-                </div>
-                
-                <div class="path-card">
-                    <div class="path-icon">🤔</div>
-                    <h3 class="path-title">The Philosopher</h3>
-                    <p class="path-description">
-                        Question every assumption.
-                        From Turing's halting problem to Gödel's incompleteness.
-                        Understand why we build.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Compression Metrics -->
-        <section>
-            <h2 class="spectrum-title">Compression Metrics</h2>
-            <div class="metrics-container">
-                <div class="metric-card">
-                    <div class="metric-value">47KB</div>
-                    <div class="metric-label">TARGET SIZE</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value">70</div>
-                    <div class="metric-label">YEARS COMPRESSED</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value">21</div>
-                    <div class="metric-label">SHADES OF GREEN</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value">∞:1</div>
-                    <div class="metric-label">COMPRESSION RATIO</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Code Example -->
-        <section>
-            <h2 class="spectrum-title">The Primordial Algorithm</h2>
-            <div class="code-example">
-                <span class="code-comment">; This pattern appears in every program ever written</span><br>
-                mov $1, %rax    <span class="code-comment">; syscall: write</span><br>
-                mov $1, %rdi    <span class="code-comment">; file descriptor: stdout</span><br>
-                mov $msg, %rsi  <span class="code-comment">; buffer</span><br>
-                mov $len, %rdx  <span class="code-comment">; count</span><br>
-                syscall         <span class="code-comment">; The eternal return</span><br><br>
-                
-                <span class="code-comment">; Every print(), console.log(), println! becomes this</span><br>
-                <span class="code-comment">; This is the compression point—where all roads lead</span>
-            </div>
-        </section>
-
-        <!-- Sacred Matrix -->
-        <section>
-            <h2 class="spectrum-title">The Sacred Green Matrix</h2>
-            <div class="matrix-grid" id="matrixGrid"></div>
-        </section>
+        <div class="quote">
+            "The person who writes in one language knows syntax.<br>
+            The person who writes in five knows patterns.<br>
+            The person who writes in fifteen knows programming."
+        </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <p style="font-size: 1.2rem; margin-bottom: 1rem;">
-            "In the face of impossible complexity, we compress.<br>
-            In the face of endless change, we endure.<br>
-            In the face of forgetting, we annotate.<br>
-            This is sisu. This is how we survive."
-        </p>
-        <div class="footer-links">
-            <a href="https://github.com/cazzy/sisu">GitHub</a>
-            <a href="manifesto/philosophy.md">Philosophy</a>
-            <a href="paths/archaeologist/journey.md">Begin Journey</a>
-            <a href="breathe.sh">Breathe</a>
+    <footer>
+        <div>
+            <a href="https://github.com/Cazzy-Aporbo/Sisu">GitHub</a>
+            <a href="GETTING-STARTED.md">Get Started</a>
+            <a href="contributing.md">Contribute</a>
+            <a href="typescript/breathe-html.html">Breathe</a>
         </div>
-        <p style="margin-top: 2rem; opacity: 0.7;">
-            The gradients continue. The compression deepens. The code endures.
-        </p>
+        <p style="margin-top: 1.5rem;">Built by <a href="https://github.com/Cazzy-Aporbo" style="margin:0">Cazzy Aporbo</a> · MIT License</p>
     </footer>
 
     <script>
-        // Generate color cards
-        const colors = [
-            { hex: '#F0FDF4', name: 'Whisper', desc: 'The faintest suggestion' },
-            { hex: '#ECFDF5', name: 'Emergence', desc: 'First detection' },
-            { hex: '#DCFCE7', name: 'Dawn', desc: 'First light' },
-            { hex: '#D4FFE4', name: 'Seed', desc: 'The origin' },
-            { hex: '#C6F7E2', name: 'Tender', desc: 'New growth' },
-            { hex: '#BBF7D0', name: 'Spring', desc: 'Rapid iteration' },
-            { hex: '#A7F3D0', name: 'Primary Sisu', desc: 'The heartbeat' },
-            { hex: '#94F2C2', name: 'Vitality', desc: 'Peak performance' },
-            { hex: '#86EFAC', name: 'Chlorophyll', desc: 'Full photosynthesis' },
-            { hex: '#73E9A0', name: 'Verdant', desc: 'Lush complexity' },
-            { hex: '#6EE7B7', name: 'Peak Green', desc: 'Optimal state' },
-            { hex: '#5CE1A6', name: 'Forest', desc: 'Ecosystem forming' },
-            { hex: '#4ADE80', name: 'Deep', desc: 'Mature codebase' },
-            { hex: '#34D399', name: 'Canopy', desc: 'Abstraction layers' },
-            { hex: '#22C55E', name: 'Pine', desc: 'Evergreen code' },
-            { hex: '#16A34A', name: 'Ancient', desc: 'Time-tested' },
-            { hex: '#15803D', name: 'Moss', desc: 'Growing on foundations' },
-            { hex: '#166534', name: 'Shadow', desc: 'Hidden depths' },
-            { hex: '#14532D', name: 'Floor', desc: 'Where decay feeds growth' },
-            { hex: '#0F462A', name: 'Root', desc: 'System level' },
-            { hex: '#052E16', name: 'Void', desc: 'return 0;' }
-        ];
+        // Fade in on load
+        document.body.style.opacity = '0';
+        document.body.style.transition = 'opacity 0.8s ease';
+        requestAnimationFrame(() => { document.body.style.opacity = '1'; });
 
-        const colorGrid = document.getElementById('colorGrid');
-        colors.forEach(color => {
-            const card = document.createElement('div');
-            card.className = 'color-card';
-            card.style.background = color.hex;
-            card.style.color = colors.indexOf(color) > 10 ? '#F0FDF4' : '#052E16';
-            card.innerHTML = `
-                <div class="color-hex">${color.hex}</div>
-                <div class="color-name">${color.name}</div>
-                <div style="font-size: 0.7rem; margin-top: 0.5rem;">${color.desc}</div>
-            `;
-            card.addEventListener('click', () => {
-                navigator.clipboard.writeText(color.hex);
-                card.style.transform = 'scale(0.95)';
-                setTimeout(() => card.style.transform = '', 200);
+        // Subtle hover glow on language pills
+        document.querySelectorAll('.lang-pill').forEach(pill => {
+            pill.addEventListener('mouseenter', () => {
+                pill.style.transform = 'scale(1.08)';
             });
-            colorGrid.appendChild(card);
-        });
-
-        // Generate Sacred Matrix
-        const matrixGrid = document.getElementById('matrixGrid');
-        const matrixColors = [
-            '#F0FDF4', '#F5FFFA', '#ECFDF5', '#DCFCE7', '#D4FFE4', '#C6F7E2', '#BBF7D0',
-            '#A7F3D0', '#00FF7F', '#00FA9A', '#94F2C2', '#86EFAC', '#73E9A0', '#6EE7B7',
-            '#66CDAA', '#7FFFD4', '#5CE1A6', '#4ADE80', '#40E0D0', '#34D399', '#20B2AA',
-            '#2E8B57', '#3CB371', '#22C55E', '#16A34A', '#008080', '#15803D', '#008B8B',
-            '#166534', '#00CED1', '#14532D', '#5F9EA0', '#0F462A', '#2F4F4F', '#052E16'
-        ];
-
-        matrixColors.forEach(color => {
-            const cell = document.createElement('div');
-            cell.className = 'matrix-cell';
-            cell.style.background = color;
-            cell.title = color;
-            cell.addEventListener('click', () => {
-                navigator.clipboard.writeText(color);
-                cell.style.transform = 'scale(0.8) rotate(180deg)';
-                setTimeout(() => cell.style.transform = '', 300);
+            pill.addEventListener('mouseleave', () => {
+                pill.style.transform = '';
             });
-            matrixGrid.appendChild(cell);
         });
-
-        // Breathing animation for page load
-        document.addEventListener('DOMContentLoaded', () => {
-            document.body.style.opacity = '0';
-            setTimeout(() => {
-                document.body.style.transition = 'opacity 2s ease';
-                document.body.style.opacity = '1';
-            }, 100);
-        });
-
-        // Random color pulse on path cards
-        const pathCards = document.querySelectorAll('.path-card');
-        setInterval(() => {
-            const randomCard = pathCards[Math.floor(Math.random() * pathCards.length)];
-            randomCard.style.background = `linear-gradient(135deg, ${colors[Math.floor(Math.random() * colors.length)].hex}, ${colors[Math.floor(Math.random() * colors.length)].hex})`;
-            setTimeout(() => {
-                randomCard.style.background = '';
-            }, 1000);
-        }, 3000);
     </script>
 </body>
 </html>
