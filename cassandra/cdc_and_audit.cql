@@ -1,9 +1,7 @@
--- ===========================================================
 -- 09_cdc_and_audit.cql
 -- Cassandra CDC (table-level) = write row changes to CDC log dir (node-local).
 -- Useful for downstream ETL or integrity checks. This enables CDC on query tables.
 -- Also enables FULL QUERY LOGGING (FQL) for short windows when debugging.
--- ===========================================================
 USE finance;
 
 -- Enable CDC on your high-value query table(s)

@@ -1,14 +1,11 @@
 #!/bin/bash
-# =========================================================
 # SISU — Auto-Configuration Script
-# =========================================================
 # 
 # Detects system capabilities and optimizes for learning
 # Ensures code can survive on any system
 #
 # COLOR PHASE: #A7F3D0 (Primary Sisu Green)
 #
-# =========================================================
 
 # Color codes
 GREEN_WHISPER='\033[38;2;240;253;244m'

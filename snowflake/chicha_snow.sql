@@ -1,5 +1,4 @@
 -- Snowflake Educational Example: Chicha Consulting Company
--- ---------------------------------------
 -- Demonstrates how to:
 -- 1. Create a database and schema
 -- 2. Create tables

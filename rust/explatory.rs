@@ -19,9 +19,7 @@
 #![allow(incomplete_features)]
 #![allow(unused)]
 
-// ==========================================================================
 // 1. COMPILE-TIME TYPE CALCULUS WITH CONST GENERICS
-// ==========================================================================
 
 /// Type-level natural numbers using const generics
 /// This allows us to do arithmetic at the type level
@@ -48,9 +46,7 @@ impl<const N: usize> Nat<N> {
     }
 }
 
-// ==========================================================================
 // 2. ADVANCED EFFECT SYSTEMS USING THE TYPE SYSTEM
-// ==========================================================================
 
 /// An effect system built on Rust's type system
 /// This allows tracking of side effects at compile time
@@ -95,9 +91,7 @@ mod effect_system {
     }
 }
 
-// ==========================================================================
 // 3. TYPE-SAFE RESOURCE MANAGEMENT WITH LINEAR TYPES
-// ==========================================================================
 
 /// Linear types using Rust's ownership system
 /// This ensures resources are used exactly once
@@ -140,9 +134,7 @@ impl UniqueResource {
     }
 }
 
-// ==========================================================================
 // 4. ADVANCED MEMORY MANAGEMENT: REGION-BASED ALLOCATION
-// ==========================================================================
 
 /// Region-based memory allocation inspired by Cyclone and Rust's arenas
 /// This provides extremely fast allocation/deallocation with compile-time safety
@@ -183,9 +175,7 @@ impl Region {
     }
 }
 
-// ==========================================================================
 // 5. COMPILE-TIME EXECUTION AND CODE GENERATION
-// ==========================================================================
 
 /// Advanced const fn with complex control flow
 /// This executes entirely at compile time
@@ -208,9 +198,7 @@ impl<const N: usize> Fibonacci<N> {
     const VALUE: usize = compile_time_fibonacci(N);
 }
 
-// ==========================================================================
 // 6. ADVANCED TRAIT SYSTEM: HIGHER-KINDED TYPES EMULATION
-// ==========================================================================
 
 /// Emulating higher-kinded types using associated type constructors
 /// This is one of Rust's most advanced type system features
@@ -249,9 +237,7 @@ impl<A, E> Functor for Result<A, E> {
     }
 }
 
-// ==========================================================================
 // 7. ADVANCED ASYNC PATTERNS: MANUAL FUTURE IMPLEMENTATION
-// ==========================================================================
 
 /// Manual Future implementation for ultimate control over async behavior
 /// This demonstrates how async/await works under the hood
@@ -294,9 +280,7 @@ impl Future for CountdownFuture {
     }
 }
 
-// ==========================================================================
 // 8. COMPILE-TIME REFLECTION AND CODE GENERATION
-// ==========================================================================
 
 /// Advanced macro for generating code based on type information
 /// This approaches the capabilities of compile-time reflection
@@ -333,9 +317,7 @@ generate_getters!(Data {
     enabled: bool
 });
 
-// ==========================================================================
 // 9. ADVANCED MEMORY SAFETY: STACK-BOUND LIFETIMES
-// ==========================================================================
 
 /// Using the type system to enforce stack-bound lifetimes
 /// This prevents returning references that would be dangling
@@ -371,9 +353,7 @@ impl<'a, T> StackBound<'a, T> {
     }
 }
 
-// ==========================================================================
 // 10. TYPE-LEVEL STATE MACHINES WITH COMPILE-TIME VERIFICATION
-// ==========================================================================
 
 /// Type-level state machine with compile-time verification of transitions
 /// This eliminates entire classes of runtime errors
@@ -443,9 +423,7 @@ mod state_machine {
     }
 }
 
-// ==========================================================================
 // 11. ADVANCED CONCURRENCY: LOCK-FREE DATA STRUCTURES
-// ==========================================================================
 
 /// A lock-free stack using atomic operations
 /// This demonstrates advanced concurrency patterns
@@ -512,9 +490,7 @@ impl<T> LockFreeStack<T> {
     }
 }
 
-// ==========================================================================
 // 12. COMPILE-TIME VALIDATION WITH CONST GENERICS
-// ==========================================================================
 
 /// Using const generics for compile-time validation
 /// This catches errors at compile time that would normally be runtime errors
@@ -542,9 +518,7 @@ impl<T, const MIN: usize, const MAX: usize> CheckedArray<T, MIN, MAX> {
     }
 }
 
-// ==========================================================================
 // MAIN DEMONSTRATION FUNCTION
-// ==========================================================================
 
 /// This function brings together all the advanced concepts in a demonstration
 async fn demonstrate_advanced_concepts() {

@@ -8,9 +8,7 @@
 
 #![allow(unused)] // For pedagogical purposes
 
-// ==========================================================================
 // 1. ADVANCED TYPE SYSTEM: CONST GENERICS AND GATs
-// ==========================================================================
 
 /// Const generics allow us to parameterize types by values, not just types
 /// This is incredibly powerful for creating type-safe APIs and zero-cost abstractions
@@ -63,9 +61,7 @@ impl Processor for StringProcessor {
     }
 }
 
-// ==========================================================================
 // 2. ZERO-COST ABSTRACTIONS: ADVANCED TRAIT PATTERNS
-// ==========================================================================
 
 /// The Typestate Pattern: Encoding state transitions at compile time
 /// This eliminates entire classes of runtime errors
@@ -143,9 +139,7 @@ where
     T: std::ops::Mul<Output = T>,
 {}
 
-// ==========================================================================
 // 3. ADVANCED CONCURRENCY: ASYNC STREAMS AND COMPLEX SYNC
-// ==========================================================================
 
 /// Sophisticated async patterns with streams and complex synchronization
 use futures::stream::{self, StreamExt};
@@ -225,9 +219,7 @@ where
     }
 }
 
-// ==========================================================================
 // 4. ADVANCED MACROS: PROCEDURAL AND DECLARATIVE PATTERNS
-// ==========================================================================
 
 /// A sophisticated declarative macro for creating builder patterns
 /// This demonstrates advanced macro hygiene and pattern matching
@@ -280,9 +272,7 @@ create_builder!(User {
     age: u32,
 });
 
-// ==========================================================================
 // 5. ADVANCED ERROR HANDLING: TYPE-SAFE ERROR PROPAGATION
-// ==========================================================================
 
 /// Sophisticated error handling with thiserror and anyhow for production code
 /// This demonstrates professional-grade error handling patterns
@@ -340,9 +330,7 @@ async fn process_user_data(user: String) -> Result<String, DomainError> {
     Ok(format!("Processed: {}", user))
 }
 
-// ==========================================================================
 // 6. ADVANCED MEMORY MANAGEMENT: ARENA ALLOCATION
-// ==========================================================================
 
 /// Arena allocation pattern for high-performance scenarios
 /// This demonstrates manual memory management patterns in safe Rust
@@ -372,9 +360,7 @@ impl<T> Arena<T> {
     }
 }
 
-// ==========================================================================
 // 7. ADVANCED FUNCTIONAL PATTERNS: MONADS AND FUNCTORS
-// ==========================================================================
 
 /// Advanced functional programming concepts in Rust
 /// This demonstrates sophisticated type-level programming
@@ -409,9 +395,7 @@ impl<A> Monad for Option<A> {
     }
 }
 
-// ==========================================================================
 // 8. ADVANCED METAPROGRAMMING: TYPE-LEVEL PROGRAMMING
-// ==========================================================================
 
 /// Type-level programming with zero-sized types (ZSTs)
 /// This demonstrates advanced compile-time computation patterns
@@ -454,9 +438,7 @@ impl<T: Nat> Nat for Succ<T> {
     }
 }
 
-// ==========================================================================
 // 9. ADVANCED PATTERN MATCHING: DESTRUCTURING AND GUARDS
-// ==========================================================================
 
 /// Sophisticated pattern matching techniques
 /// This demonstrates expert-level use of Rust's pattern matching
@@ -477,9 +459,7 @@ fn advanced_pattern_matching(value: &(Option<(i32, i32)>, Result<String, String>
     }
 }
 
-// ==========================================================================
 // 10. PROFESSIONAL-QUALITY DEMONSTRATION
-// ==========================================================================
 
 /// This function brings together all the advanced concepts
 /// in a professional-quality implementation

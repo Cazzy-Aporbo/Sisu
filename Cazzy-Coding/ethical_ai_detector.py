@@ -8,9 +8,7 @@ import pandas as pd
 import numpy as np
 from collections import Counter
 
-# -----------------------------
 # 1. Sample Dataset & Predictions
-# -----------------------------
 sample_data = pd.DataFrame({
     "age": [25, 40, 18, 65, 30, 22],
     "gender": ["M","F","F","M","F","M"],
@@ -18,9 +16,7 @@ sample_data = pd.DataFrame({
     "loan_approved": [1,1,0,1,0,0]
 })
 
-# -----------------------------
 # 2. Bias Detection Functions
-# -----------------------------
 def detect_gender_bias(df, target_column="loan_approved"):
     genders = df["gender"].unique()
     approval_rates = {}
@@ -39,9 +35,7 @@ def detect_age_bias(df, target_column="loan_approved", threshold=0.2):
     disparity = abs(young - adult)
     return {"<30": young, ">=30": adult}, disparity
 
-# -----------------------------
 # 3. Ethical Analysis
-# -----------------------------
 def ethical_analysis(df, target_column="loan_approved"):
     report = {}
     
@@ -70,9 +64,7 @@ def ethical_analysis(df, target_column="loan_approved"):
     
     return report
 
-# -----------------------------
 # 4. Example Usage
-# -----------------------------
 if __name__ == "__main__":
     report = ethical_analysis(sample_data)
     print("=== Ethical AI Detector Report ===")

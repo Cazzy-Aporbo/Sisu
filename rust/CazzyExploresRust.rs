@@ -6,9 +6,7 @@
 use std::collections::HashMap;
 use std::io::{self, Write};
 
-// =======================
 // Section 1: Basics
-// =======================
 fn basics() {
     println!("-- Basics Section --");
 
@@ -28,9 +26,7 @@ fn basics() {
     println!("Shadowed x = {}", x);
 }
 
-// =======================
 // Section 2: Functions & Closures
-// =======================
 fn add(a: i32, b: i32) -> i32 {
     a + b
 }
@@ -57,9 +53,7 @@ fn functions_section() {
     println!("apply closure subtraction 10 - 3 = {}", result);
 }
 
-// =======================
 // Section 3: Structs & Enums
-// =======================
 struct Rectangle {
     width: u32,
     height: u32,
@@ -98,9 +92,7 @@ fn structs_enums() {
     }
 }
 
-// =======================
 // Section 4: Vectors, Iterators, & Recursion
-// =======================
 fn recursion_example(n: u32) -> u32 {
     if n <= 1 {
         1
@@ -128,9 +120,7 @@ fn collections_and_iterators() {
     println!("Doubled vector = {:?}", doubled);
 }
 
-// =======================
 // Section 5: HashMap & Interactive Example
-// =======================
 fn hashmap_example() {
     println!("-- HashMap & Interactive Section --");
 
@@ -151,9 +141,7 @@ fn hashmap_example() {
     println!("Score for {} = {}", name, score);
 }
 
-// =======================
 // Section 6: Exploratory Exercises
-// =======================
 fn exploratory() {
     println!("-- Exploratory Section --");
 
@@ -176,9 +164,7 @@ fn exploratory() {
     println!("Sum via recursion = {}", recursive_sum(&numbers));
 }
 
-// =======================
 // Main Function
-// =======================
 fn main() {
     println!("Welcome to CazzyExploresRust!");
     basics();

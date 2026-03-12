@@ -11,9 +11,7 @@ Demonstrates multi-layer reasoning:
 import random
 from datetime import datetime, timedelta
 
-# -----------------------------
 # 1. Simulated Appliance Knowledge Base
-# -----------------------------
 APPLIANCE_DB = {
     "washer": ["not spinning", "leaking water", "won't start"],
     "dryer": ["not heating", "tumbler not spinning", "strange noise"],
@@ -21,9 +19,7 @@ APPLIANCE_DB = {
     "oven": ["not heating", "uneven temperature", "door won't close"]
 }
 
-# -----------------------------
 # 2. Multi-Layer AI Reasoning (Prototype)
-# -----------------------------
 def predict_fault(appliance, symptoms):
     """
     Layer 1: Predict likely fault based on symptoms
@@ -60,9 +56,7 @@ def schedule_booking(preferred_date=None):
         preferred_date = datetime.now() + timedelta(days=random.randint(1,5))
     return preferred_date.strftime("%Y-%m-%d %H:%M")
 
-# -----------------------------
 # 3. Superintelligence Multi-Layer Reasoning Simulation
-# -----------------------------
 def appliance_ai_assistant(user_input):
     """
     Layer 4: Superintelligent decision-making
@@ -103,9 +97,7 @@ def appliance_ai_assistant(user_input):
     }
     return response
 
-# -----------------------------
 # 4. Example Usage
-# -----------------------------
 if __name__ == "__main__":
     user_query = "My washer is leaking water and not spinning"
     result = appliance_ai_assistant(user_query)

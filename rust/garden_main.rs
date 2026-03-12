@@ -12,14 +12,12 @@ use std::io::{self, Write};
 use std::thread::sleep;
 use std::time::Duration;
 
-// ---------------- Config ----------------
 const WIDTH: usize = 60;
 const HEIGHT: usize = 20;
 const INITIAL_SEEDS: i32 = 3;
 const TICKS_PER_SEASON: usize = 40; // how many frames each season lasts
 const FLOWER_GROW_TICKS: usize = 6; // planted seed -> flower
 
-// ---------------- Tiny deterministic RNG (xorshift64*) ----------------
 // avoids depending on external crates; deterministic if you seed it.
 struct SimpleRng {
     state: u64,
@@ -44,7 +42,6 @@ impl SimpleRng {
     }
 }
 
-// ---------------- Types ----------------
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 enum Season { Spring, Summer, Autumn, Winter }
 
@@ -114,7 +111,6 @@ impl Entity {
     }
 }
 
-// ---------------- Player ----------------
 struct Player {
     x: usize,
     y: usize,
@@ -137,7 +133,6 @@ impl Player {
     }
 }
 
-// ---------------- World ----------------
 struct World {
     entities: Vec<Entity>,
     rng: SimpleRng,
@@ -292,7 +287,6 @@ impl World {
     }
 }
 
-// ---------------- Rendering & UI ----------------
 fn clear() {
     print!("\x1B[2J\x1B[H");
 }
@@ -347,7 +341,6 @@ fn draw(world: &World, player: &Player) {
     io::stdout().flush().ok();
 }
 
-// ---------------- Interaction ----------------
 fn interact_at(world: &mut World, player: &mut Player) {
     if let Some(idx) = world.collect_at(player.x, player.y) {
         // clone to inspect kind
@@ -483,7 +476,6 @@ fn rest(player: &mut Player) {
     player.record("You rest for a moment. Energy +8".to_string());
 }
 
-// ---------------- Input & main loop ----------------
 fn prompt_input() -> Option<char> {
     print!("Action> ");
     io::stdout().flush().ok();

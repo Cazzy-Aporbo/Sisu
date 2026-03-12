@@ -1,10 +1,8 @@
--- ===========================================================
 -- 03_lwts_and_batches.cql — LWTs (Paxos) and batches
 -- Guidance:
 --  • LWT (IF ... ) is for correctness (uniqueness, conditional updates), not speed.
 --  • Use LOGGED BATCH only when multiple rows share the *same partition key*.
 --  • Otherwise prefer UNLOGGED BATCH or, better, multiple single-partition writes.
--- ===========================================================
 
 USE finance;
 

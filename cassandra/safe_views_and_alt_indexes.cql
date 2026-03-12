@@ -1,10 +1,8 @@
--- ===========================================================
 -- 06_safe_views_and_alt_indexes.cql
 -- Apache Cassandra MVs exist, but operationally risky if you don't monitor
 -- backfills/repairs. Prefer QUERY TABLES + dual writes. This script:
 --   1) Shows a minimal MV (for teaching), with guardrails notes
 --   2) Gives two stronger alternatives you can actually ship
--- ===========================================================
 USE finance;
 
 -- 0) TEACHING-ONLY MV: "latest tx per user_id" (NOT RECOMMENDED IN PROD)

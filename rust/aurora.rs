@@ -12,9 +12,7 @@ use std::time::Instant;
 use palette::{Hsv, Srgb};
 use rayon::prelude::*;
 
-// ==========================================================================
 // 1. FRACTAL ENGINE WITH SMOOTH COLORING
-// ==========================================================================
 
 /// Fractal type enumeration
 #[derive(Debug, Clone, Copy, PartialEq)]
@@ -121,9 +119,7 @@ fn render_fractal(width: usize, height: usize, config: &FractalConfig) -> Vec<u3
     }).collect()
 }
 
-// ==========================================================================
 // 2. INTERACTIVE RENDERING ENGINE
-// ==========================================================================
 
 /// Main application state
 struct Aurora {
@@ -272,9 +268,7 @@ impl Aurora {
     }
 }
 
-// ==========================================================================
 // 3. ADDITIONAL FRACTAL TYPES AND ENHANCEMENTS
-// ==========================================================================
 
 /// Burning Ship fractal variant
 fn burning_ship(c: Complex64, max_iterations: u32) -> f64 {
@@ -358,9 +352,7 @@ impl ColorPalette {
     }
 }
 
-// ==========================================================================
 // 4. MAIN FUNCTION AND INITIALIZATION
-// ==========================================================================
 
 fn main() {
     println!("🌌 Aurora Fractal Explorer");

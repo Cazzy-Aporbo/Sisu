@@ -1,5 +1,4 @@
 -- Advanced Cassandra Educational CQL Script
--- ------------------------------------------
 -- This script covers:
 -- 1. Composite primary keys
 -- 2. Clustering columns

@@ -10,9 +10,7 @@ use std::pin::Pin;
 use std::thread;
 use std::time::Duration;
 
-// =======================
 // 1. Variables & Constants (Multiple Approaches)
-// =======================
 fn variables_section() {
     println!("-- Variables & Constants --");
 
@@ -31,9 +29,7 @@ fn variables_section() {
     println!("Constant MAX_POINTS = {}", MAX_POINTS);
 }
 
-// =======================
 // 2. Functions (Multiple Styles)
-// =======================
 fn add(a: i32, b: i32) -> i32 { a + b }
 
 fn functions_section() {
@@ -51,9 +47,7 @@ fn functions_section() {
     println!("apply subtraction = {}", apply(|a,b| a-b,10,3));
 }
 
-// =======================
 // 3. Structs & Methods (Multiple Patterns)
-// =======================
 struct Rectangle { width:u32, height:u32 }
 
 impl Rectangle {
@@ -84,9 +78,7 @@ fn structs_section() {
     }
 }
 
-// =======================
 // 4. Collections & Iterators (Multiple Approaches)
-// =======================
 fn collections_section() {
     println!("-- Collections Section --");
 
@@ -105,9 +97,7 @@ fn collections_section() {
     println!("Sum via recursion = {}", rec_sum(&v));
 }
 
-// =======================
 // 5. HashMap & Interaction (Multiple Approaches)
-// =======================
 fn hashmap_section() {
     println!("-- HashMap Section --");
 
@@ -125,9 +115,7 @@ fn hashmap_section() {
     for (name,score) in &scores { println!("{}: {}",name,score); }
 }
 
-// =======================
 // 6. Generics & Traits (Depth)
-// =======================
 trait Summable<T> { fn sum_items(&self)->T; }
 
 impl Summable<i32> for Vec<i32> { fn sum_items(&self)->i32 { self.iter().sum() } }
@@ -142,9 +130,7 @@ fn generics_traits_section() {
     print_debug("Hello Generics");
 }
 
-// =======================
 // 7. Async & Concurrency Exploration
-// =======================
 fn async_section() {
     println!("-- Async & Concurrency Section --");
 
@@ -167,9 +153,7 @@ fn async_section() {
     });
 }
 
-// =======================
 // 8. Exploratory Mini-Project: Particles
-// =======================
 struct Particle{ x:f64, y:f64, vx:f64, vy:f64 }
 
 impl Particle{
@@ -187,9 +171,7 @@ fn particle_section() {
     }
 }
 
-// =======================
 // Main
-// =======================
 fn main(){
     println!("Welcome to CazzyRustMastery!");
 

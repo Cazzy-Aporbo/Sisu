@@ -12,9 +12,7 @@ func header(_ title: String) {
     print(String(repeating: "🚀", count: 50) + "\n")
 }
 
-// -----------------------------------------------------------------------------
 // Lesson 21 — Result & Error Futures
-// -----------------------------------------------------------------------------
 
 func lesson21_Result() {
     header("Lesson 21 — Result as Schrödinger’s Box 📦🐱\nSuccess + Failure coexist until opened.")
@@ -44,9 +42,7 @@ func lesson21_Result() {
     // QUIZ: Write a function `safeDivide(a:b:) -> Result<Double,Error>`.
 }
 
-// -----------------------------------------------------------------------------
 // Lesson 22 — Concurrency: Async Sequences
-// -----------------------------------------------------------------------------
 
 func lesson22_AsyncSeq() async {
     header("Lesson 22 — Async Sequences 🌊\nA river of values flowing over time.")
@@ -82,9 +78,7 @@ func lesson22_AsyncSeq() async {
     // QUIZ: Build an AsyncStream that yields 🌙 every second, 3 times.
 }
 
-// -----------------------------------------------------------------------------
 // Lesson 23 — Memory Games (Value vs Reference)
-// -----------------------------------------------------------------------------
 
 func lesson23_Memory() {
     header("Lesson 23 — Memory: Value vs Reference 🧠\nTwo ways to exist in time.")
@@ -115,9 +109,7 @@ func lesson23_Memory() {
     // QUIZ: Create a struct `Book` and a class `Library`. Show how mutating copies differ.
 }
 
-// -----------------------------------------------------------------------------
 // Lesson 24 — SwiftUI Spirit (DSL Thinking)
-// -----------------------------------------------------------------------------
 
 func lesson24_SwiftUI() {
     header("Lesson 24 — SwiftUI Spirit 🎨\nCode as canvas, describing worlds.")
@@ -149,9 +141,7 @@ func lesson24_SwiftUI() {
     // QUIZ: Pretend to build a “LoginView” with username + password + submit button.
 }
 
-// -----------------------------------------------------------------------------
 // Lesson 25 — Metaprogramming Vibes
-// -----------------------------------------------------------------------------
 
 func lesson25_Meta() {
     header("Lesson 25 — Metaprogramming Vibes 🧬\nCode gazes into its own mirror.")
@@ -185,9 +175,7 @@ func lesson25_Meta() {
     // QUIZ: Use Mirror to inspect an Array of 3 elements.
 }
 
-// -----------------------------------------------------------------------------
 // Run All
-// -----------------------------------------------------------------------------
 
 @main
 struct Lessons {

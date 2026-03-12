@@ -12,9 +12,7 @@ func header(_ title: String) {
     print(String(repeating: "=", count: 60) + "\n")
 }
 
-// -----------------------------------------------------------------------------
 // Lesson 6 — Optionals
-// -----------------------------------------------------------------------------
 
 func lesson6_Optionals() {
     header("Lesson 6 — Optionals ❓\nGoal: handling values that might be missing")
@@ -43,9 +41,7 @@ func lesson6_Optionals() {
     print("print(pet!)  // 💥 may crash if nil")
 }
 
-// -----------------------------------------------------------------------------
 // Lesson 7 — Strings and Characters
-// -----------------------------------------------------------------------------
 
 func lesson7_Strings() {
     header("Lesson 7 — Strings and Characters 🔤\nGoal: explore text manipulation")
@@ -76,9 +72,7 @@ func lesson7_Strings() {
     print("\nQUIZ: Write code to count the number of vowels in \"education\".")
 }
 
-// -----------------------------------------------------------------------------
 // Lesson 8 — Arrays and Higher-Order Functions
-// -----------------------------------------------------------------------------
 
 func lesson8_Arrays() {
     header("Lesson 8 — Arrays 📚\nGoal: collection operations, map/filter/reduce")
@@ -106,9 +100,7 @@ func lesson8_Arrays() {
     print("\nQUIZ: Use map/filter/reduce to find the sum of all odd numbers in [10,11,12,13].")
 }
 
-// -----------------------------------------------------------------------------
 // Lesson 9 — Dictionaries
-// -----------------------------------------------------------------------------
 
 func lesson9_Dictionaries() {
     header("Lesson 9 — Dictionaries 📖\nGoal: key-value pairs")
@@ -135,9 +127,7 @@ func lesson9_Dictionaries() {
     print("\nQUIZ: Create a dictionary of 3 fruits with their colors. Print only the keys (fruit names).")
 }
 
-// -----------------------------------------------------------------------------
 // Lesson 10 — Structs and Methods
-// -----------------------------------------------------------------------------
 
 func lesson10_Structs() {
     header("Lesson 10 — Structs 🧩\nGoal: define custom types with properties and methods")
@@ -182,9 +172,7 @@ func lesson10_Structs() {
     print("\nQUIZ: Define a struct `Circle` with a radius property and a computed property `circumference` (2 * pi * r).")
 }
 
-// -----------------------------------------------------------------------------
 // Run all lessons
-// -----------------------------------------------------------------------------
 
 func runAllLessons() {
     lesson6_Optionals()

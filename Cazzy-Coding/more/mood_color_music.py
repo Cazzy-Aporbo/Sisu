@@ -6,34 +6,24 @@ import string
 from datetime import datetime
 from dataclasses import dataclass
 
-# -----------------------------
 # 1. User Input
-# -----------------------------
 mood = input("How are you feeling today? (one word or phrase): ").strip().lower()
 
-# -----------------------------
 # 2. Mood Analysis (simple)
-# -----------------------------
 mood_score = sum([ord(c) for c in mood if c.isalpha()]) % 100  # unique number from text
 
-# -----------------------------
 # 3. Generate Color Palette
-# -----------------------------
 def random_color(seed):
     random.seed(seed)
     return f"rgb({random.randint(0,255)},{random.randint(0,255)},{random.randint(0,255)})"
 
 colors = [random_color(mood_score + i) for i in range(5)]
 
-# -----------------------------
 # 4. Generate Sound Pattern (simulated)
-# -----------------------------
 notes = ['C', 'D', 'E', 'F', 'G', 'A', 'B']
 pattern = [random.choice(notes) + str(random.randint(1,5)) for _ in range(10)]
 
-# -----------------------------
 # 5. Save Mood Dashboard HTML
-# -----------------------------
 html_content = f"""
 <html>
 <head>

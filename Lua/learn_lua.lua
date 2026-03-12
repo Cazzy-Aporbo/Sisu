@@ -1,6 +1,4 @@
--- ======================================
 -- Welcome to your Lua learning playground
--- ======================================
 
 -- 1️⃣ Printing
 print("Hello, Lua world!")

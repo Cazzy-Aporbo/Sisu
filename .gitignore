@@ -1,13 +1,10 @@
-# =========================================================
 # SISU — Git Ignore Configuration
-# =========================================================
 # 
 # Only ignore what cannot endure
 # Build artifacts are temporary, source is eternal
 #
 # COLOR PHASE: #F0FDF4 (Whisper - barely visible)
 #
-# =========================================================
 
 # Build artifacts (these don't endure)
 *.o
@@ -104,6 +101,4 @@ paths/*/personal/
 # The breathing cache (regenerated each time)
 .breathe-cache/
 
-# =========================================================
 # Remember: We ignore the temporary, commit the eternal
-# =========================================================

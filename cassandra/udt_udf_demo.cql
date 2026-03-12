@@ -1,7 +1,5 @@
--- ===========================================================
 -- 05_udt_udf_demo.cql — UDT for structured notes; UDF (if enabled) for tiny transforms
 -- Warning: UDFs require enabling (security & perf considerations). Prefer app-side logic.
--- ===========================================================
 
 USE finance;
 

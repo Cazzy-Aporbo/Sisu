@@ -1,9 +1,9 @@
 /*
- * METAPHORICAL COMPUTATION: A Journey Through Abstract Concepts in C
- * 
- * This program transcends traditional programming pedagogy by exploring
- * profound computational concepts through metaphor and abstraction.
- * Each component embodies a unique perspective on computation itself.
+ * concepts.c — Exploring higher-order patterns in C
+ *
+ * Complex numbers with semantic payloads, function introspection,
+ * and deterministic chaos. Weird things you can do in C when you
+ * stop treating it as "just systems programming."
  */
 
 #include <stdio.h>
@@ -11,22 +11,16 @@
 #include <string.h>
 #include <math.h>
 
-/* 
- * CONCEPT 1: COMPUTATIONAL ONTOLOGY
- * The belief that data structures not only contain information but 
- * fundamentally define the reality of the computational universe.
- */
+// A complex number that carries a meaning string alongside its value.
+// Why? Because sometimes data needs metadata, even at the struct level.
 typedef struct {
     double real;
     double imaginary;
     char *meaning;  // Semantic payload beyond numerical representation
 } OntologicalNumber;
 
-/*
- * CONCEPT 2: ALGORITHMIC IRREDUCIBILITY
- * Some computations cannot be understood by analyzing their parts alone;
- * their behavior emerges only through execution.
- */
+// A transformation you can't shortcut — you have to run it to see the result.
+// This is the C equivalent of "just step through it in the debugger."
 void irreducible_computation(OntologicalNumber *n) {
     // This function's behavior cannot be predicted through static analysis
     // The output emerges only through execution in a specific context
@@ -44,10 +38,7 @@ void irreducible_computation(OntologicalNumber *n) {
     }
 }
 
-/*
- * CONCEPT 3: COMPUTATIONAL INTROSPECTION
- * Code that examines not just data but its own computational process
- */
+// Higher-order function in C: pass a function pointer, watch what it does.
 void introspective_function(void (*f)(OntologicalNumber*), OntologicalNumber *n) {
     printf("Beginning introspection on function at address %p\n", f);
     printf("Input: real=%.3f, imaginary=%.3f, meaning=%s\n", 
@@ -61,11 +52,7 @@ void introspective_function(void (*f)(OntologicalNumber*), OntologicalNumber *n)
     printf("Introspection complete. Computation has altered reality.\n");
 }
 
-/*
- * CONCEPT 4: SEMANTIC RECONSTRUCTION
- * The process of extracting meaning from the interplay between
- * representation and computation
- */
+// Extract a human-readable interpretation from a complex number's state.
 char *extract_semantics(OntologicalNumber n) {
     // Allocate space for our semantic interpretation
     char *interpretation = malloc(256 * sizeof(char));
@@ -82,11 +69,8 @@ char *extract_semantics(OntologicalNumber n) {
     return interpretation;
 }
 
-/*
- * CONCEPT 5: COMPUTATIONAL ECOSYSTEM
- * Functions that create and interact with each other, forming
- * a minimal ecosystem of computations
- */
+// Function pointer evolution — returns a modified version of its input.
+// Placeholder for actual code generation (which C can do via JIT, but not here).
 typedef void (*ComputationalOrganism)(OntologicalNumber*);
 
 ComputationalOrganism evolve_computation(ComputationalOrganism parent) {
@@ -100,11 +84,8 @@ ComputationalOrganism evolve_computation(ComputationalOrganism parent) {
     return child ? child : parent;  // Placeholder for actual evolution
 }
 
-/*
- * CONCEPT 6: NON-DETERMINISTIC DETERMINISM
- * A function that appears random but is completely deterministic,
- * challenging perceptions of predictability and free will in computation
- */
+// Deterministic chaos: fixed seed + iterated arithmetic = unpredictable-looking output.
+// Same seed always gives the same result. Chaos theory in 10 lines.
 void nondeterministic_determinism(OntologicalNumber *n, unsigned int seed) {
     // Use deterministic operations that produce complex, hard-to-predict results
     srand(seed);  // Fixed seed makes it deterministic
@@ -117,7 +98,7 @@ void nondeterministic_determinism(OntologicalNumber *n, unsigned int seed) {
 }
 
 int main() {
-    printf("=== BEGIN METAPHORICAL COMPUTATION ===\n\n");
+    printf("concepts.c — running\n\n");
     
     // Initialize an ontological number with semantic payload
     OntologicalNumber num = {3.0, 4.0, "initial state"};
@@ -143,7 +124,7 @@ int main() {
     nondeterministic_determinism(&num, 42);
     printf("Result: real=%.3f, imaginary=%.3f\n\n", num.real, num.imaginary);
     
-    printf("=== METAPHORICAL COMPUTATION COMPLETE ===\n");
+    printf("done.\n");
     
     return 0;
 }

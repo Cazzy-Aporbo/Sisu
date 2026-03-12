@@ -6,9 +6,7 @@
 use rand::prelude::*;
 use std::fmt;
 
-// =======================
 // Entity Definitions
-// =======================
 #[derive(Debug)]
 enum Species {
     Rabbit,
@@ -47,9 +45,7 @@ impl Entity {
     }
 }
 
-// =======================
 // Simulation Grid
-// =======================
 struct Grid {
     size: i32,
     entities: Vec<Entity>,
@@ -131,9 +127,7 @@ impl Grid {
     }
 }
 
-// =======================
 // Main Simulation
-// =======================
 fn main() {
     println!("Welcome to Cazzy's Predator-Prey Ecosystem Simulation!");
     let mut grid = Grid::new(10, 10, 3); // 10x10 grid, 10 rabbits, 3 foxes

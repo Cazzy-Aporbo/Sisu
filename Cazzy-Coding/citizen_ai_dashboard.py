@@ -8,9 +8,7 @@ import streamlit as st
 import random
 import pandas as pd
 
-# -----------------------------
 # 1. Sample Recommendations & Gamification
-# -----------------------------
 RECOMMENDATIONS = {
     "environment": [
         "Reduce daily water usage by 20%",
@@ -29,9 +27,7 @@ RECOMMENDATIONS = {
     ]
 }
 
-# -----------------------------
 # 2. Streamlit UI
-# -----------------------------
 st.title("🌱 Interactive Citizen AI")
 
 st.sidebar.header("Enter Your Daily Habits")
@@ -47,9 +43,7 @@ user_data = {
     "finance": finance_score
 }
 
-# -----------------------------
 # 3. AI Assessment & Recommendation
-# -----------------------------
 def assess_domain(domain, score):
     recommendation = random.choice(RECOMMENDATIONS[domain])
     points = int((1-score) * 100)
@@ -60,9 +54,7 @@ results = {}
 for domain, score in user_data.items():
     results[domain] = assess_domain(domain, score)
 
-# -----------------------------
 # 4. Display Results
-# -----------------------------
 st.header("📊 Your Behavior Assessment")
 for domain, res in results.items():
     st.subheader(f"{domain.capitalize()}")
@@ -71,9 +63,7 @@ for domain, res in results.items():
     st.write(f"Gamification Points: {res['points']}")
     st.info(res['narrative'])
 
-# -----------------------------
 # 5. Progress Visualization
-# -----------------------------
 st.header("📈 Behavior Progress Simulation")
 df = pd.DataFrame({
     "Domain": list(user_data.keys()),
@@ -85,9 +75,7 @@ st.bar_chart(df.set_index("Domain")["Score"])
 st.header("🏆 Gamification Dashboard")
 st.bar_chart(df.set_index("Domain")["Points"])
 
-# -----------------------------
 # 6. Scenario Simulation
-# -----------------------------
 st.header("🔮 Scenario Simulation")
 st.write("Try increasing your behavior score to see potential improvements.")
 sim_scores = {d: min(score + 0.2,1.0) for d, score in user_data.items()}

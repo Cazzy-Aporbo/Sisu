@@ -12,9 +12,7 @@ func header(_ title: String) {
     print(String(repeating: "✦", count: 60) + "\n")
 }
 
-// -----------------------------------------------------------------------------
 // Lesson 11 — Functions as First-Class Citizens
-// -----------------------------------------------------------------------------
 
 func lesson11_Functions() {
     header("Lesson 11 — Functions as First-Class Citizens 🪄")
@@ -44,9 +42,7 @@ func lesson11_Functions() {
     // QUIZ: Write a function `makeMultiplier` that returns a closure multiplying by `n`.
 }
 
-// -----------------------------------------------------------------------------
 // Lesson 12 — Enumerations with Power
-// -----------------------------------------------------------------------------
 
 func lesson12_Enums() {
     header("Lesson 12 — Enums with Associated Values 🌀")
@@ -82,9 +78,7 @@ func lesson12_Enums() {
     // QUIZ: Define an enum `Mood` with cases happy, sad(String), excited(Int).
 }
 
-// -----------------------------------------------------------------------------
 // Lesson 13 — Protocols and Extensions
-// -----------------------------------------------------------------------------
 
 func lesson13_Protocols() {
     header("Lesson 13 — Protocols & Extensions 🧩")
@@ -119,9 +113,7 @@ func lesson13_Protocols() {
     // QUIZ: Make a protocol `Playable` with a `play()` method. Conform `Guitar` to it.
 }
 
-// -----------------------------------------------------------------------------
 // Lesson 14 — Error Handling
-// -----------------------------------------------------------------------------
 
 func lesson14_Errors() {
     header("Lesson 14 — Error Handling 🚨")
@@ -152,9 +144,7 @@ func lesson14_Errors() {
     // QUIZ: Write a throwing function `squareRoot` that throws if input < 0.
 }
 
-// -----------------------------------------------------------------------------
 // Lesson 15 — Generics & Creativity
-// -----------------------------------------------------------------------------
 
 func lesson15_Generics() {
     header("Lesson 15 — Generics 🌈")
@@ -190,9 +180,7 @@ func lesson15_Generics() {
     // QUIZ: Make a generic function `swapTwo` that swaps two values.
 }
 
-// -----------------------------------------------------------------------------
 // Run All
-// -----------------------------------------------------------------------------
 
 func runAllLessons() {
     lesson11_Functions()

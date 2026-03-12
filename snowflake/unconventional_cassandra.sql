@@ -1,5 +1,4 @@
 -- Advanced and Unconventional Cassandra Usage
--- -------------------------------------------
 -- Teaching unconventional ways to use Cassandra
 
 -- 1. Keyspace for advanced experimentation
@@ -80,9 +79,7 @@ VALUES (uuid(), uuid(), toTimestamp(now()), 'humidity', 55.0);
 -- Query last 5 metrics for a device at a location
 -- SELECT * FROM device_metrics WHERE device_id=<uuid> AND location_id=<uuid> LIMIT 5;
 
--- ==========================
 -- Notes on unconventional usage
--- ==========================
 -- 1. Graphs: Use partitioning to model directed relationships efficiently.
 -- 2. Versioning: Cassandra's clustering columns are perfect for historical tracking.
 -- 3. Semi-structured data: Store JSON as string or use UDTs for flexible schemas.

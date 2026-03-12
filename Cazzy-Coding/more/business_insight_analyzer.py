@@ -18,9 +18,7 @@ try:
 except ImportError:
     plotter = None
 
-# =========================
 # Section 1: Input Processing
-# =========================
 
 def load_csv_data(file_path):
     """
@@ -53,9 +51,7 @@ def load_json_data(file_path):
         data = json.load(json_file)
     return data
 
-# =========================
 # Section 2: Metrics Calculation
-# =========================
 
 def calculate_average(values):
     """
@@ -95,9 +91,7 @@ def detect_anomalies(values, sensitivity_factor=2.0):
     anomalies = [(index, value) for index, value in enumerate(values) if value > threshold_upper or value < threshold_lower]
     return anomalies
 
-# =========================
 # Section 3: Business Insights Generator
-# =========================
 
 def generate_summary_report(metric_name, values):
     """
@@ -126,9 +120,7 @@ def generate_summary_report(metric_name, values):
         report_text += "  No significant anomalies detected.\n"
     return report_text
 
-# =========================
 # Section 4: Visualization (Optional)
-# =========================
 
 def plot_metric(values, metric_name):
     """
@@ -149,9 +141,7 @@ def plot_metric(values, metric_name):
     plotter.grid(True)
     plotter.show()
 
-# =========================
 # Section 5: Main Execution
-# =========================
 
 def main():
     """

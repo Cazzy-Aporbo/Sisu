@@ -1,5 +1,4 @@
 // ReadWithCazzy: Underwater Adventure in Rust 🦀🌊
-// ------------------------------------------------
 // This is not just "a game" — it's also a Rust teaching file.
 // It's written to show you:
 //   - how to structure a Rust project

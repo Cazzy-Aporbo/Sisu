@@ -12,9 +12,7 @@ use palette::{Hsv, Srgb, LinSrgb, FromColor};
 use rayon::prelude::*;
 use std::f64::consts::PI;
 
-// ==========================================================================
 // 1. ENHANCED FRACTAL ENGINE WITH WAVE DYNAMICS
-// ==========================================================================
 
 /// Fractal type with wave parameters
 #[derive(Debug, Clone, Copy, PartialEq)]
@@ -224,9 +222,7 @@ fn render_fractal(width: usize, height: usize, config: &FractalConfig) -> Vec<u3
     }).collect()
 }
 
-// ==========================================================================
 // 2. WAVE SIMULATION AND FLUID DYNAMICS
-// ==========================================================================
 
 /// Wave simulation for surface effects
 struct WaveSimulation {
@@ -292,9 +288,7 @@ impl WaveSimulation {
     }
 }
 
-// ==========================================================================
 // 3. ENHANCED APPLICATION WITH WAVE EFFECTS
-// ==========================================================================
 
 /// Main application state with wave simulation
 struct Aurora {
@@ -585,9 +579,7 @@ impl Aurora {
     }
 }
 
-// ==========================================================================
 // 4. MAIN FUNCTION
-// ==========================================================================
 
 fn main() {
     // Initialize the application

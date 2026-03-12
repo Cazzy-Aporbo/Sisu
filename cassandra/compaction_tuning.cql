@@ -1,8 +1,6 @@
--- ===========================================================
 -- 02_compaction_tuning.cql
 -- Use STCS (SizeTiered) default or TWCS (TimeWindowCompactionStrategy) for time-series.
 -- TWCS helps expire old data by TTL per window; fewer overlapping SSTables.
--- ===========================================================
 
 USE finance;
 

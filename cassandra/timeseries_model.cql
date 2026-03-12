@@ -1,4 +1,3 @@
--- ===========================================================
 -- 01_timeseries_model.cql — Time-series modeling (finance)
 -- Key ideas:
 --  • Wide rows partitioned by (user_id, yyyymm bucket) to keep partitions healthy
@@ -6,7 +5,6 @@
 --  • STATIC columns for per-partition metadata (e.g., monthly budget)
 --  • Query patterns: by month, by day range, last N events (paging)
 --  • Prepared INSERTs with IF NOT EXISTS for idempotence (optionally)
--- ===========================================================
 
 CREATE KEYSPACE IF NOT EXISTS finance
 WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};

@@ -1,5 +1,4 @@
 // Enchanted Garden 🌱✨🦋
-// ---------------------------------------
 // Expanded variation: day/night cycle, more entities,
 // dynamic behaviors, planting & harvesting.
 //

@@ -1,19 +1,7 @@
-# =========================================================
-# SISU — Master Build Configuration
-# =========================================================
-# 
-# DENSITY:     █████████░  [9/10]
-# ENDURANCE:   ██████████  [10/10]  
-# ABSTRACTION: ██████░░░░  [6/10]
+# Sisu — Polyglot Build
+# Compiles C, C++, Rust, checks Python/JS syntax.
+# Run `make help` for targets.
 #
-# COLOR PHASE: #16A34A (Ancient Green - Survived since 1976)
-#
-# Historical Context:
-#   Born from: Stuart Feldman's Make, 1976
-#   Survived:  CMake, Autotools, npm, cargo, and still essential
-#   Evolves:   Never. Make is eternal.
-#
-# =========================================================
 
 # Color configuration for output
 GREEN_WHISPER = \033[38;2;240;253;244m

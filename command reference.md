@@ -1,16 +1,8 @@
 #!/bin/bash
-# =========================================================
-# SISU — Quick Command Reference
-# =========================================================
-# 
+# Sisu — Quick Command Reference
 # Copy these to your .bashrc/.zshrc or source this file
-# Color codes represent command depth in the system
-#
-# COLOR PHASE: #A7F3D0 (Primary Sisu Green)
-#
-# =========================================================
 
-# ============= SETUP COMMANDS =============
+# Setup
 
 # Initialize Sisu repository
 sisu-init() {
@@ -32,7 +24,7 @@ sisu-configure() {
     ./configure --detect-architecture --optimize-for-learning
 }
 
-# ============= NAVIGATION ALIASES =============
+# Navigation
 
 # Navigate by color depth (darker = deeper)
 alias void='cd $(git rev-parse --show-toplevel)/core'              # #052E16
@@ -47,7 +39,7 @@ alias comp='cd $(git rev-parse --show-toplevel)/paths/compressor'
 alias viz='cd $(git rev-parse --show-toplevel)/paths/visualist'
 alias phil='cd $(git rev-parse --show-toplevel)/paths/philosopher'
 
-# ============= BUILD COMMANDS =============
+# Build
 
 # Build everything chronologically
 sisu-timeline() {
@@ -61,7 +53,7 @@ sisu-1980s() { make cpp; }
 sisu-2000s() { make modern; }
 sisu-2020s() { make quantum; }
 
-# ============= TESTING COMMANDS =============
+# Testing
 
 # Run all endurance tests
 sisu-test() {
@@ -105,7 +97,7 @@ sisu-survival() {
     echo "Compression ratio: ${ratio}:1"
 }
 
-# ============= COMPRESSION COMMANDS =============
+# Compression
 
 # Compress a file (shows before/after)
 sisu-compress() {
@@ -141,7 +133,7 @@ sisu-bloat() {
     find . -type f \( -name "*.c" -o -name "*.py" -o -name "*.js" \) -exec wc -l {} \; | sort -rn | head -10
 }
 
-# ============= COLOR COMMANDS =============
+# Color
 
 # Show file with its assigned color
 sisu-show() {
@@ -207,7 +199,7 @@ sisu-breathe() {
     ./breathe.sh
 }
 
-# ============= GIT COMMANDS =============
+# Git
 
 # Commit with compression metrics
 sisu-commit() {
@@ -255,7 +247,7 @@ sisu-endurance() {
     fi
 }
 
-# ============= ANALYSIS COMMANDS =============
+# Analysis
 
 # Count eternal vs trendy patterns
 sisu-patterns() {
@@ -292,7 +284,7 @@ sisu-audit() {
     done
 }
 
-# ============= CREATION COMMANDS =============
+# Creation
 
 # Create a new Sisu-compliant file
 sisu-new() {
@@ -360,7 +352,7 @@ EOF
     echo "✓ Created ${filename}.${ext} with Sisu header"
 }
 
-# ============= HELP COMMAND =============
+# Help
 
 sisu-help() {
     echo "╔═══════════════════════════════════════════════════════════╗"

@@ -5,24 +5,18 @@ from datetime import datetime, timedelta
 import json
 import random
 
-# ------------------------------
 # Connect to Cassandra
-# ------------------------------
 cluster = Cluster(['127.0.0.1'])  # replace with your Cassandra host
 session = cluster.connect()
 
-# ------------------------------
 # Create Keyspace
-# ------------------------------
 session.execute("""
 CREATE KEYSPACE IF NOT EXISTS playground
 WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1}
 """)
 session.set_keyspace('playground')
 
-# ------------------------------
 # Create Tables
-# ------------------------------
 
 # 1. Employee Mentorship
 session.execute("""
@@ -67,9 +61,7 @@ CREATE TABLE IF NOT EXISTS device_metrics (
 ) WITH CLUSTERING ORDER BY (metric_time DESC, metric_name ASC)
 """)
 
-# ------------------------------
 # Insert Sample Data
-# ------------------------------
 
 # Create some UUIDs for employees, mentors, sensors, devices
 employees = [uuid.uuid4() for _ in range(5)]
@@ -122,9 +114,7 @@ for device in devices:
                 VALUES (%s, %s, %s, %s, %s)
                 """, (device, location, datetime.now() - timedelta(hours=i), metric, random.uniform(10, 100)))
 
-# ------------------------------
 # Queries: Interactive Examples
-# ------------------------------
 
 print("=== Mentorships ===")
 rows = session.execute("SELECT * FROM employee_mentorship LIMIT 10")

@@ -1,10 +1,8 @@
--- ===========================================================
 -- 04_counters_and_ttl.cql — counters & TTLs
 -- Notes:
 --  • Counters must live in dedicated counter tables (no non-counter mix except PK).
 --  • They are eventually consistent; use idempotent increment patterns in app.
 --  • TTL on base tables is safer than issuing deletes later (tombstones).
--- ===========================================================
 
 USE finance;
 

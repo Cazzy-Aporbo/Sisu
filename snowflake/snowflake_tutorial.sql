@@ -1,11 +1,8 @@
 -- Snowflake Full Beginner-to-Advanced Tutorial
--- --------------------------------------------
 -- Learn Snowflake step by step, from basics to intermediate analytics
 -- Each section is annotated with explanations
 
--- ===============================
 -- STEP 1: Create Database and Schema
--- ===============================
 -- Database: container for all your data
 CREATE OR REPLACE DATABASE SNOWFLAKE_LEARNING;
 USE DATABASE SNOWFLAKE_LEARNING;
@@ -14,9 +11,7 @@ USE DATABASE SNOWFLAKE_LEARNING;
 CREATE OR REPLACE SCHEMA LEARNING_SCHEMA;
 USE SCHEMA LEARNING_SCHEMA;
 
--- ===============================
 -- STEP 2: Create Basic Tables
--- ===============================
 
 -- Employees Table
 -- Stores basic employee information
@@ -36,9 +31,7 @@ CREATE OR REPLACE TABLE DEPARTMENTS (
     MANAGER_NAME STRING
 );
 
--- ===============================
 -- STEP 3: Insert Sample Data
--- ===============================
 
 -- Insert Departments
 INSERT INTO DEPARTMENTS (DEPT_ID, DEPT_NAME, MANAGER_NAME)
@@ -55,9 +48,7 @@ VALUES
 ('E003', 'Charlie', 'Lee', 'charlie@company.com', 'Strategy', 110000),
 ('E004', 'Dana', 'Kim', 'dana@company.com', 'IT', 95000);
 
--- ===============================
 -- STEP 4: Querying Basics
--- ===============================
 
 -- Select all employees
 SELECT * FROM EMPLOYEES;
@@ -71,9 +62,7 @@ SELECT * FROM EMPLOYEES WHERE DEPARTMENT = 'IT';
 -- Order by salary descending
 SELECT * FROM EMPLOYEES ORDER BY SALARY DESC;
 
--- ===============================
 -- STEP 5: Joins
--- ===============================
 
 -- List employees with their department manager
 SELECT E.FIRST_NAME, E.LAST_NAME, E.DEPARTMENT, D.MANAGER_NAME
@@ -81,9 +70,7 @@ FROM EMPLOYEES E
 JOIN DEPARTMENTS D
   ON E.DEPARTMENT = D.DEPT_NAME;
 
--- ===============================
 -- STEP 6: Aggregations
--- ===============================
 
 -- Average salary per department
 SELECT DEPARTMENT, AVG(SALARY) AS AVG_SALARY
@@ -95,9 +82,7 @@ SELECT DEPARTMENT, COUNT(*) AS NUM_EMPLOYEES
 FROM EMPLOYEES
 GROUP BY DEPARTMENT;
 
--- ===============================
 -- STEP 7: Advanced Table (JSON Example)
--- ===============================
 
 -- Snowflake supports semi-structured data
 CREATE OR REPLACE TABLE PROJECTS (
@@ -114,9 +99,7 @@ VALUES ('P001', 'Project Alpha', PARSE_JSON('{"budget": 50000, "deadline": "2025
 SELECT PROJECT_NAME, DETAILS:budget AS BUDGET, DETAILS:deadline AS DEADLINE
 FROM PROJECTS;
 
--- ===============================
 -- STEP 8: Views
--- ===============================
 
 -- Create a view for high-paying IT employees
 CREATE OR REPLACE VIEW HIGH_IT_EMPLOYEES AS
@@ -127,9 +110,7 @@ WHERE DEPARTMENT = 'IT' AND SALARY > 100000;
 -- Query the view
 SELECT * FROM HIGH_IT_EMPLOYEES;
 
--- ===============================
 -- STEP 9: Best Practices
--- ===============================
 
 -- 1. Always use descriptive names for databases, schemas, tables, columns, and views.
 -- 2. Use primary keys to uniquely identify rows.
@@ -139,6 +120,4 @@ SELECT * FROM HIGH_IT_EMPLOYEES;
 -- 6. Views help organize frequently used queries.
 -- 7. Snowflake separates compute and storage; choose warehouses wisely to optimize costs.
 
--- ===============================
 -- END OF TUTORIAL
--- ===============================

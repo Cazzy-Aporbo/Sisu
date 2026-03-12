@@ -12,9 +12,7 @@ Demonstrates multi-layer AI reasoning with prototype-level intelligence.
 import random
 from datetime import datetime, timedelta
 
-# -----------------------------
 # 1. Environmental Knowledge Base (Prototype)
-# -----------------------------
 GARBAGE_TIPS = [
     "Implement city-wide recycling programs",
     "Encourage composting at household level",
@@ -39,9 +37,7 @@ PRICING_TIPS = [
     "Use dynamic pricing to encourage sustainable behavior"
 ]
 
-# -----------------------------
 # 2. Multi-Layer AI Reasoning
-# -----------------------------
 def assess_environmental_issue(issue_type, severity_level=None):
     """
     Layer 1: Identify key problem and severity
@@ -85,9 +81,7 @@ def simulate_environmental_impact(issue_type, level):
     improvement = base_impact * random.uniform(0.3, 0.7)
     return round(1 - improvement, 2)  # lower number = better outcome
 
-# -----------------------------
 # 3. Environmental AI Assistant
-# -----------------------------
 def enviro_ai_assistant(user_input, location=None):
     """
     Main interface: processes user input and provides multi-layered reasoning
@@ -127,9 +121,7 @@ def enviro_ai_assistant(user_input, location=None):
     
     return response
 
-# -----------------------------
 # 4. Example Usage
-# -----------------------------
 if __name__ == "__main__":
     queries = [
         "Our city has too much garbage piling up",

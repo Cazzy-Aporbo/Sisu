@@ -1,5 +1,4 @@
 // CazzyTeachesRust: Enchanted Garden 🌱🦋
-// ---------------------------------------
 // Welcome to the Enchanted Garden.
 // This file is not only a *simulation* — it’s also a *lesson*.
 // We'll cover Rust concepts like:

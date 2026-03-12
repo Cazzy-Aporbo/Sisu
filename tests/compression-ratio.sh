@@ -1,14 +1,11 @@
 #!/bin/bash
-# =========================================================
 # SISU — Compression Ratio Test
-# =========================================================
 # 
 # Ensures the repository maintains its density target
 # The entire history of computing must fit in 47KB
 #
 # COLOR PHASE: #34D399 (Canopy - Testing at the abstraction layer)
 #
-# =========================================================
 
 # Color codes for output
 GREEN_WHISPER='\033[38;2;240;253;244m'

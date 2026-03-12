@@ -32,7 +32,6 @@ from typing import Dict
 
 OUTPUT_DIR_DEFAULT = "./sisu_output"
 
-# ----- Creative pools -----
 BATTLE_TEMPLATES = [
     "Stand, {name}. Breathe. Make the world yield.",
     "{name}, carry the small fire forward until it becomes a blaze.",
@@ -70,7 +69,6 @@ COLOR_PALETTES = [
 ]
 
 
-# ----- Helpers -----
 def hash_to_seed(s: str) -> int:
     h = sha256(s.encode("utf-8")).hexdigest()
     return int(h[:16], 16)
@@ -80,7 +78,6 @@ def ensure_dir(path: str) -> None:
     os.makedirs(path, exist_ok=True)
 
 
-# ----- Bundle generation -----
 def generate_bundle(situation: str, seed: int | None = None) -> Dict:
     if seed is None:
         seed = hash_to_seed(situation + "|" + datetime.datetime.utcnow().isoformat())
@@ -113,7 +110,6 @@ def generate_bundle(situation: str, seed: int | None = None) -> Dict:
     }
 
 
-# ----- Animated sigil generator (SMIL SVG) -----
 def generate_animated_sigil(bundle: Dict, filepath: str) -> str:
     """Create an animated SVG that pulses with the breathing pattern in bundle['breathing']."""
     w, h = 800, 800
@@ -179,7 +175,6 @@ def generate_animated_sigil(bundle: Dict, filepath: str) -> str:
     return filepath
 
 
-# ----- Drone WAV synthesis (stdlib only) -----
 def synth_drone_wav(bundle: Dict, filepath: str, duration_seconds: int = 120) -> str:
     """
     Synthesize a simple drone + harmonic overtones WAV using only the standard library.
@@ -217,7 +212,6 @@ def synth_drone_wav(bundle: Dict, filepath: str, duration_seconds: int = 120) ->
     return filepath
 
 
-# ----- Chant mode (console) -----
 def chant_mode(bundle: Dict, live: bool = True) -> None:
     breath = bundle["breathing"]
     total_cycle = breath["inhale"] + breath["hold"] + breath["exhale"]
@@ -247,7 +241,6 @@ def chant_mode(bundle: Dict, live: bool = True) -> None:
         print("\nChant interrupted. Keep the hinge moving.")
 
 
-# ----- CLI & main flow -----
 def build_parser():
     p = argparse.ArgumentParser(prog="sisu_ritual", description="Sisu Ritual Kit — sigil, chant, drone.")
     p.add_argument("situation", type=str, help="Your struggle, goal, or situation (wrap in quotes).")

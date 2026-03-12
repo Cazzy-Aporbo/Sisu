@@ -1,7 +1,6 @@
 // src/main.rs
 //
 // 🌊 ReadWithCazzy: An Underwater World in Rust
-// --------------------------------------------------
 // This file is a **teaching artifact**. It shows:
 //   1. How to structure a small Rust simulation project.
 //   2. How to model entities with enums & structs.
@@ -21,14 +20,12 @@
 // Author: Cazzy 🐚
 // Build: cargo run
 //
-// --------------------------------------------------
 
 use rand::Rng;
 use std::io::{self, Write};
 use std::thread::sleep;
 use std::time::Duration;
 
-// ---------------- Constants ---------------- //
 const MAP_W: i32 = 100;
 const MAP_H: i32 = 30;
 const VIEW_W: i32 = 40;
@@ -40,7 +37,6 @@ const NUM_OCTOPUS: usize = 3;
 const NUM_SEAWEED: usize = 20;
 const NUM_BUBBLES: usize = 30;
 
-// ---------------- Data Structures ---------------- //
 
 #[derive(Clone, Copy)]
 struct Entity {
@@ -86,7 +82,6 @@ fn emoji_for(kind: Kind) -> &'static str {
     }
 }
 
-// ---------------- Game State ---------------- //
 
 struct Game {
     player: Entity,
@@ -210,7 +205,6 @@ impl Game {
     }
 }
 
-// ---------------- Main Loop ---------------- //
 
 fn main() {
     let mut game = Game::new();

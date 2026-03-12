@@ -6,9 +6,7 @@
  * showing both basic usage and advanced applications.
  */
 
-// ==========================================================================
 // 1. OWNERSHIP AND BORROWING: THE CORE OF RUST'S MEMORY SAFETY
-// ==========================================================================
 
 /// Demonstrates Rust's ownership system - the key feature that prevents
 /// memory bugs at compile time without a garbage collector.
@@ -51,9 +49,7 @@ fn change_string(s: &mut String) {
     s.push_str(" bar");
 }
 
-// ==========================================================================
 // 2. PATTERN MATCHING: RUST'S POWERFUL CONTROL FLOW CONSTRUCT
-// ==========================================================================
 
 /// Shows how pattern matching works in Rust, which is more powerful than
 /// traditional switch statements in other languages.
@@ -98,9 +94,7 @@ fn pattern_matching_demo() {
     }
 }
 
-// ==========================================================================
 // 3. ERROR HANDLING: THE RUST WAY WITH RESULT AND OPTION
-// ==========================================================================
 
 /// Demonstrates Rust's approach to error handling, which is explicit and
 /// forces developers to handle potential errors.
@@ -157,9 +151,7 @@ fn might_fail(should_succeed: bool) -> Result<i32, String> {
     }
 }
 
-// ==========================================================================
 // 4. TRAITS AND GENERICS: RUST'S APPROACH TO POLYMORPHISM
-// ==========================================================================
 
 /// Shows how traits and generics work in Rust to provide polymorphism
 /// and code reuse while maintaining performance.
@@ -248,9 +240,7 @@ impl Summary for Tweet {
     }
 }
 
-// ==========================================================================
 // 5. CONCURRENCY: SAFE PARALLEL EXECUTION WITH THREADS AND ASYNC
-// ==========================================================================
 
 /// Demonstrates Rust's approach to concurrency, which prevents data races
 /// at compile time through ownership and type system.
@@ -304,9 +294,7 @@ fn concurrency_demo() {
     println!("Result: {}", *counter.lock().unwrap());
 }
 
-// ==========================================================================
 // 6. SMART POINTERS: MANAGING MEMORY WITH EXTRA CAPABILITIES
-// ==========================================================================
 
 /// Shows how smart pointers in Rust provide functionality beyond references.
 fn smart_pointers_demo() {
@@ -343,9 +331,7 @@ fn smart_pointers_demo() {
     println!("Reference count after c goes out of scope: {}", Rc::strong_count(&a));
 }
 
-// ==========================================================================
 // 7. FUNCTIONAL PROGRAMMING FEATURES: ITERATORS AND CLOSURES
-// ==========================================================================
 
 /// Demonstrates Rust's support for functional programming patterns.
 fn functional_programming_demo() {
@@ -380,9 +366,7 @@ fn functional_programming_demo() {
     println!("Even numbers: {:?}", even_numbers);
 }
 
-// ==========================================================================
 // 8. ADVANCED FEATURES: MACROS, UNSAFE RUST, AND MORE
-// ==========================================================================
 
 /// Shows some of Rust's advanced features that provide extra power when needed.
 fn advanced_features_demo() {
@@ -417,9 +401,7 @@ fn advanced_features_demo() {
     // println!("Random number: {}", secret_number);
 }
 
-// ==========================================================================
 // MAIN FUNCTION: RUNNING ALL DEMOS
-// ==========================================================================
 
 fn main() {
     println!("RUST EDUCATIONAL SHOWCASE");

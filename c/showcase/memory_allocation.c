@@ -22,9 +22,7 @@
 #include <stdarg.h>
 #include <assert.h>
 
-// ==========================================================================
 // 1. MEMORY ALLOCATION: MULTIPLE APPROACHES
-// ==========================================================================
 
 /*
  * Approach 1: Standard allocator - Simple but can fragment memory
@@ -127,9 +125,7 @@ void arena_reset(arena_allocator_t *arena) {
     arena->offset = 0;
 }
 
-// ==========================================================================
 // 2. CONCURRENCY: MULTIPLE MODELS
-// ==========================================================================
 
 /*
  * Approach 1: Mutex-based synchronization
@@ -184,9 +180,7 @@ void rcu_read_unlock(atomic_int *rc) {
     atomic_fetch_sub_explicit(rc, 1, memory_order_release);
 }
 
-// ==========================================================================
 // 3. DATA STRUCTURES: MULTIPLE IMPLEMENTATIONS
-// ==========================================================================
 
 /*
  * Approach 1: Linked list - Simple but O(n) access
@@ -298,9 +292,7 @@ void ht_insert(hash_table_t *ht, const char *key, void *value) {
     ht->item_count++;
 }
 
-// ==========================================================================
 // 4. ALGORITHM OPTIMIZATION: MULTIPLE TECHNIQUES
-// ==========================================================================
 
 /*
  * Approach 1: Loop unrolling - Reduces loop overhead
@@ -363,9 +355,7 @@ unsigned long long fibonacci_memoized(unsigned n, unsigned long long *cache) {
     return cache[n];
 }
 
-// ==========================================================================
 // 5. ERROR HANDLING: MULTIPLE APPROACHES
-// ==========================================================================
 
 /*
  * Approach 1: Return codes - Simple, explicit control flow
@@ -434,9 +424,7 @@ error_info_t create_error(error_code_t code, const char *message,
 
 #define ERROR(code, msg) create_error(code, msg, __FILE__, __LINE__, __func__)
 
-// ==========================================================================
 // 6. API DESIGN: MULTIPLE PATTERNS
-// ==========================================================================
 
 /*
  * Approach 1: Opaque pointers - Information hiding, implementation flexibility
@@ -502,9 +490,7 @@ int execute_strategy(strategy_t *strategy, int a, int b) {
     return strategy->algorithm(a, b);
 }
 
-// ==========================================================================
 // DEMONSTRATION CODE
-// ==========================================================================
 
 int main() {
     printf("=== C MULTI-PARADIGM IMPLEMENTATION SHOWCASE ===\n\n");

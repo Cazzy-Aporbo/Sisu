@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  rust:
+    name: Rust (cargo test)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo test --verbose
+
+  c-compile:
+    name: C (gcc syntax check)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check C files compile
+        run: |
+          count=0
+          fail=0
+          for f in $(find c/ -name '*.c' -type f); do
+            if gcc -Wall -Wextra -fsyntax-only -std=c99 "$f" 2>/dev/null; then
+              count=$((count + 1))
+            else
+              echo "WARN: $f has compile issues (non-fatal)"
+              fail=$((fail + 1))
+            fi
+          done
+          echo "C files checked: $count passed, $fail warnings"
+
+  python-syntax:
+    name: Python (syntax check)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check Python syntax
+        run: |
+          count=0
+          fail=0
+          for f in $(find . -name '*.py' -not -path './.git/*' -type f); do
+            if python3 -m py_compile "$f" 2>/dev/null; then
+              count=$((count + 1))
+            else
+              echo "FAIL: $f"
+              fail=$((fail + 1))
+            fi
+          done
+          echo "Python files: $count passed, $fail failed"
+          if [ $fail -gt 0 ]; then
+            exit 1
+          fi

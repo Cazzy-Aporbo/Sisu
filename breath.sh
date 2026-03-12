@@ -1,7 +1,5 @@
 #!/bin/bash
-# =========================================================
 # SISU — Breathing Gradient Script
-# =========================================================
 # 
 # Makes your terminal breathe in the full spectrum of Sisu greens
 # From whisper (#F0FDF4) to void (#052E16) and back
@@ -9,7 +7,6 @@
 #
 # COLOR PHASE: Full spectrum animation
 #
-# =========================================================
 
 # The 21 Greens of Growth (RGB values)
 declare -a greens=(

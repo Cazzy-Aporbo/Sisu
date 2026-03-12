@@ -34,9 +34,7 @@ def now_iso() -> str:
     return datetime.datetime.utcnow().replace(microsecond=0).isoformat() + "Z"
 
 
-# -----------------------------
 # Domain dataclasses
-# -----------------------------
 @dataclass
 class ProgressEntry:
     timestamp: str
@@ -88,9 +86,7 @@ class Challenge:
         return ch
 
 
-# -----------------------------
 # Persistence and repo
-# -----------------------------
 class SisuRepo:
     def __init__(self, path: str = DATA_FILE):
         self.path = path
@@ -141,9 +137,7 @@ class SisuRepo:
         return False
 
 
-# -----------------------------
 # Sisu algorithms / motivational logic
-# -----------------------------
 SISU_QUOTES = [
     "Sisu is not a single virtue, but a variety of traits; the grit to keep going when others stop.",
     "Lean into the discomfort — that's where you forge lasting strength.",
@@ -208,9 +202,7 @@ def compact_status_line(ch: Challenge) -> str:
         return f"{ch.name}: {total} {ch.unit} logged — no numeric target"
 
 
-# -----------------------------
 # CLI
-# -----------------------------
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="sisu", description="Sisu — grit-inspired challenge manager")
     sub = p.add_subparsers(dest="cmd")
@@ -336,9 +328,7 @@ def cmd_archive(repo: SisuRepo, args: argparse.Namespace):
     print(f"Archived challenge '{args.name}'. Archive is reversible by editing the data file.")
 
 
-# -----------------------------
 # Minimal self-tests / demo
-# -----------------------------
 def _run_demo(repo_path: str = DATA_FILE):
     """
     Quick demo function you can call from python to see program behavior.
@@ -361,9 +351,7 @@ def _run_demo(repo_path: str = DATA_FILE):
     print("Demo cleaned up.")
 
 
-# -----------------------------
 # Entrypoint
-# -----------------------------
 def main(argv: Optional[List[str]] = None):
     parser = build_parser()
     args = parser.parse_args(argv)

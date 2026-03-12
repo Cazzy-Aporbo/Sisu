@@ -1,8 +1,6 @@
 import os
 
-# ==============================
 # Helper functions
-# ==============================
 def create_file(path, content=""):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
@@ -60,9 +58,7 @@ def skeleton_code(file_path):
         content = "-- Cassandra skeleton\n-- Define schema and queries here\n"
     return content
 
-# ==============================
 # User Input
-# ==============================
 print("Welcome to the Ultimate Repository Generator!")
 project_type = input("Enter project type(s) (Python, C++, R, Fortran, Jupyter, Cassandra, AI, etc.): ").strip()
 repo_name = input("Enter repository name: ").strip()
@@ -70,9 +66,7 @@ include_ai = input("Include AI/data folders? (y/n): ").strip().lower() == 'y'
 
 base_path = os.path.join(os.getcwd(), repo_name)
 
-# ==============================
 # Base folders
-# ==============================
 folders = {
     "src": [],
     "docs": ["README.md", "INSTALL.md", "USAGE.md", "CONTRIBUTING.md", "CHANGELOG.md", "FAQ.md"],
@@ -87,9 +81,7 @@ folders = {
     "results": [],
 }
 
-# ==============================
 # Language-specific skeletons
-# ==============================
 lang_files = {
     "Python": ["src/main.py", "tests/test_main.py", "scripts/utils.py"],
     "C++": ["src/main.cpp", "src/utils.cpp", "src/utils.h", "tests/test_main.cpp"],
@@ -109,9 +101,7 @@ for lang, files in lang_files.items():
                 folders.setdefault(folder, [])
             folders[folder].append(file_name)
 
-# ==============================
 # Create folders and files
-# ==============================
 for folder, files in folders.items():
     folder_path = os.path.join(base_path, folder)
     os.makedirs(folder_path, exist_ok=True)
@@ -123,9 +113,7 @@ for folder, files in folders.items():
             content = skeleton_code(file_path)
         create_file(file_path, content)
 
-# ==============================
 # Print repo tree
-# ==============================
 print(f"\n✅ Ultimate repository '{repo_name}' created successfully at {base_path}!\n")
 print("Structure:")
 for root, dirs, files in os.walk(base_path):

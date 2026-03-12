@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-# =========================================================
 # SISU — Density Check
-# =========================================================
 # 
 # DENSITY:     █████████░  [9/10]
 # ENDURANCE:   ██████████  [10/10]  
@@ -14,7 +12,6 @@
 #   Survived:  Every metric since (LOC, Halstead, etc.)
 #   Evolves:   Into measuring essence vs ceremony
 #
-# =========================================================
 
 import os
 import sys

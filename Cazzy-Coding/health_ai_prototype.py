@@ -15,9 +15,7 @@ from sklearn.metrics import classification_report
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# -----------------------------
 # 1. Load Sample Health Data
-# -----------------------------
 # Using synthetic example; replace with CSV or database in real application
 def generate_synthetic_data(n=500):
     np.random.seed(42)
@@ -34,9 +32,7 @@ def generate_synthetic_data(n=500):
 
 data = generate_synthetic_data()
 
-# -----------------------------
 # 2. Preprocess Data
-# -----------------------------
 X = data.drop("disease", axis=1)
 y = data["disease"]
 
@@ -47,9 +43,7 @@ X_train, X_test, y_train, y_test = train_test_split(
     X_scaled, y, test_size=0.2, random_state=42
 )
 
-# -----------------------------
 # 3. Build AI Model
-# -----------------------------
 model = RandomForestClassifier(
     n_estimators=100,
     max_depth=5,
@@ -61,9 +55,7 @@ y_pred = model.predict(X_test)
 print("Classification Report:\n")
 print(classification_report(y_test, y_pred))
 
-# -----------------------------
 # 4. Feature Importance (Explainability)
-# -----------------------------
 feature_importances = pd.Series(model.feature_importances_, index=X.columns)
 feature_importances = feature_importances.sort_values(ascending=False)
 
@@ -72,9 +64,7 @@ sns.barplot(x=feature_importances, y=feature_importances.index)
 plt.title("Feature Importance - Health AI Prototype")
 plt.show()
 
-# -----------------------------
 # 5. High-Level Reasoning Example
-# -----------------------------
 def interpret_patient_risk(patient):
     """
     Interpret a single patient's risk with reasoning.

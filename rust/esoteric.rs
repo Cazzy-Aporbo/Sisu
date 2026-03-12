@@ -16,9 +16,7 @@
 #![allow(incomplete_features)]
 #![allow(unused)]
 
-// ==========================================================================
 // 1. COMPILE-TIME REFLECTION WITH CONST GENERICS
-// ==========================================================================
 
 /// Using const generics to create type-level computations that feel like
 /// reflection, but happen entirely at compile time.
@@ -49,9 +47,7 @@ const _: () = {
     MyType::assert_size(16);
 };
 
-// ==========================================================================
 // 2. ADVANCED GAT PATTERNS (GENERIC ASSOCIATED TYPES)
-// ==========================================================================
 
 /// Higher-kinded polymorphism patterns using GATs
 /// This allows us to express patterns that are typically only possible in
@@ -82,9 +78,7 @@ impl Monad for Option<()> {
     }
 }
 
-// ==========================================================================
 // 3. TYPE-LEVEL PROGRAMMING WITH ZSTs
-// ==========================================================================
 
 /// Zero-sized types for compile-time state machines with complex transitions
 struct InitialState;
@@ -137,9 +131,7 @@ impl StateMachine<CompletedState> {
     }
 }
 
-// ==========================================================================
 // 4. ADVANCED UNSAFE PATTERNS (PROCEED WITH CAUTION)
-// ==========================================================================
 
 /// A safe abstraction over unsafe code that demonstrates advanced memory
 /// management patterns while maintaining safety guarantees.
@@ -185,9 +177,7 @@ impl<T> Drop for SafeUnsafe<T> {
     }
 }
 
-// ==========================================================================
 // 5. COMPILE-TIME EXECUTION WITH CONST FN
-// ==========================================================================
 
 /// Advanced const fn usage for compile-time computation and validation
 const fn compile_time_checks() -> usize {
@@ -207,9 +197,7 @@ const fn compile_time_checks() -> usize {
 /// Compile-time computed constant
 const COMPILE_TIME_RESULT: usize = compile_time_checks();
 
-// ==========================================================================
 // 6. ADVANCED TRAIT SYSTEM PATTERNS
-// ==========================================================================
 
 /// Specialization-like behavior using overlapping trait impls and
 /// negative trait bounds (requires nightly)
@@ -240,9 +228,7 @@ where
     println!("HRTB result: {}", result);
 }
 
-// ==========================================================================
 // 7. CUSTOM ALLOCATORS AND MEMORY MANAGEMENT
-// ==========================================================================
 
 /// A custom allocator demonstrating advanced memory management patterns
 use std::alloc::{GlobalAlloc, Layout, System};
@@ -270,9 +256,7 @@ unsafe impl GlobalAlloc for TrackingAllocator {
 #[global_allocator]
 static GLOBAL: TrackingAllocator = TrackingAllocator;
 
-// ==========================================================================
 // 8. ADVANCED MACRO METAPROGRAMMING
-// ==========================================================================
 
 /// A macro that generates complex code structures based on input
 /// This demonstrates advanced macro hygiene and code generation patterns
@@ -312,9 +296,7 @@ generate_struct!(ComplexStruct {
     enabled: bool
 });
 
-// ==========================================================================
 // 9. ASYNC DEEP MAGIC: BEYOND CONVENTIONAL ASYNC/AWAIT
-// ==========================================================================
 
 /// Advanced async patterns that go beyond conventional async/await usage
 use std::future::Future;
@@ -357,9 +339,7 @@ async fn advanced_async() -> String {
     custom.await
 }
 
-// ==========================================================================
 // 10. COMPILE-TIME TYPE CALCULUS
-// ==========================================================================
 
 /// Type-level arithmetic and calculus using const generics and traits
 trait TypeMath {
@@ -391,9 +371,7 @@ impl<const V: usize> Value<V> {
     const VALUE: usize = V;
 }
 
-// ==========================================================================
 // 11. ADVANCED PATTERN MATCHING ESOTERICA
-// ==========================================================================
 
 /// Pattern matching tricks that go beyond conventional usage
 fn advanced_patterns() {
@@ -423,9 +401,7 @@ fn advanced_patterns() {
     }
 }
 
-// ==========================================================================
 // 12. DARK ARTS: USING COMPILER INTERNALS (UNSTABLE)
-// ==========================================================================
 
 /// This section demonstrates extremely advanced patterns that interface
 /// with compiler internals. These are highly unstable and should be
@@ -452,9 +428,7 @@ unsafe fn advanced_intrinsics() {
     // `data` is no longer available, but not dropped
 }
 
-// ==========================================================================
 // MAIN DEMONSTRATION FUNCTION
-// ==========================================================================
 
 /// This function brings together all the advanced concepts in a demonstration
 async fn demonstrate_hidden_rust() {

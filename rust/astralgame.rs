@@ -26,9 +26,7 @@ use tokio::{
     time::sleep,
 };
 
-// ==========================================================================
 // 1. ADVANCED ENTITY COMPONENT SYSTEM (ECS) IMPLEMENTATION
-// ==========================================================================
 
 /// Entity is a unique identifier for game objects
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -104,9 +102,7 @@ impl World {
     }
 }
 
-// ==========================================================================
 // 2. GAME COMPONENTS
-// ==========================================================================
 
 /// Position component for spatial representation
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -162,9 +158,7 @@ struct Render {
     visible: bool,
 }
 
-// ==========================================================================
 // 3. GAME SYSTEMS
-// ==========================================================================
 
 /// Movement system updates positions based on velocity
 struct MovementSystem;
@@ -307,9 +301,7 @@ async fn handle_collision(world: &mut World, entity_a: Entity, entity_b: Entity)
     }
 }
 
-// ==========================================================================
 // 4. PROCEDURAL CONTENT GENERATION
-// ==========================================================================
 
 /// Advanced procedural generation using noise and algorithms
 struct WorldGenerator {
@@ -450,9 +442,7 @@ impl WorldGenerator {
     }
 }
 
-// ==========================================================================
 // 5. AI INTEGRATION FOR DYNAMIC CONTENT
-// ==========================================================================
 
 /// AI service for generating dynamic content and dialogues
 struct AIService {
@@ -525,9 +515,7 @@ struct Quest {
     difficulty: f32,
 }
 
-// ==========================================================================
 // 6. ADVANCED RENDERING SYSTEM (SIMULATED)
-// ==========================================================================
 
 /// Advanced rendering system with multiple techniques
 struct RenderSystem {
@@ -649,9 +637,7 @@ impl RenderEffect for PostProcessingEffect {
     }
 }
 
-// ==========================================================================
 // 7. GAME STATE MANAGEMENT
-// ==========================================================================
 
 /// Sophisticated state machine for game states
 struct GameStateMachine {
@@ -738,9 +724,7 @@ enum GameEvent {
     PauseToggle,
 }
 
-// ==========================================================================
 // 8. MAIN GAME LOOP AND EXECUTION
-// ==========================================================================
 
 /// The main game struct that brings everything together
 struct AstralFrontier {
@@ -844,9 +828,7 @@ impl AstralFrontier {
     }
 }
 
-// ==========================================================================
 // 9. MAIN FUNCTION
-// ==========================================================================
 
 #[tokio::main]
 async fn main() {

@@ -1,10 +1,8 @@
--- ===========================================================
 -- 07_rollups_retention_qc.cql
 -- Goals:
 --  • Roll up raw tx ➝ daily + monthly aggregates for cheap reads
 --  • TTL policy by tier (raw short, rollups medium, KPIs long)
 --  • QC-inspired guard columns for quick anomaly screens (z-score-like)
--- ===========================================================
 USE finance;
 
 -- Daily rollups per user/category

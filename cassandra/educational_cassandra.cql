@@ -1,5 +1,4 @@
 -- Educational Cassandra CQL Script
--- ---------------------------------
 -- This file teaches basic Cassandra usage: keyspaces, tables, inserts, queries, updates, and deletes.
 
 -- 1. Create a Keyspace (like a database)

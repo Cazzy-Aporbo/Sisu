@@ -9,9 +9,7 @@ use std::pin::Pin;
 use std::time::Duration;
 use std::thread;
 
-// =======================
 // Section 1: Generics & Traits
-// =======================
 trait Summable<T> {
     fn sum_items(&self) -> T;
 }
@@ -38,9 +36,7 @@ fn generics_and_traits() {
     print_type_and_value("Hello Rust!");
 }
 
-// =======================
 // Section 2: Lifetimes Explained
-// =======================
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     // Returns the longer string; lifetime ensures reference is valid
     if x.len() > y.len() { x } else { y }
@@ -55,9 +51,7 @@ fn lifetimes_section() {
     println!("Longest string: {}", result);
 }
 
-// =======================
 // Section 3: Advanced Enums & Pattern Matching
-// =======================
 enum Message {
     Quit,
     Move { x: i32, y: i32 },
@@ -85,9 +79,7 @@ fn enums_and_matching() {
     }
 }
 
-// =======================
 // Section 4: Closures & Higher-Order Functions
-// =======================
 fn higher_order_section() {
     println!("-- Closures & Higher-Order Functions --");
 
@@ -105,9 +97,7 @@ fn higher_order_section() {
     println!("Apply multiply: {}", apply(multiply, 5, 7));
 }
 
-// =======================
 // Section 5: Async & Concurrency (Exploratory)
-// =======================
 fn async_example() {
     println!("-- Async & Concurrency Section --");
 
@@ -131,9 +121,7 @@ fn async_example() {
     });
 }
 
-// =======================
 // Section 6: Mini Exploratory Project
-// =======================
 struct Particle {
     x: f64,
     y: f64,
@@ -168,9 +156,7 @@ fn particle_simulation() {
     }
 }
 
-// =======================
 // Main Function
-// =======================
 fn main() {
     println!("Welcome to CazzyExploresRust2!");
     generics_and_traits();

@@ -12,9 +12,7 @@ func header(_ title: String) {
     print(String(repeating: "🌌", count: 40) + "\n")
 }
 
-// -----------------------------------------------------------------------------
 // Lesson 16 — Async / Await (time as poetry)
-// -----------------------------------------------------------------------------
 
 func lesson16_Async() async {
     header("Lesson 16 — Async & Await ⏳\nWe bend time, letting code breathe between moments.")
@@ -43,9 +41,7 @@ func lesson16_Async() async {
     // QUIZ: Write an async function `dream()` that waits 2 seconds then prints "✨ Dream complete".
 }
 
-// -----------------------------------------------------------------------------
 // Lesson 17 — Higher-Order Whispers (functional thinking)
-// -----------------------------------------------------------------------------
 
 func lesson17_Functional() {
     header("Lesson 17 — Higher-Order Whispers 🌀\nFunctions shaping functions, like rivers carve valleys.")
@@ -76,9 +72,7 @@ func lesson17_Functional() {
     // QUIZ: Use reduce to compute the product of [2,3,4].
 }
 
-// -----------------------------------------------------------------------------
 // Lesson 18 — Pattern Matching (poetry of choices)
-// -----------------------------------------------------------------------------
 
 func lesson18_Patterns() {
     header("Lesson 18 — Pattern Matching 🔮\nPattern as prophecy: see shapes in values.")
@@ -113,9 +107,7 @@ func lesson18_Patterns() {
     // QUIZ: Write a switch that classifies any Int as "negative", "zero", or "positive".
 }
 
-// -----------------------------------------------------------------------------
 // Lesson 19 — Extensions of Imagination
-// -----------------------------------------------------------------------------
 
 func lesson19_Extensions() {
     header("Lesson 19 — Extensions 🌈\nTeach old types new tricks.")
@@ -151,9 +143,7 @@ func lesson19_Extensions() {
     // QUIZ: Extend Bool with a toggle() mutating method.
 }
 
-// -----------------------------------------------------------------------------
 // Lesson 20 — Metaphors of Generics
-// -----------------------------------------------------------------------------
 
 func lesson20_MetaphorGenerics() {
     header("Lesson 20 — Generics as Metaphor ✨\nWe whisper: 'code that loves all types equally'.")
@@ -191,9 +181,7 @@ func lesson20_MetaphorGenerics() {
     // QUIZ: Write a generic Pair<T,U> that holds two values.
 }
 
-// -----------------------------------------------------------------------------
 // Run All
-// -----------------------------------------------------------------------------
 
 @main
 struct Lessons {

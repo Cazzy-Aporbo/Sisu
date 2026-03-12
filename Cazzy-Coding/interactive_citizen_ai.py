@@ -7,18 +7,14 @@ through personalized recommendations and gamification.
 
 import random
 
-# -----------------------------
 # 1. Sample User Data
-# -----------------------------
 users = {
     "alice": {"domain":"environment", "behavior_score": 0.4},
     "bob": {"domain":"health", "behavior_score": 0.7},
     "carol": {"domain":"finance", "behavior_score": 0.5}
 }
 
-# -----------------------------
 # 2. Personalized Recommendations
-# -----------------------------
 RECOMMENDATIONS = {
     "environment": [
         "Reduce daily water usage by 20%",
@@ -63,9 +59,7 @@ def assess_user(user_name):
         "gamification_points": points
     }
 
-# -----------------------------
 # 3. Example Usage
-# -----------------------------
 if __name__ == "__main__":
     for user_name in ["alice", "bob", "carol"]:
         result = assess_user(user_name)

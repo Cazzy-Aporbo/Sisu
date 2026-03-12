@@ -20,9 +20,7 @@ def cogita_insight(data):
     # Simulate Cogita reasoning
     return {"analysis": "Cogita prediction/insight", "confidence": 0.88}
 
-# -----------------------------
 # 1. Data Ingestion
-# -----------------------------
 def ingest_data(file_path=None, audio_file=None, web_data=None):
     data_layers = {}
     
@@ -40,9 +38,7 @@ def ingest_data(file_path=None, audio_file=None, web_data=None):
     
     return data_layers
 
-# -----------------------------
 # 2. Analysis Layer
-# -----------------------------
 def analyze_data(data_layers):
     insights = {}
     
@@ -61,9 +57,7 @@ def analyze_data(data_layers):
     
     return insights
 
-# -----------------------------
 # 3. Meta-Synthesis Layer
-# -----------------------------
 def meta_synthesis(insights):
     """
     Combine outputs from multiple AI systems, detect conflicts, and provide meta-insights
@@ -78,9 +72,7 @@ def meta_synthesis(insights):
     }
     return meta_report
 
-# -----------------------------
 # 4. Example Usage
-# -----------------------------
 if __name__ == "__main__":
     data_layers = ingest_data(audio_file="meeting.mp3", web_data="Recent climate and health trends dataset")
     insights = analyze_data(data_layers)

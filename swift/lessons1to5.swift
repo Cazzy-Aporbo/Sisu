@@ -22,10 +22,8 @@ func briefPause(_ ms: UInt32 = 400) {
     usleep(ms * 1000)
 }
 
-// -----------------------------------------------------------------------------
 // Lesson 1 — Hello, Swift
 // Goals: printing, strings, interpolation, small functions.
-// -----------------------------------------------------------------------------
 
 func lesson1_HelloSwift() {
     header("Lesson 1 — Hello, Swift 🌸\nGoal: print text, strings, interpolation")
@@ -71,10 +69,8 @@ func lesson1_HelloSwift() {
     print("\nTeacher note: try replacing the string with emoji (\"🌍\") — Swift treats emoji as text.")
 }
 
-// -----------------------------------------------------------------------------
 // Lesson 2 — Variables & Constants
 // Goals: let vs var, types, annotations, mutability.
-// -----------------------------------------------------------------------------
 
 func lesson2_VariablesConstants() {
     header("Lesson 2 — Variables & Constants ⭐\nGoal: let vs var, type annotations, mutability")
@@ -115,10 +111,8 @@ func lesson2_VariablesConstants() {
     print("\nTeacher note: prefer `let` unless you specifically need to change the value — it's safer and documents intent.")
 }
 
-// -----------------------------------------------------------------------------
 // Lesson 3 — Types & Math
 // Goals: Int, Double, conversion, operators, functions from Foundation.
-// -----------------------------------------------------------------------------
 
 func lesson3_TypesAndMath() {
     header("Lesson 3 — Types & Math ⚡\nGoal: numeric types, conversions, math functions")
@@ -166,10 +160,8 @@ func lesson3_TypesAndMath() {
     briefPause()
 }
 
-// -----------------------------------------------------------------------------
 // Lesson 4 — Control Flow & Collections
 // Goals: if/else, switch, for-in, while, arrays, dictionaries.
-// -----------------------------------------------------------------------------
 
 func lesson4_ControlFlowCollections() {
     header("Lesson 4 — Control Flow & Collections 🔁\nGoal: conditionals, loops, arrays, dictionaries")
@@ -236,10 +228,8 @@ func lesson4_ControlFlowCollections() {
     print("\nTeacher note: show students how to mutate arrays/dictionaries and how `let` vs `var` affects mutability.")
 }
 
-// -----------------------------------------------------------------------------
 // Lesson 5 — Functions, Closures & Basics of Structs
 // Goals: write functions, use closures, simple struct demo.
-// -----------------------------------------------------------------------------
 
 func lesson5_FunctionsClosuresStructs() {
     header("Lesson 5 — Functions, Closures, and Structs 🧩\nGoal: functions, closures, and simple data types")
@@ -300,9 +290,7 @@ func lesson5_FunctionsClosuresStructs() {
     print("\nTeacher note: emphasize value semantics of structs (copy on assignment) vs classes (reference types) — saved for next lessons.")
 }
 
-// -----------------------------------------------------------------------------
 // Utility: run selected lessons or all
-// -----------------------------------------------------------------------------
 
 func runAllLessons() {
     lesson1_HelloSwift()

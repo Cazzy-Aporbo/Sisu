@@ -22,9 +22,7 @@
 #include <sys/time.h>
 #include <x86intrin.h>  // For SIMD intrinsics
 
-// ==========================================================================
 // 1. ADVANCED MEMORY ALLOCATOR WITH DEBUGGING FEATURES
-// ==========================================================================
 
 typedef struct {
     void *ptr;
@@ -121,9 +119,7 @@ void report_memory_leaks() {
 #define MALLOC(size) debug_malloc(size, __FILE__, __LINE__, __func__)
 #define FREE(ptr) debug_free(ptr, __FILE__, __LINE__, __func__)
 
-// ==========================================================================
 // 2. GENERIC VECTOR (DYNAMIC ARRAY) IMPLEMENTATION
-// ==========================================================================
 
 typedef struct {
     void *data;
@@ -176,9 +172,7 @@ int vector_push_back(vector_t *vec, const void *value) {
     return 1;
 }
 
-// ==========================================================================
 // 3. THREAD POOL IMPLEMENTATION
-// ==========================================================================
 
 typedef struct {
     void (*task)(void*);
@@ -333,9 +327,7 @@ void thread_pool_destroy(thread_pool_t *pool) {
     FREE(pool);
 }
 
-// ==========================================================================
 // 4. SIMD-OPTIMIZED MATRIX MULTIPLICATION
-// ==========================================================================
 
 void matrix_multiply_simd(const float *a, const float *b, float *c, 
                          size_t a_rows, size_t a_cols, size_t b_cols) {
@@ -354,9 +346,7 @@ void matrix_multiply_simd(const float *a, const float *b, float *c,
     }
 }
 
-// ==========================================================================
 // 5. PLUGIN ARCHITECTURE WITH DYNAMIC LOADING
-// ==========================================================================
 
 typedef struct {
     void *handle;
@@ -408,9 +398,7 @@ void unload_plugin(plugin_t *plugin) {
     }
 }
 
-// ==========================================================================
 // 6. PROFESSIONAL ERROR HANDLING AND LOGGING
-// ==========================================================================
 
 typedef enum {
     LOG_DEBUG,
@@ -453,9 +441,7 @@ void logger(log_level_t level, const char *file, int line, const char *func, con
 
 #define LOG(level, ...) logger(level, __FILE__, __LINE__, __func__, __VA_ARGS__)
 
-// ==========================================================================
 // 7. DEMONSTRATION OF ADVANCED ALGORITHMS
-// ==========================================================================
 
 // Binary search tree implementation
 typedef struct bst_node {
@@ -505,9 +491,7 @@ void bst_free(bst_node_t *root) {
     }
 }
 
-// ==========================================================================
 // 8. MAIN FUNCTION DEMONSTRATING ALL FEATURES
-// ==========================================================================
 
 void sample_task(void *arg) {
     int *value = (int*)arg;

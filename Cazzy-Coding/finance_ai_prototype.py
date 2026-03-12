@@ -14,9 +14,7 @@ from sklearn.metrics import mean_squared_error
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# -----------------------------
 # 1. Load / Generate Financial Data
-# -----------------------------
 def generate_synthetic_finance_data(n=500):
     np.random.seed(42)
     df = pd.DataFrame({
@@ -33,9 +31,7 @@ def generate_synthetic_finance_data(n=500):
 
 data = generate_synthetic_finance_data()
 
-# -----------------------------
 # 2. Preprocess Data
-# -----------------------------
 X = data.drop("close_price", axis=1)
 y = data["close_price"]
 
@@ -46,9 +42,7 @@ X_train, X_test, y_train, y_test = train_test_split(
     X_scaled, y, test_size=0.2, random_state=42
 )
 
-# -----------------------------
 # 3. Build AI Model
-# -----------------------------
 model = RandomForestRegressor(
     n_estimators=150,
     max_depth=6,
@@ -60,9 +54,7 @@ y_pred = model.predict(X_test)
 mse = mean_squared_error(y_test, y_pred)
 print("Mean Squared Error:", round(mse,2))
 
-# -----------------------------
 # 4. Feature Importance (Explainability)
-# -----------------------------
 feature_importances = pd.Series(model.feature_importances_, index=X.columns)
 feature_importances = feature_importances.sort_values(ascending=False)
 
@@ -71,9 +63,7 @@ sns.barplot(x=feature_importances, y=feature_importances.index)
 plt.title("Feature Importance - Finance AI Prototype")
 plt.show()
 
-# -----------------------------
 # 5. High-Level Reasoning Example
-# -----------------------------
 def interpret_trade_risk(trade_features):
     """
     Interpret risk and prediction for a single trade.
